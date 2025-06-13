@@ -1,0 +1,3257 @@
+:root {
+  /* Color System */
+  --color-primary: #f1c40f;
+  --color-primary-dark: #f39c12;
+  --color-background: #e0f2f7;
+  --color-text: #2c3e50;
+  --color-text-light: #030303;
+  --color-accent: #3498db;
+  --color-secondary: #e67e22;
+  
+
+  /* Glass Effect Variables */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-blur: 8px;
+  --glass-blur-sm: 4px;
+  --color-background-glass-fallback: rgba(230, 242, 247, 0.9);
+
+  /* Spacing System */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --border-radius-sm: var(--radius-sm);
+
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.2);
+
+  /* Font Styles */
+  --font-heading: 'Poppins', sans-serif;
+  --font-size-xl: 1.8rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+}
+
+/* --- Reset & Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* --- Utility Classes --- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-md);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* --- Header & Navigation --- */
+header {
+  background-color: var(--color-background-glass-fallback);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  width: 100%;
+}
+
+.main-header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-decoration: none;
+  z-index: 1100;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* --- Header & Navigation (Penyesuaian untuk Logo) --- */
+/* ... (Style header Anda yang sudah ada) ... */
+
+.main-header .brand-name {
+  display: flex; /* Mengatur logo dan teks secara horizontal */
+  align-items: center; /* Menyejajarkan logo dan teks secara vertikal di tengah */
+  gap: var(--spacing-xs, 0.5rem); /* Jarak antara logo dan teks, gunakan variabel spasi Anda */
+  /* text-decoration: none; sudah ada di style .brand-name Anda */
+  /* color: var(--color-primary); sudah ada di style .brand-name Anda */
+}
+
+.main-header .brand-logo { /* Kelas baru untuk styling logo */
+  height: 70px; /* Sesuaikan tinggi logo sesuai kebutuhan */
+  width: auto; /* Lebar akan menyesuaikan secara proporsional */
+  display: block; /* Menghindari spasi ekstra di bawah gambar */
+}
+
+.main-header .brand-name span {
+  line-height: 1; /* Untuk alignment vertikal yang lebih baik dengan logo */
+}
+
+/* ... (style header dan navigasi Anda) ... */
+.brand-name:hover {
+  color: var(--color-secondary);
+}
+
+.navigation-drawer {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--spacing-lg);
+}
+
+.nav-list li a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-list li a:hover {
+  color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-list li a.active {
+  color: var(--color-secondary);
+}
+
+.nav-list li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - var(--spacing-sm) * 2);
+  height: 2px;
+  background-color: var(--color-secondary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.drawer-button {
+  background: none;
+  border: none;
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  cursor: pointer;
+  display: none;
+  z-index: 1100;
+  padding: var(--spacing-xs);
+  transition: color 0.3s ease;
+}
+
+.drawer-button:hover,
+.drawer-button:focus {
+  color: var(--color-secondary);
+  outline: none;
+}
+
+/* Responsive */
+@media screen and (width > 1000px) {
+  .navigation-drawer {
+    min-height: auto;
+    width: auto;
+    padding: 0;
+    background-color: transparent;
+    position: static;
+    box-shadow: none;
+    transform: translateX(0);
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
+
+  .nav-list li a {
+    color: var(--color-text-light);
+    display: inline-block;
+  }
+
+  .nav-list li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .drawer-button {
+    display: none;
+  }
+}
+
+/* --- Accessibility --- */
+.skip-link {
+  position: absolute;
+  top: -80px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  transition: top 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+              opacity 0.3s ease-in-out;
+  opacity: 0; 
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.skip-link:focus {
+  top: var(--spacing-md); 
+  opacity: 1; 
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* --- Footer --- */
+footer {
+  background-color: var(--color-text);
+  color: #fff;
+  padding: var(--spacing-xl) 0;
+  margin-top: auto; /* Dorong footer ke bagian bawah */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+}
+
+.footer-logo,
+.footer-links,
+.footer-contact {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-logo h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-logo p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  display: block;
+  padding: var(--spacing-xs) 0;
+  transition: color 0.3s ease;
+}
+
+.footer-links li a:hover {
+  color: var(--color-accent);
+}
+
+.footer-contact p {
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-contact a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.social-icons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.social-icons a {
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: var(--color-primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--spacing-md);
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- General Components --- */
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-text);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.9rem;
+}
+
+.btn-outline:hover {
+  background: var(--color-accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-lg {
+  font-size: 1.2rem;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  margin-top: var(--spacing-lg);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Forms */
+.form-container {
+  max-width: 600px;
+  margin: var(--spacing-xl) auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  color: var(--color-text);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.3);
+}
+
+/* Loader */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+}
+
+.loader {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid var(--color-primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* Alerts */
+.alert {
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) auto;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.alert-error {
+  background-color: rgba(255, 99, 71, 0.2);
+  color: #cc0000;
+  border: 1px solid rgba(255, 99, 71, 0.5);
+}
+
+.alert p {
+  margin: 0;
+}
+
+.alert a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.alert a:hover {
+  text-decoration: underline;
+}
+
+/* --- Page Specific: Home --- */
+.home-hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--spacing-xl);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.home-hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  width: 100%;
+  padding: var(--spacing-lg) 0;
+  flex-wrap: wrap;
+}
+
+.home-hero-content {
+  flex: 1;
+  max-width: 55%;
+  text-align: left;
+  z-index: 1;
+  padding-right: var(--spacing-lg);
+}
+
+.home-title {
+  font-size: clamp(3rem, 7vw, 5rem);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+}
+
+.home-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-light);
+  line-height: 1.8;
+}
+
+.home-hero-btn {
+  font-size: 1.1rem;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.hero-glass-card {
+  flex: 1;
+  max-width: 45%;
+  min-width: 300px;
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: slideInRight 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.hero-image-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.hero-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-carousel-image.active {
+  opacity: 1;
+}
+
+.carousel-nav {
+  position: absolute;
+  bottom: var(--spacing-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-xs);
+  z-index: 2;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background-color: var(--color-primary);
+  transform: scale(1.2);
+  border-color: var(--color-primary);
+}
+
+.hero-glass-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border-top: 1px solid var(--glass-border);
+  color: var(--color-text);
+  z-index: 1;
+}
+
+.hero-glass-text h3 {
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.3rem;
+  color: var(--color-text);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.hero-glass-text p {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+.home-content {
+  padding: var(--spacing-xl) 0;
+}
+
+.home-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.search-options {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.search-input-group {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-grow: 1;
+  max-width: 350px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  color: var(--color-text);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.3);
+}
+
+.search-button {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.stories-container {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.7s ease-out forwards;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+.story-image-container {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.story-card:hover .story-image {
+  transform: scale(1.05);
+}
+
+.story-content {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-title {
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.story-description {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.story-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.story-date {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .hero-glass-card {
+    display: block;
+  }
+
+  .hero-image-carousel,
+  .hero-carousel-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 1 !important; /* paksa gambar tampil jika class .active hilang */
+    position: static;
+    transition: none;
+  }
+
+  .hero-carousel-image:not(.active) {
+    display: none; /* sembunyikan gambar yang tidak aktif */
+  }
+}
+
+/* Ini adalah style untuk memastikan gambar terlihat di semua kondisi */
+.hero-carousel-image {
+  display: block;
+  object-fit: cover;
+  background-color: #ccc; /* fallback jika tidak ada gambar */
+}
+
+/* Ini adalah style untuk menyembunyikan elemen kosong di mobile jika diperlukan */
+@media (max-width: 768px) {
+  .hero-glass-card:empty {
+    display: none;
+  }
+}
+
+/* --- Page Specific: About --- */
+.about-page.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+}
+
+.about-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 2.5em;
+}
+
+.about-description {
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  margin-bottom: 30px;
+}
+
+.about-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.about-section h2 {
+  color: #34495e;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+  font-size: 1.8em;
+}
+
+.vision-mission {
+  display: flex;
+  gap: 30px;
+}
+
+.vision,
+.mission {
+  flex: 1;
+}
+
+.objectives ul,
+.why-storymap ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.objectives ul li,
+.why-storymap ul li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.6;
+}
+
+.objectives ul li .icon-primary,
+.why-storymap ul li .icon-primary {
+  margin-right: 10px;
+  color: #007bff;
+  margin-top: 4px;
+}
+
+.gallery-section h2 {
+  text-align: center;
+}
+
+.gallery-section > p {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.story-carousel-container {
+  position: relative;
+  max-width: 800px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel { /* Used by About page gallery */
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+}
+
+.carousel-item {
+  min-width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.9em;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  font-size: 1.5em;
+  width: 40px;
+  height: 40px;
+  line-height: 20px;
+}
+
+.carousel-control.prev {
+  left: 10px;
+}
+
+.carousel-control.next {
+  right: 10px;
+}
+
+.carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.contribution-cta h2 {
+  text-align: center;
+}
+
+.contribution-cta > p {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.1em;
+}
+
+.contribution-options {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contribution-option {
+  flex-basis: calc(33.333% - 20px);
+  min-width: 280px;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contribution-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contribution-option .icon-secondary {
+  color: #5cb85c;
+  margin-bottom: 10px;
+}
+
+.contribution-option h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.cta-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-link:hover {
+  text-decoration: underline;
+}
+
+.developer-profile h2 {
+  text-align: center;
+}
+
+.developer-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.developer-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.developer-avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+  border: 3px solid #007bff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 20px; /* if avatar is to the left of info */
+}
+
+.developer-info {
+  flex: 1;
+}
+
+.developer-info p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.developer-info p em { /* Styling for quotes */
+  display: block;
+  margin-top: 10px;
+  padding-left: 15px;
+  border-left: 3px solid #007bff;
+  font-style: italic;
+  color: #555;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.social-links li a {
+  text-decoration: none;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9em;
+}
+
+.social-links li a:hover {
+  color: #007bff;
+}
+
+.social-links li a i {
+  margin-right: 8px;
+  font-size: 1.4em;
+}
+
+.tech-stack-acknowledgements p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.tech-stack-acknowledgements p a:hover {
+  text-decoration: underline;
+}
+
+.about-credits {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.about-credits a {
+  color: #555;
+  text-decoration: none;
+}
+
+.about-credits a:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+/* --- (Konten style.css Anda yang sudah ada di atas) --- */
+
+/* ... (all your existing CSS) ... */
+
+/* --- Page Specific: Add Story Page --- */
+.add-story-page-container {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+  animation: fadeInUp 0.6s ease-out forwards; /* Menggunakan animasi yang ada */
+}
+
+/* Wrapper utama formulir, sudah menggunakan .form-container .glass-card dari HTML */
+/* Kita bisa override atau tambahkan spesifik jika perlu */
+.add-story-form-wrapper {
+  max-width: 850px; /* Sedikit lebih lebar untuk mengakomodasi konten form yang kaya */
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-xl); /* Padding lebih besar untuk form utama */
+}
+
+.add-story-form-wrapper .form-title {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  text-align: center;
+  font-size: clamp(2rem, 4.5vw, 2.5rem); /* Sedikit lebih besar dari section-title standar */
+  margin-bottom: var(--spacing-sm); /* Lebih dekat ke subjudul */
+}
+/* Tidak perlu ::after seperti .section-title karena ini judul form spesifik */
+
+.add-story-form-wrapper .form-subtitle {
+  text-align: center;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.add-story-form-wrapper .required-asterisk {
+  color: var(--color-secondary); /* Menggunakan warna sekunder untuk penekanan */
+  font-weight: var(--font-weight-bold);
+  font-size: 1.1em; /* Sedikit lebih besar */
+}
+
+/* Kontainer untuk pesan error/sukses */
+#alert-container .alert { /* Menggunakan style .alert yang sudah ada */
+  margin-bottom: var(--spacing-lg); /* Jarak sebelum fieldset pertama */
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#alert-container .alert p {
+  font-size: 0.95rem;
+}
+
+.add-story-form-wrapper .form-section {
+  margin-bottom: var(--spacing-xl); /* Jarak antar fieldset */
+  padding: var(--spacing-lg); /* Padding di dalam fieldset */
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.08); /* Sedikit beda dari glass-card utama */
+  box-shadow: var(--shadow-sm); /* Bayangan lembut untuk fieldset */
+}
+
+.add-story-form-wrapper .form-section:last-of-type {
+  margin-bottom: var(--spacing-xl); /* Jarak sebelum tombol submit utama */
+}
+
+.add-story-form-wrapper .section-legend {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-lg); /* Jarak dari legend ke konten fieldset */
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(var(--rgb-primary, 241, 196, 15), 0.1); /* Latar belakang dengan warna primer transparan */
+  border: 1px solid var(--color-primary-dark);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm); /* Jarak antara ikon dan teks legend */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+/* Anda mungkin perlu menambahkan --rgb-primary: 241, 196, 15; di :root */
+/* Jika tidak, gunakan: background-color: rgba(241, 196, 15, 0.1); */
+
+
+.add-story-form-wrapper .icon-legend {
+  color: var(--color-primary-dark); /* Warna ikon di legend */
+  font-size: 1.1em;
+}
+
+/* Photo Section: Tabs */
+.photo-options .option-tabs {
+  display: flex;
+  margin-bottom: var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background-color: rgba(0,0,0,0.03);
+}
+
+.photo-options .option-tab {
+  flex: 1 1 0; /* Agar tab memiliki lebar yang sama */
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent;
+  border: none;
+  /* border-bottom: 3px solid transparent; */
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  position: relative;
+}
+
+.photo-options .option-tab::after { /* Indikator bawah */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.photo-options .option-tab .icon-tab {
+  margin-right: var(--spacing-sm);
+  color: var(--color-accent);
+  transition: color 0.3s ease;
+  font-size: 1.1em;
+}
+
+.photo-options .option-tab:hover,
+.photo-options .option-tab:focus {
+  color: var(--color-primary-dark);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.photo-options .option-tab:hover .icon-tab,
+.photo-options .option-tab:focus .icon-tab {
+  color: var(--color-primary-dark);
+}
+
+.photo-options .option-tab.active {
+  color: var(--color-text);
+  background-color: var(--glass-bg); /* Atau warna solid ringan */
+  font-weight: var(--font-weight-bold);
+  box-shadow: inset 0 -3px 0 var(--color-primary);
+}
+.photo-options .option-tab.active::after {
+    width: 70%; /* Lebar indikator untuk tab aktif */
+}
+
+.photo-options .option-tab.active .icon-tab {
+  color: var(--color-primary);
+}
+
+.photo-options .tab-content {
+  padding: var(--spacing-sm) 0;
+  min-height: 250px; /* Beri tinggi minimum agar layout tidak melompat */
+  display: flex; /* Untuk mengatur konten di dalamnya jika perlu */
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Camera UI */
+.camera-ui-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg); /* Jarak antara preview dan kontrol */
+}
+
+.camera-preview-area {
+  width: 100%;
+  max-width: 500px; /* Batasi lebar maksimum area preview */
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background-color: rgba(0, 0, 0, 0.05); /* Latar belakang halus untuk placeholder */
+  border: 2px dashed var(--glass-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+#camera-stream,
+#captured-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius-md) - 2px);
+}
+
+.camera-placeholder-content {
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+.camera-placeholder-content i { /* Font Awesome icon */
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+}
+.camera-placeholder-content p {
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.1rem;
+}
+.camera-placeholder-content small {
+  font-size: 0.85rem;
+}
+
+.camera-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.camera-controls .btn { /* Menggunakan style .btn yang ada */
+  padding: var(--spacing-sm) var(--spacing-lg); /* Tombol lebih besar */
+}
+.camera-controls .btn i {
+  margin-right: var(--spacing-xs);
+}
+/* Kelas .btn-primary, .btn-secondary, .btn-outline sudah di-style */
+
+
+/* Gallery Upload UI */
+.file-upload-ui-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+/* Tambahkan ini ke :root jika belum ada: --color-accent-rgb: 52, 152, 219; */
+.file-upload-label {
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-md); /* Area klik yang besar */
+  border: 3px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+  background-color: rgba(var(--color-accent-rgb, 52, 152, 219), 0.05);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.file-upload-label:hover,
+.file-upload-ui-container.highlight .file-upload-label { /* Highlight dari JS */
+  background-color: rgba(var(--color-accent-rgb, 52, 152, 219), 0.1);
+  border-color: var(--color-primary); /* Warna border berubah saat hover/highlight */
+  border-style: solid;
+}
+
+.file-upload-content {
+  text-align: center;
+  color: var(--color-text);
+}
+.file-upload-icon { /* Font Awesome icon */
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  font-size: 3.5em !important; /* Ukuran ikon besar */
+  transition: transform 0.3s ease;
+}
+.file-upload-label:hover .file-upload-icon {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.file-upload-text {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+  font-size: 1.1rem;
+}
+.file-upload-text strong {
+  color: var(--color-primary-dark); /* Penekanan pada "seret & lepas" */
+}
+.file-upload-hint {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.file-preview-wrapper {
+  width: 100%;
+  max-width: 450px; /* Batasi lebar preview */
+  position: relative;
+  margin: var(--spacing-md) auto;
+  border-radius: var(--radius-md);
+  overflow: hidden; /* Agar tombol hapus tidak keluar dari radius */
+  box-shadow: var(--shadow-lg);
+}
+
+.file-preview-image {
+  display: block; /* Hapus spasi ekstra di bawah gambar */
+  width: 100%;
+  max-height: 400px; /* Batasi tinggi maksimum preview */
+  object-fit: contain; /* Agar gambar tidak terpotong, tapi terlihat utuh */
+  background-color: rgba(0,0,0,0.02); /* Latar belakang untuk gambar transparan */
+}
+
+.btn-remove-preview { /* Menggunakan .btn .btn-danger */
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm) !important;
+  font-size: 0.85rem !important;
+  background-color: rgba(200, 0, 0, 0.8) !important; /* Warna merah dengan transparansi */
+  backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  color: white !important;
+  border-radius: var(--radius-sm) !important;
+  z-index: 10;
+}
+.btn-remove-preview:hover {
+  background-color: rgba(170, 0, 0, 0.9) !important;
+  transform: scale(1.05);
+}
+.btn-remove-preview i {
+  margin-right: 5px;
+}
+
+/* Location Section */
+.location-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+#get-current-location { /* Menggunakan style .btn .btn-secondary */
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+#get-current-location i {
+  margin-right: var(--spacing-sm);
+}
+
+.location-feedback .alert, /* Menggunakan style .alert */
+.location-loading {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+.location-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text); /* Lebih kontras */
+  padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+}
+.loader-small { /* Digunakan di JS */
+  border: 4px solid rgba(var(--color-text-rgb, 44, 62, 80), 0.15); /* Anda mungkin perlu --color-text-rgb */
+  border-top: 4px solid var(--color-accent);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.8s linear infinite; /* Animasi spin sudah ada */
+}
+
+#location-map-container {
+  width: 100%;
+  height: 400px; /* Tinggi peta yang cukup */
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--glass-border); /* Border lebih tebal untuk peta */
+  box-shadow: var(--shadow-lg); /* Bayangan lebih kuat untuk peta */
+  margin-bottom: var(--spacing-md);
+  background-color: #eee; /* Fallback jika map tiles lambat loading */
+}
+#map { /* ID dari Leaflet container */
+  width: 100%;
+  height: 100%;
+}
+/* Animasi untuk marker Leaflet (opsional, tapi bagus) */
+@keyframes customMarkerBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.1); }
+}
+.custom-map-marker .marker-pin.animate-bounce {
+  animation: customMarkerBounce 2s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+.leaflet-marker-icon .fa-map-marker-alt { /* Pastikan warna ikon di marker sesuai */
+  color: white !important;
+}
+
+
+.location-display {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  text-align: left; /* Align ke kiri agar lebih rapi dengan tombol */
+  color: var(--color-text);
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Jika teks lokasi panjang */
+  gap: var(--spacing-md);
+}
+.location-display strong {
+  color: var(--color-primary-dark);
+}
+#clear-location.btn-small { /* Tombol kecil kustom */
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.85rem;
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+}
+#clear-location.btn-small:hover {
+  background-color: var(--color-primary-dark);
+  transform: scale(1.05);
+}
+#clear-location.btn-small i {
+  margin-right: 5px;
+}
+
+/* Details Section (Description) */
+.description-editor-wrapper {
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.description-toolbar {
+  padding: var(--spacing-sm); /* Padding lebih untuk toolbar */
+  background-color: rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  gap: var(--spacing-sm); /* Jarak antar tombol toolbar */
+}
+.toolbar-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--glass-border);
+  color: var(--color-text);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.toolbar-btn:hover:not([aria-disabled="true"]) {
+  background-color: var(--color-primary);
+  color: var(--color-text); /* Atau white jika kontrasnya lebih baik */
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.toolbar-btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: rgba(0,0,0,0.05);
+}
+.toolbar-btn i {
+  font-size: 1rem;
+  display: block; /* Agar padding bekerja dengan baik */
+}
+
+.description-textarea { /* Menggunakan .form-input dari CSS Anda jika ada, atau style baru */
+  width: 100%;
+  padding: var(--spacing-md); /* Padding yang nyaman untuk mengetik */
+  border: none; /* Border sudah ada di wrapper */
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: transparent; /* Atau background sangat halus: rgba(255, 255, 255, 0.03); */
+  color: var(--color-text);
+  min-height: 180px; /* Tinggi minimum yang lebih besar */
+  resize: vertical; /* Hanya izinkan resize vertikal */
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.description-textarea::placeholder {
+  color: var(--color-text-light);
+  opacity: 0.6;
+}
+.description-textarea:focus {
+  outline: none;
+  /* background: rgba(255, 255, 255, 0.05); Beri sedikit feedback saat fokus */
+}
+
+.char-counter {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  opacity: 0.9;
+  text-align: right;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: rgba(0, 0, 0, 0.03);
+  /* border-top: 1px solid var(--glass-border); Sudah ada di wrapper atasnya */
+}
+
+/* Submit Button */
+.btn-submit-story { /* Menggunakan .btn .btn-primary */
+  width: 100%; /* Tombol submit full-width */
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg); /* Font lebih besar untuk tombol utama */
+  margin-top: var(--spacing-xl); /* Jarak yang cukup di atas tombol */
+  letter-spacing: 0.5px;
+}
+.btn-submit-story i {
+  margin-right: var(--spacing-sm);
+  font-size: 1.1em; /* Ikon sedikit lebih besar */
+}
+/* Style untuk disabled state sudah ada di .btn-primary:disabled jika Anda menambahkannya, atau bisa di sini */
+.btn-submit-story:disabled {
+  background: var(--color-text-light) !important; /* Override jika perlu */
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+.btn-submit-story:disabled:hover {
+    background: var(--color-text-light) !important;
+}
+
+/* --- Page Specific: View Detail Page --- */
+.detail-container {
+  padding: var(--spacing-xl) 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.detail-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.detail-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+}
+
+.detail-meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.detail-meta .badge {
+  background-color: rgba(var(--color-accent-rgb), 0.1);
+  color: var(--color-text);
+  padding: 0.3em 0.8em;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.detail-image {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin: var(--spacing-md) 0;
+}
+
+.detail-description {
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-lg);
+}
+
+.map-container {
+  margin-top: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+#map {
+  height: 300px;
+  width: 100%;
+  border-radius: inherit;
+}
+
+/* Copy Link Button */
+#copy-link-btn {
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#copy-link-btn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Snackbar / Toast */
+.snackbar {
+  visibility: hidden;
+  min-width: 200px;
+  background-color: var(--color-text);
+  color: #fff;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm);
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.95rem;
+}
+
+.snackbar.show {
+  visibility: visible;
+  animation: fadein 0.3s, fadeout 0.3s 2.7s;
+}
+
+@keyframes fadein {
+  from { bottom: 10px; opacity: 0; }
+  to { bottom: 30px; opacity: 1; }
+}
+@keyframes fadeout {
+  from { bottom: 30px; opacity: 1; }
+  to { bottom: 10px; opacity: 0; }
+}
+
+/* --- Responsive untuk Add Story Page --- */
+@media (max-width: 768px) {
+  .add-story-form-wrapper {
+    padding: var(--spacing-lg); /* Kurangi padding di tablet */
+  }
+  .add-story-form-wrapper .form-title {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+  }
+  .add-story-form-wrapper .form-subtitle {
+    font-size: 0.95rem;
+  }
+  .add-story-form-wrapper .form-section {
+    padding: var(--spacing-md);
+  }
+
+  .photo-options .option-tab {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm); /* Kurangi padding tab */
+  }
+  .photo-options .option-tab .icon-tab {
+    margin-right: var(--spacing-xs);
+  }
+
+  .camera-controls { /* Tombol kamera bisa dibuat stacked */
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .camera-controls .btn {
+    width: 100%;
+  }
+
+  .location-display {
+    flex-direction: column; /* Tumpuk display lokasi */
+    align-items: flex-start; /* Align item ke kiri */
+    gap: var(--spacing-sm);
+  }
+  #clear-location.btn-small {
+    align-self: flex-end; /* Tombol clear tetap di kanan */
+  }
+
+  #location-map-container {
+    height: 300px; /* Kurangi tinggi peta */
+  }
+  .description-toolbar {
+    gap: var(--spacing-xs);
+    flex-wrap: wrap; /* Biarkan tombol toolbar wrap jika tidak muat */
+  }
+  .toolbar-btn {
+    padding: var(--spacing-xs);
+  }
+  .toolbar-btn i {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-story-form-wrapper {
+    padding: var(--spacing-md); /* Padding lebih kecil lagi di mobile */
+    margin: var(--spacing-md) auto;
+  }
+  .add-story-form-wrapper .section-legend {
+    font-size: var(--font-size-md); /* Kecilkan font legend */
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  .add-story-form-wrapper .form-section {
+    padding: var(--spacing-sm);
+  }
+
+  .photo-options .option-tabs {
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0; /* Agar sesuai jika kontennya memanjang */
+  }
+  .photo-options .option-tab {
+    font-size: 0.8rem; /* Kecilkan font tab */
+    flex-direction: column; /* Ikon di atas teks untuk hemat ruang */
+    gap: 4px;
+    padding: var(--spacing-xs);
+  }
+  .photo-options .option-tab .icon-tab {
+    margin-right: 0;
+    margin-bottom: 2px;
+    font-size: 1rem;
+  }
+
+
+  .file-upload-label {
+    padding: var(--spacing-lg);
+  }
+  .file-upload-text {
+    font-size: 1rem;
+  }
+  .file-upload-hint {
+    font-size: 0.8rem;
+  }
+
+  .description-textarea {
+    min-height: 120px;
+  }
+  .btn-submit-story {
+    font-size: var(--font-size-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  #location-map-container {
+    height: 250px;
+  }
+}
+
+/* --- Animations & Keyframes --- */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  header {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .main-header {
+    padding: 0;
+  }
+
+  .drawer-button {
+    display: block;
+  }
+   body {
+    overflow-x: hidden;
+  }
+
+  .navigation-drawer {
+    max-width: 100vw;
+    box-sizing: border-box;
+    right: -100%;
+  }
+
+  .navigation-drawer.open {
+    right: 0;
+  }
+
+  .nav-list li a {
+    word-break: break-word;
+  }
+
+  .navigation-drawer {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initial position off-screen */
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-background-glass-fallback);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-lg);
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+    padding-top: calc(var(--spacing-lg) * 2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .navigation-drawer.open {
+    right: 0; /* Slide in */
+  }
+
+  .nav-list {
+    flex-direction: column;
+    width: 100%;
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-list li a {
+    display: block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+  }
+
+  .nav-list li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--color-primary-dark);
+  }
+
+  .nav-list li a.active::after {
+    left: var(--spacing-md);
+    transform: translateX(0);
+    width: 40px;
+  }
+
+  .home-hero-container {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-sm);
+    gap: var(--spacing-lg);
+  }
+
+  .home-hero-content {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .home-title {
+    font-size: 2.5rem;
+  }
+
+  .home-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-glass-card {
+    max-width: 100%;
+    min-width: unset;
+  }
+
+  .home-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-options {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .search-input-group {
+    width: 100%;
+    max-width: none;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .story-list {
+    grid-template-columns: 1fr;
+  }
+
+  .section { /* General section padding adjustment */
+    padding: var(--spacing-lg) 0;
+  }
+
+  /* About Page Responsive */
+  .about-title {
+    font-size: 2em;
+  }
+
+  .vision-mission {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .developer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .developer-avatar,
+  .developer-avatar-placeholder {
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .contribution-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contribution-option {
+    flex-basis: 80%;
+    max-width: 400px;
+  }
+
+  /* Footer Responsive */
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-logo,
+  .footer-links,
+  .footer-contact {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-page.glass-card {
+    padding: 20px;
+  }
+
+  .about-section {
+    padding: 15px;
+  }
+
+  .carousel-caption {
+    font-size: 0.8em;
+    padding: 10px;
+  }
+
+  .carousel-control {
+    padding: 8px 12px;
+    font-size: 1.2em;
+  }
+}
+
+
+/* --- :root (Tambahkan variabel RGB jika belum ada) --- */
+:root {
+    /* ... variabel Anda yang sudah ada ... */
+    --color-primary-rgb: 241, 196, 15; /* Contoh: untuk rgba(var(--color-primary-rgb), 0.1) */
+    --color-accent-rgb: 52, 152, 219;  /* Contoh: untuk rgba(var(--color-accent-rgb), 0.3) */
+    --color-text-rgb: 44, 62, 80;      /* Contoh: untuk rgba(var(--color-text-rgb), 0.05) */
+}
+
+/* --- Page Specific: Map Page --- */
+.map-page-container {
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-xl);
+    animation: fadeInUp 0.7s ease-out forwards; /* Animasi masuk yang halus */
+}
+
+/* Judul Utama Halaman Peta */
+#map-page-title.page-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5.5vw, 3.2rem); /* Ukuran yang lebih menonjol */
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-sm); /* Jarak lebih dekat ke subjudul */
+    text-align: center;
+    position: relative;
+    padding-bottom: var(--spacing-md); /* Ruang untuk garis bawah yang lebih tebal */
+    letter-spacing: 0.5px;
+}
+
+#map-page-title.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px; /* Garis bawah lebih panjang */
+    height: 5px;  /* Garis bawah lebih tebal */
+    background-color: var(--color-accent); /* Gunakan warna aksen untuk menyorot tema peta */
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(var(--color-accent-rgb), 0.3); /* Bayangan halus untuk garis */
+}
+
+/* Subjudul Halaman Peta */
+.page-subtitle { /* Sudah ada di JS, kita style di sini */
+    text-align: center;
+    font-size: clamp(1rem, 2.5vw, 1.15rem); /* Ukuran font responsif */
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xl); /* Jarak cukup sebelum konten peta */
+    max-width: 750px; /* Batasi lebar untuk keterbacaan */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.75; /* Keterbacaan lebih baik */
+}
+
+/* Wrapper Utama Konten Peta (Glass Card) */
+#map-content-wrapper.glass-card {
+    display: flex;
+    flex-direction: column; /* Default untuk mobile */
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    /* background: rgba(255, 255, 255, 0.2); /* Sedikit lebih soft dari glass-card standar jika perlu */
+    /* backdrop-filter: blur(var(--glass-blur-sm)); */
+    /* border: 1px solid var(--glass-border); */
+    /* box-shadow: var(--glass-shadow); */
+    /* border-radius: var(--radius-md); */
+    /* Style di atas sudah dicover oleh .glass-card, tidak perlu di-override kecuali ada kebutuhan spesifik */
+}
+
+@media (min-width: 992px) { /* Layout side-by-side untuk layar lebih besar (desktop) */
+    #map-content-wrapper.glass-card {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 768px) {
+  #map-main-area,
+  .map-container.large,
+  #map {
+    display: block;
+    width: 100% !important;
+    height: 300px !important;
+    opacity: 1;
+    position: relative;
+  }
+
+  #map-sidebar {
+    margin-top: var(--spacing-md);
+  }
+}
+
+/* Area Peta Utama (Sebelah Kiri di Desktop) */
+#map-main-area {
+    flex-grow: 1; /* Mengisi ruang yang tersedia */
+    min-height: 450px; /* Tinggi minimum untuk peta atau loader */
+    display: flex; /* Untuk memusatkan loader atau pesan error */
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-md); /* Radius konsisten */
+    overflow: hidden; /* Penting agar peta tidak keluar dari border radius */
+    position: relative; /* Untuk positioning absolut loader */
+    background-color: rgba(var(--color-text-rgb), 0.03); /* Latar belakang sangat halus */
+    box-shadow: inset 0 0 20px rgba(var(--color-text-rgb), 0.05); /* Efek kedalaman halus */
+}
+
+@media (min-width: 992px) {
+    #map-main-area {
+        min-height: 600px; /* Lebih tinggi di desktop */
+    }
+}
+
+/* Kontainer Peta Aktual dari Leaflet */
+.map-container.large { /* Sudah ada di JS */
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-md); /* Cocokkan dengan #map-main-area */
+}
+
+#map { /* Div target Leaflet */
+    width: 100%;
+    height: 100%; /* Krusial untuk Leaflet agar memenuhi kontainer */
+    border-radius: inherit; /* Warisi border-radius dari parent */
+    background-color: var(--color-background); /* Warna fallback sebelum tiles dimuat */
+}
+
+/* Loader Container & Loader (Menggunakan style global yang sudah ada) */
+/* .loader-container { ... } */
+/* .loader { ... } */
+/* .sr-only { ... } (Pastikan style sr-only sudah ada untuk aksesibilitas) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* Sidebar Peta (Sebelah Kanan di Desktop) */
+#map-sidebar {
+    flex-basis: 340px; /* Lebar tetap untuk sidebar di desktop */
+    flex-shrink: 0; /* Agar tidak mengecil */
+    padding: var(--spacing-lg); /* Padding lebih luas */
+    background: var(--glass-bg); /* Efek glass konsisten */
+    backdrop-filter: blur(var(--glass-blur-sm));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius-md);
+    align-self: flex-start; /* Konten tidak meregang jika sedikit */
+    max-height: calc(100vh - 220px); /* Batasi tinggi dan aktifkan scroll */
+    overflow-y: auto;
+    /* Efek transisi saat muncul */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpSidebar 0.5s 0.2s ease-out forwards; /* Delay sedikit */
+}
+
+@keyframes fadeInUpSidebar {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 991px) { /* Sidebar di bawah peta pada layar kecil */
+    #map-sidebar {
+        flex-basis: auto; /* Lebar penuh */
+        width: 100%;
+        max-height: none; /* Tidak ada batasan tinggi spesifik di mobile */
+        margin-top: var(--spacing-lg); /* Jarak dari area peta */
+    }
+    #map-main-area {
+        min-height: 400px; /* Kurangi tinggi peta di mobile agar tidak terlalu dominan */
+    }
+}
+
+.sidebar-title {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    font-size: 1.6rem; /* Sedikit lebih besar dari var(--font-size-xl) standar */
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+.sidebar-title::before { /* Tambahkan ikon peta kecil di judul sidebar */
+    content: "\f5a0"; /* Kode ikon Font Awesome untuk peta, sesuaikan jika beda */
+    font-family: "Font Awesome 5 Free"; /* Pastikan Font Awesome termuat */
+    font-weight: 900; /* Solid icon */
+    font-size: 1em;
+    color: var(--color-primary-dark);
+}
+
+.sidebar-section {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+.sidebar-section:last-of-type { /* Hapus border untuk section terakhir */
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.sidebar-section p {
+    font-size: 0.9rem; /* Teks lebih kecil agar muat banyak informasi */
+    color: var(--color-text-light);
+    line-height: 1.65;
+    margin-bottom: var(--spacing-sm);
+}
+.sidebar-section p:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-section .icon-legend { /* Ikon di dalam teks legenda */
+    color: var(--color-accent);
+    margin-right: var(--spacing-xs);
+    font-size: 1.05em;
+    width: 22px; /* Jaga agar ikon dan teks sejajar */
+    text-align: center;
+    vertical-align: middle; /* Sejajarkan ikon dengan teks */
+}
+
+.marker-example { /* Styling untuk contoh marker di legenda */
+    display: inline-flex; /* Agar ikon dan teks di dalamnya sejajar */
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-accent); /* Sesuai dengan warna marker asli */
+    color: white;
+    padding: 4px 7px;
+    border-radius: 50%;
+    font-size: 0.75em; /* Kecilkan agar tidak dominan */
+    margin: 0 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.marker-example .fas { /* Ikon di dalam marker-example */
+    font-size: inherit; /* Ikuti ukuran font parent */
+    vertical-align: middle;
+}
+
+#map-stats h4 {
+    font-size: var(--font-size-lg); /* Ukuran konsisten */
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+    border-bottom: 1px dashed var(--glass-border); /* Garis pemisah halus */
+    padding-bottom: var(--spacing-xs);
+}
+
+#total-stories-on-map strong {
+    color: var(--color-primary-dark);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.1em; /* Sedikit perbesar angka statistik */
+}
+
+/* Tombol Reset Tampilan Peta */
+#reset-map-view-btn.btn { /* Menggunakan style .btn */
+    width: 100%; /* Tombol mengisi lebar sidebar */
+    background-color: var(--color-accent); /* Warna utama tombol */
+    border-color: var(--color-accent);
+    color: white;
+    margin-top: var(--spacing-md); /* Jarak dari statistik */
+    font-size: 0.95rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+#reset-map-view-btn.btn:hover {
+    background-color: var(--color-primary-dark); /* Warna hover lebih gelap */
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px); /* Efek hover halus */
+    box-shadow: var(--shadow-sm);
+}
+#reset-map-view-btn.btn i {
+    margin-right: var(--spacing-sm); /* Jarak ikon dan teks */
+}
+
+/* Teks Ringkasan Peta (di bawah konten utama) */
+#map-summary-text {
+    text-align: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: var(--spacing-lg) auto 0 auto; /* Jarak dari #map-content-wrapper, dan pusatkan */
+    max-width: 800px; /* Batasi lebar */
+    background: rgba(255, 255, 255, 0.15); /* Glass effect yang lebih subtle */
+    backdrop-filter: blur(var(--glass-blur-sm));
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--glass-border);
+    color: var(--color-text-light);
+    font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+    /* Animasi saat muncul */
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUpSummary 0.5s 0.4s ease-out forwards; /* Delay setelah sidebar */
+}
+
+@keyframes fadeInUpSummary {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#map-summary-text strong {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+}
+
+/* --- Styling untuk Kontrol Leaflet --- */
+.leaflet-control-container .leaflet-control {
+    border-radius: var(--radius-sm) !important;
+    box-shadow: var(--shadow-lg) !important; /* Bayangan lebih jelas untuk kontrol */
+    background-clip: padding-box !important; /* Perbaikan border-radius di Safari */
+    border: 1px solid var(--glass-border) !important;
+    background-color: rgba(255, 255, 255, 0.6) !important; /* Latar belakang semi-transparan */
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+}
+
+.leaflet-control-layers-toggle { /* Tombol Layers Control */
+    width: 38px !important;
+    height: 38px !important;
+    background-size: 22px 22px !important; /* Ukuran ikon di tombol */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    /* Ganti dengan ikon SVG atau Font Awesome jika diinginkan, contoh: */
+    /* background-image: url('path/to/your/layers-icon.svg') !important; */
+}
+/* Jika menggunakan Font Awesome, Anda mungkin perlu men-style ::before atau ::after */
+
+.leaflet-control-layers { /* Kontainer daftar layer */
+    padding: var(--spacing-sm) !important; /* Padding internal */
+}
+.leaflet-control-layers-list,
+.leaflet-control-layers-expanded {
+    font-family: 'Inter', sans-serif !important;
+}
+.leaflet-control-layers-base label,
+.leaflet-control-layers-overlays label {
+    color: var(--color-text) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    margin-bottom: var(--spacing-xs) !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+}
+.leaflet-control-layers-base label input, /* Styling radio/checkbox */
+.leaflet-control-layers-overlays label input {
+    margin-right: var(--spacing-sm) !important;
+    accent-color: var(--color-primary) !important; /* Warna saat terpilih */
+}
+.leaflet-control-layers-base label:hover,
+.leaflet-control-layers-overlays label:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.1) !important; /* Highlight saat hover */
+    border-radius: var(--radius-sm);
+}
+
+.leaflet-control-layers-separator {
+    margin: var(--spacing-sm) 0 !important; /* Jarak pemisah */
+    border-top: 1px solid var(--glass-border) !important;
+}
+
+.leaflet-bar a, .leaflet-bar a:hover { /* Tombol Zoom (+/-) */
+    color: var(--color-accent) !important;
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+    font-size: 1.5rem !important; /* Ukuran ikon zoom */
+}
+.leaflet-bar a:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.2) !important;
+}
+.leaflet-bar a:first-child {
+    border-top-left-radius: var(--radius-sm) !important;
+    border-top-right-radius: var(--radius-sm) !important;
+}
+.leaflet-bar a:last-child {
+    border-bottom-left-radius: var(--radius-sm) !important;
+    border-bottom-right-radius: var(--radius-sm) !important;
+}
+
+.leaflet-control-scale-line { /* Skala Peta */
+    border-color: var(--color-text) !important;
+    color: var(--color-text) !important;
+    background: transparent !important; /* Hapus background default jika ada */
+    padding: 3px 6px !important;
+    font-size: 0.8rem !important;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.7); /* Agar lebih terbaca di atas peta */
+}
+
+/* --- Custom Map Markers & Popups --- */
+.custom-map-marker { /* Kontainer untuk pin dan pulse */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Pin mengarah ke bawah */
+    filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3)); /* Efek bayangan untuk marker */
+}
+
+.marker-pin { /* Pin utama marker */
+    width: 34px; /* Sedikit lebih besar */
+    height: 34px;
+    border-radius: 50% 50% 50% 2px; /* Bentuk pin lebih halus */
+    background: var(--color-accent); /* Warna dari JS */
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white; /* Border putih untuk kontras dari peta */
+    transition: transform 0.2s ease-in-out;
+}
+.custom-map-marker:hover .marker-pin {
+    transform: rotate(-45deg) scale(1.1); /* Efek hover pada pin */
+}
+
+.marker-pin i.fas { /* Ikon di dalam pin */
+    transform: rotate(45deg); /* Luruskan kembali ikon */
+    color: white; /* Warna dari JS */
+    font-size: 17px; /* Ukuran ikon */
+}
+
+.marker-pulse { /* Efek denyut di bawah pin */
+    position: absolute;
+    bottom: -4px; /* Sesuaikan agar pas dengan ujung pin */
+    left: 50%;
+    /* transform: translateX(-50%); -- Dihandle di animasi */
+    width: 24px; /* Sesuaikan ukuran pulse */
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(var(--color-accent-rgb), 0.4); /* Gunakan variabel RGB warna aksen */
+    animation: pulse-animation 2.2s infinite cubic-bezier(0.25, 0.1, 0.25, 1); /* Animasi lebih smooth */
+    z-index: -1; /* Pastikan di belakang pin */
+    border: none;
+}
+
+@keyframes pulse-animation {
+    0% {
+        transform: translateX(-50%) scale(0.7);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.6); /* Lebih besar saat puncak */
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateX(-50%) scale(0.7);
+        opacity: 0.8; /* Kembali ke awal untuk loop yang mulus */
+    }
+}
+
+/* Styling Popup Leaflet */
+.leaflet-popup-content-wrapper {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important; /* Blur lebih kuat untuk popup */
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-lg) !important; /* Bayangan lebih menonjol */
+    border-radius: var(--radius-lg) !important; /* Radius lebih besar untuk popup */
+    padding: 0 !important; /* Hapus padding default, kita atur di .map-popup */
+    color: var(--color-text) !important;
+    overflow: hidden; /* Agar konten dengan radius tidak keluar */
+}
+
+.leaflet-popup-content {
+    margin: 0 !important; /* Hapus margin default Leaflet */
+    width: auto !important; /* Biarkan konten menentukan lebar */
+    min-width: 300px; /* Lebar minimum popup */
+    max-width: 340px; /* Batasi lebar maksimum popup */
+    font-family: 'Inter', sans-serif !important;
+}
+
+.map-popup { /* Konten kustom di dalam popup */
+    /* Padding diatur di sini, bukan di .leaflet-popup-content-wrapper */
+}
+
+.popup-image {
+    width: 100%; /* Gambar mengisi lebar popup */
+    height: 160px; /* Tinggi tetap untuk gambar */
+    object-fit: cover;
+    /* Tidak perlu border-radius jika wrapper sudah overflow:hidden dan padding:0 */
+    /* border-radius: var(--radius-lg) var(--radius-lg) 0 0; */ /* Radius hanya di atas */
+    display: block; /* Hapus spasi ekstra di bawah gambar */
+}
+
+.popup-content-text {
+    padding: var(--spacing-md); /* Padding untuk area teks */
+}
+
+.popup-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem; /* Judul lebih besar */
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.3;
+}
+
+.popup-description {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.55;
+    margin-bottom: var(--spacing-sm);
+    /* Batasan tinggi dan overflow dihandle oleh JS truncateText,
+       namun ini bisa jadi fallback jika JS gagal:
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    */
+}
+
+.popup-date {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    opacity: 0.9;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs); /* Jarak antara ikon dan teks */
+}
+.popup-date i.far { /* Ikon kalender */
+    color: var(--color-accent);
+    font-size: 0.9em;
+}
+
+.popup-btn.btn { /* Tombol "Baca Selengkapnya" */
+    width: 100%;
+    background-color: var(--color-accent); /* Warna aksen untuk tombol utama popup */
+    border-color: var(--color-accent);
+    color: white;
+    font-size: 0.9rem !important; /* Sesuaikan ukuran font jika perlu */
+    padding: var(--spacing-xs) var(--spacing-md) !important; /* Padding yang sesuai */
+}
+.popup-btn.btn:hover {
+    background-color: var(--color-primary); /* Warna hover berbeda */
+    border-color: var(--color-primary);
+    transform: translateY(-2px) scale(1.02);
+}
+.popup-btn.btn i.fas { /* Ikon pada tombol */
+    margin-right: var(--spacing-xs);
+}
+
+.leaflet-popup-tip-container { /* Panah popup */
+    /* Leaflet biasanya menangani ini dengan baik, tapi bisa di-override jika perlu */
+}
+.leaflet-popup-tip { /* Ujung panah popup */
+    background: var(--glass-bg) !important; /* Warna konsisten dengan wrapper */
+    border: 1px solid var(--glass-border) !important;
+    border-top-color: transparent !important; /* Sesuaikan jika panah di atas */
+    border-left-color: transparent !important; /* Sesuaikan jika panah di kiri */
+    box-shadow: none !important;
+}
+
+.leaflet-popup-close-button { /* Tombol close (X) pada popup */
+    color: var(--color-text) !important;
+    font-size: 1.3rem !important;
+    padding: var(--spacing-xs) var(--spacing-xs) 0 0 !important; /* Padding agar tidak terlalu mepet */
+    transition: color 0.2s ease;
+}
+.leaflet-popup-close-button:hover {
+    color: var(--color-secondary) !important; /* Warna hover untuk tombol close */
+    background-color: transparent !important; /* Hapus background hover default */
+}
+
+/* Styling untuk Pesan Alert di Area Peta (jika belum tercover sempurna) */
+#map-main-area .alert { /* Alert di dalam #map-main-area */
+    width: calc(100% - (2 * var(--spacing-lg))); /* Tidak terlalu lebar */
+    max-width: 550px; /* Batasi lebar maksimum alert */
+    margin-left: auto;
+    margin-right: auto;
+    /* Style .alert dan .alert-error sudah ada, ini hanya penyesuaian minor */
+    padding: var(--spacing-lg); /* Padding lebih besar untuk alert utama */
+    font-size: 1.05rem; /* Teks alert lebih jelas */
+}
+#map-main-area .alert p i { /* Ikon di dalam alert */
+    margin-right: var(--spacing-sm); /* Jarak ikon dan teks */
+    font-size: 1.2em; /* Ikon lebih besar */
+}
+
+/* Penyesuaian untuk animasi fade-in pada alert jika perlu */
+.animate-fade-in {
+    animation: fadeInAlert 0.5s ease-out forwards;
+}
+@keyframes fadeInAlert {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- Page Specific: Login & Register --- */
+.login-page,
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%); /* Konsisten dengan body */
+  animation: fadeIn 0.8s ease-out forwards; /* Efek masuk yang lembut */
+}
+
+.login-container,
+.auth-container { /* Kontainer utama untuk kedua form */
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg); /* Radius lebih besar untuk kesan modern */
+  padding: var(--spacing-xl);
+  max-width: 450px; /* Lebar maksimum form */
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* Untuk efek overlay */
+  animation: scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Animasi pop-in */
+}
+
+/* Glass overlay for visual interest */
+.login-container::before,
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  pointer-events: none;
+  animation: floatEffect 8s infinite alternate ease-in-out;
+}
+
+.login-container::after,
+.auth-container::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+  pointer-events: none;
+  animation: floatEffect 10s infinite alternate-reverse ease-in-out;
+}
+
+.login-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.login-logo {
+  max-width: 120px;
+  margin-bottom: var(--spacing-sm);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.login-title,
+.form-title { /* Digunakan di kedua form */
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.4;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+  text-align: left; /* Align label to the left */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.form-input,
+.form-control { /* Input fields for both forms */
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.15); /* Sedikit lebih opaque */
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Bayangan inset lembut */
+}
+
+.form-input::placeholder,
+.form-control::placeholder {
+  color: var(--color-text-light);
+  opacity: 0.6;
+}
+
+.form-input:focus,
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(var(--rgb-primary, 241, 196, 15), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2); /* Sedikit lebih transparan saat fokus */
+}
+
+.btn-login,
+.btn-full { /* Tombol submit untuk kedua form */
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  position: relative; /* Untuk efek loading */
+  overflow: hidden;
+}
+
+.btn-login:hover,
+.btn-full:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-login:disabled,
+.btn-full:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.8;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1em; /* Sesuaikan ukuran */
+  height: 1em; /* Sesuaikan ukuran */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Warna border spinner */
+  border-radius: 50%;
+  border-top-color: #fff; /* Warna bagian yang berputar */
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Animasi spin sudah ada di CSS Anda, pastikan targetnya benar jika berbeda */
+/* @keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
+
+/* Loading effect for buttons */
+.btn-login.loading::after,
+.btn-full.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.btn-login.loading,
+.btn-full.loading {
+  color: transparent !important; /* Hide text during loading */
+  pointer-events: none;
+  background-color: var(--color-primary-dark);
+}
+
+.form-footer {
+  margin-top: var(--spacing-lg);
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+.form-footer a,
+.link-register {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.form-footer a:hover,
+.link-register:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* Alerts for Login/Register */
+.alert-wrapper {
+  min-height: 50px; /* Pastikan ada ruang untuk alert agar tidak melompat */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.alert {
+  width: 100%; /* Agar alert mengisi lebar kontainer */
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  justify-content: center;
+  animation: fadeInDown 0.4s ease-out forwards; /* Animasi masuk alert */
+}
+
+.alert.success,
+.alert.alert-success {
+  background-color: rgba(144, 238, 144, 0.2); /* Light green with transparency */
+  color: #28a745; /* Darker green */
+  border: 1px solid rgba(40, 167, 69, 0.4);
+}
+
+.alert.error,
+.alert.alert-error {
+  background-color: rgba(255, 99, 71, 0.2); /* Light red with transparency */
+  color: #dc3545; /* Darker red */
+  border: 1px solid rgba(220, 53, 69, 0.4);
+}
+
+.alert p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.alert i {
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+
+.alert-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.alert-link:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Register specific adjustments */
+.auth-container .mb-3 { /* alert-container wrapper for register */
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Additional UX static features */
+/* Background particles/shapes for overall site */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: var(--color-primary);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  width: 150px;
+  height: 150px;
+  top: 10%;
+  left: 5%;
+  animation: moveShape 15s infinite alternate ease-in-out;
+}
+
+body::after {
+  width: 200px;
+  height: 200px;
+  bottom: 15%;
+  right: 8%;
+  background: var(--color-accent);
+  animation: moveShape 18s infinite alternate-reverse ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes floatEffect {
+  0% {
+    transform: translate(0, 0) rotate(45deg);
+  }
+  50% {
+    transform: translate(10px, 20px) rotate(50deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(45deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveShape {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(20px, 15px) scale(1.05);
+    }
+    50% {
+        transform: translate(0, 30px) scale(1);
+    }
+    75% {
+        transform: translate(-15px, 10px) scale(0.95);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .login-container,
+  .auth-container {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+  }
+
+  .login-title,
+  .form-title {
+    font-size: 1.8rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .form-input,
+  .form-control,
+  .btn-login,
+  .btn-full {
+    font-size: 1rem;
+    padding: var(--spacing-sm);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-page,
+  .register-page {
+    padding: var(--spacing-sm);
+  }
+
+  .login-container,
+  .auth-container {
+    padding: var(--spacing-md);
+  }
+
+  .login-logo {
+    max-width: 100px;
+  }
+
+  .login-title,
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .form-footer {
+    font-size: 0.85rem;
+  }
+}
