@@ -1205,10 +1205,6 @@ footer {
   color: #007bff;
 }
 
-/* --- (Konten style.css Anda yang sudah ada di atas) --- */
-
-/* ... (all your existing CSS) ... */
-
 /* --- Page Specific: Add Story Page --- */
 .add-story-page-container {
   padding-top: var(--spacing-lg);

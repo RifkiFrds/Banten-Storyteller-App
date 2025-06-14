@@ -167,17 +167,26 @@ export default class ViewDetailPage {
   }
 
   async initMap(story) {
+    const leafletCss = document.createElement("link");
+    leafletCss.id = "leaflet-css";
+    leafletCss.rel = "stylesheet";
+    leafletCss.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+    leafletCss.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
+    leafletCss.crossOrigin = "";
+    if (!document.getElementById("leaflet-css")) {
+        document.head.appendChild(leafletCss);
+    }
+    
     const script = document.createElement("script");
     script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
     script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
     script.crossOrigin = "";
-    document.head.appendChild(script);
-
+    
     script.onload = () => {
       const map = L.map("map").setView([story.lat, story.lon], 14);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
-        attribution: '&copy; OpenStreetMap',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
       L.marker([story.lat, story.lon])
@@ -187,5 +196,7 @@ export default class ViewDetailPage {
 
       setTimeout(() => map.invalidateSize(), 300);
     };
+
+    document.head.appendChild(script);
   }
 }
