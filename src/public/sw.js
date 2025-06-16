@@ -1,5 +1,3 @@
-// Banten-Storyteller-App/src/public/sw.js
-
 self.addEventListener('push', (event) => {
   console.log('Service Worker: Menerima Push Notification...');
 
@@ -8,7 +6,6 @@ self.addEventListener('push', (event) => {
     // Coba parse data push sebagai JSON
     notificationData = event.data.json();
   } catch (e) {
-    // Jika gagal, anggap sebagai teks biasa
     notificationData = {
       title: 'Notifikasi Baru',
       options: {

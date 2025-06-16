@@ -192,18 +192,21 @@ header {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm, 1rem);
+  flex-wrap: nowrap;
+  white-space: nowarp;
 }
 
 .nav-list li a {
   color: var(--color-text-light);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-md);
-  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 14px;
+  padding: var(--spacing-xs) var(--spacing-xs);
   border-radius: var(--border-radius-sm);
   transition: all 0.3s ease;
   position: relative;
+  display: inline-block;
 }
 
 .nav-list li a:hover {

@@ -5,73 +5,73 @@ const urlBase64ToUint8Array = (base64String) => {
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
   const rawData = window.atob(base64);
   const outputArray = new Uint8Array(rawData.length);
-  for (let i = 0; i < rawData.length; ++i) {
+  for (let i = 0; i < rawData.length; i += 1) {
     outputArray[i] = rawData.charCodeAt(i);
   }
   return outputArray;
 };
 
 const NotificationHelper = {
-  // Meminta izin kepada pengguna untuk menampilkan notifikasi
-  async askPermission() {
-    if ('Notification' in window && 'serviceWorker' in navigator) {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        console.log('Izin notifikasi diberikan.');
-        this._subscribeToPushManager();
-      } else {
-        console.log('Izin notifikasi tidak diberikan.');
-      }
+  // Menggabungkan permintaan izin dan subscribe 
+  async subscribe() {
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+      console.warn('Browser tidak mendukung notifikasi.');
+      return;
     }
+
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') {
+      console.log('Izin notifikasi tidak diberikan oleh pengguna.');
+      throw new Error('Izin notifikasi ditolak.'); 
+    }
+
+    await this._subscribeToPushManager();
   },
 
-  // push subscription
+  // Fungsi internal untuk menangani logika subscription
   async _subscribeToPushManager() {
+    const serviceWorkerRegistration = await navigator.serviceWorker.ready;
+    let subscription = await serviceWorkerRegistration.pushManager.getSubscription();
+
+    if (subscription) {
+      console.log('Pengguna sudah berlangganan:', subscription.toJSON());
+      return; // Keluar jika sudah ada subscription
+    }
+
     try {
-      const serviceWorkerRegistration = await navigator.serviceWorker.ready;
-      let subscription = await serviceWorkerRegistration.pushManager.getSubscription();
-
-      if (!subscription) {
-        console.log('Belum berlangganan, membuat langganan baru...');
-        subscription = await serviceWorkerRegistration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(PUSH_API_SERVER_KEY),
-        });
-        console.log('Berhasil berlangganan:', subscription.toJSON());
-
-      } else {
-        console.log('Sudah berlangganan:', subscription.toJSON());
-      }
+      console.log('Membuat langganan baru...');
+      subscription = await serviceWorkerRegistration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(PUSH_API_SERVER_KEY),
+      });
+      console.log('Berhasil berlangganan:', subscription.toJSON());
+      // TODO: Kirim subscription ke server Anda di sini
     } catch (error) {
       console.error('Gagal berlangganan push notification:', error);
+      throw error;
     }
   },
 
-  // === FUNGSI BARU UNTUK BERHENTI BERLANGGANAN ===
+  // Fungsi untuk berhenti berlangganan
   async unsubscribe() {
-    try {
-      const serviceWorkerRegistration = await navigator.serviceWorker.ready;
-      const subscription = await serviceWorkerRegistration.pushManager.getSubscription();
+    const serviceWorkerRegistration = await navigator.serviceWorker.ready;
+    const subscription = await serviceWorkerRegistration.pushManager.getSubscription();
 
-      if (subscription) {
-        const successful = await subscription.unsubscribe();
-        if (successful) {
-          console.log('Berhasil berhenti berlangganan.');
-          this._showUnsubscriptionSuccessNotification(serviceWorkerRegistration);
-        }
+    if (!subscription) {
+      console.log('Tidak ada langganan yang aktif untuk dibatalkan.');
+      return;
+    }
+
+    try {
+      const successful = await subscription.unsubscribe();
+      if (successful) {
+        console.log('Berhasil berhenti berlangganan.');
+        // TODO: Kirim pemberitahuan ke server Anda untuk menghapus subscription
       }
     } catch (error) {
       console.error('Gagal berhenti berlangganan:', error);
+      throw error;
     }
-  },
-
-  // push UNSUBSCRIBE 
-  _showUnsubscriptionSuccessNotification(serviceWorkerRegistration) {
-    const options = {
-      body: 'Anda telah berhenti berlangganan notifikasi.',
-      icon: '/icons/icon-192x192.png',
-    };
-    serviceWorkerRegistration.showNotification('Langganan Dibatalkan', options);
   },
 };
 
