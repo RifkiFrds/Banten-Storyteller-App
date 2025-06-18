@@ -19,7 +19,7 @@ class ServiceWorkerRegister {
   async registerServiceWorker() {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
+        scope: '/',
       });
       console.log('Service Worker registered successfully:', registration);
       return registration;
@@ -30,7 +30,7 @@ class ServiceWorkerRegister {
   }
 
   setupInstallPrompt() {
-    window.addEventListener('beforeinstallprompt', (e) => {
+    window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       this.deferredPrompt = e;
       this.showInstallPrompt();
@@ -121,4 +121,4 @@ class ServiceWorkerRegister {
   }
 }
 
-export default ServiceWorkerRegister; 
+export default ServiceWorkerRegister;

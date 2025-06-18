@@ -1,8 +1,9 @@
-import { subscribeNotification, unsubscribeNotification } from '../data/api'; 
+import { subscribeNotification, unsubscribeNotification } from '../data/api';
 
-const PUSH_API_SERVER_KEY = 'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk';
+const PUSH_API_SERVER_KEY =
+  'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk';
 
-const urlBase64ToUint8Array = (base64String) => {
+const urlBase64ToUint8Array = base64String => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
   const rawData = window.atob(base64);
@@ -23,12 +24,12 @@ const NotificationHelper = {
     const permission = await Notification.requestPermission();
     if (permission !== 'granted') {
       console.log('Izin notifikasi tidak diberikan oleh pengguna.');
-      throw new Error('Izin notifikasi ditolak.'); 
+      throw new Error('Izin notifikasi ditolak.');
     }
 
-     await this._subscribeToPushManager(token);
+    await this._subscribeToPushManager(token);
   },
- async _subscribeToPushManager(token) {
+  async _subscribeToPushManager(token) {
     const serviceWorkerRegistration = await navigator.serviceWorker.ready;
     let subscription = await serviceWorkerRegistration.pushManager.getSubscription();
 
@@ -42,7 +43,7 @@ const NotificationHelper = {
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(PUSH_API_SERVER_KEY),
       });
-      
+
       console.log('Berhasil berlangganan di browser, mengirim ke server...');
       // IMPLEMENTASI TODO: Kirim subscription ke server
       await subscribeNotification({
@@ -50,7 +51,6 @@ const NotificationHelper = {
         token, // Kirim token untuk otentikasi
       });
       console.log('Berhasil mengirim subscription ke server.');
-
     } catch (error) {
       console.error('Gagal berlangganan push notification:', error);
       // Jika gagal, langsung batalkan subscription di browser

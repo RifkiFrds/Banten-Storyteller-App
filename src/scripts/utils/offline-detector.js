@@ -21,7 +21,7 @@ class OfflineDetector {
 
     // Listen for service worker messages
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', (event) => {
+      navigator.serviceWorker.addEventListener('message', event => {
         if (event.data && event.data.type === 'OFFLINE_STATUS') {
           this.updateOfflineStatus(event.data.isOffline);
         }
@@ -193,7 +193,7 @@ class OfflineDetector {
     if (this.offlineQueue.length === 0) return;
 
     console.log('Processing offline queue...');
-    
+
     // Process queued actions
     this.offlineQueue.forEach((action, index) => {
       try {
@@ -269,4 +269,4 @@ class OfflineDetector {
   }
 }
 
-export default OfflineDetector; 
+export default OfflineDetector;

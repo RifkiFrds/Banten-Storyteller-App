@@ -1,5 +1,5 @@
-import LoginPresenter from "./login-presenter";
-import * as DicodingAPI from "../../data/api";
+import LoginPresenter from './login-presenter';
+import * as DicodingAPI from '../../data/api';
 
 export default class LoginPage {
   #presenter = null;
@@ -67,32 +67,32 @@ export default class LoginPage {
   }
 
   attachFormListener() {
-    const loginForm = document.getElementById("login-form");
+    const loginForm = document.getElementById('login-form');
 
-    loginForm.addEventListener("submit", async (event) => {
+    loginForm.addEventListener('submit', async event => {
       event.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
       await this.#presenter.login(email, password);
     });
   }
 
- setLoading(isLoading) {
-    const loginButton = document.getElementById("login-button");
+  setLoading(isLoading) {
+    const loginButton = document.getElementById('login-button');
 
     if (isLoading) {
       loginButton.disabled = true;
-      loginButton.innerHTML = `Memproses... <span class="spinner"></span>`; 
+      loginButton.innerHTML = `Memproses... <span class="spinner"></span>`;
     } else {
       loginButton.disabled = false;
-      loginButton.innerHTML = "Masuk";
+      loginButton.innerHTML = 'Masuk';
     }
   }
 
   showSuccess(message) {
-    const alertContainer = document.getElementById("alert-container");
+    const alertContainer = document.getElementById('alert-container');
     alertContainer.innerHTML = `
       <div class="alert success">
         ${message}
@@ -101,7 +101,7 @@ export default class LoginPage {
   }
 
   showError(message) {
-    const alertContainer = document.getElementById("alert-container");
+    const alertContainer = document.getElementById('alert-container');
     alertContainer.innerHTML = `
       <div class="alert error">
         ${message}

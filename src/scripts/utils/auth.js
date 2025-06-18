@@ -1,4 +1,4 @@
-const AUTH_KEY = "dicoding_story_auth";
+const AUTH_KEY = 'dicoding_story_auth';
 
 export function saveAuth(authData) {
   localStorage.setItem(AUTH_KEY, JSON.stringify(authData));

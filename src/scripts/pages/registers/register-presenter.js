@@ -1,4 +1,4 @@
-import * as DicodingAPI from "../../data/api";
+import * as DicodingAPI from '../../data/api';
 
 export default class RegisterPresenter {
   #view;
@@ -23,20 +23,16 @@ export default class RegisterPresenter {
         throw new Error(response.message);
       }
 
-      this.#view.showSuccess(
-        "Registration successful. Please login with your new account."
-      );
+      this.#view.showSuccess('Registration successful. Please login with your new account.');
 
       setTimeout(() => {
-        window.location.hash = "#/login";
+        window.location.hash = '#/login';
       }, 2000);
 
       return true;
     } catch (error) {
-      console.error("register: error:", error);
-      this.#view.showError(
-        error.message || "Failed to register. Please try again."
-      );
+      console.error('register: error:', error);
+      this.#view.showError(error.message || 'Failed to register. Please try again.');
       return false;
     } finally {
       this.#view.setLoading(false);

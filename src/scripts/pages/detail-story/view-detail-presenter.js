@@ -1,5 +1,5 @@
-import { getToken } from "../../utils/auth";
-import * as DicodingAPI from "../../data/api";
+import { getToken } from '../../utils/auth';
+import * as DicodingAPI from '../../data/api';
 
 export default class ViewDetailPresenter {
   #view;
@@ -30,13 +30,13 @@ export default class ViewDetailPresenter {
       }
 
       const story = response.story;
-      this.#view.displayStoryDetail(story);
+      await this.#view.displayStoryDetail(story);
 
       if (story.lat && story.lon) {
         this.#view.initMap(story);
       }
     } catch (error) {
-      console.error("loadStoryDetail error:", error);
+      console.error('loadStoryDetail error:', error);
       this.#view.showError(error.message);
     }
   }

@@ -1,5 +1,5 @@
-import { getToken } from "../../utils/auth";
-import * as DicodingAPI from "../../data/api";
+import { getToken } from '../../utils/auth';
+import * as DicodingAPI from '../../data/api';
 
 export default class HomePresenter {
   #view;
@@ -16,7 +16,7 @@ export default class HomePresenter {
    */
   async loadStories(query = null) {
     try {
-      this.#view.showLoading(); 
+      this.#view.showLoading();
       const token = getToken();
 
       if (!token) {
@@ -38,16 +38,16 @@ export default class HomePresenter {
       }
 
       if (!response.listStory || response.listStory.length === 0) {
-        this.#view.showEmptyStories(query); 
+        this.#view.showEmptyStories(query);
         return;
       }
 
-      this.#view.displayStories(response.listStory);
+      await this.#view.displayStories(response.listStory);
     } catch (error) {
-      console.error("loadStories: error:", error);
+      console.error('loadStories: error:', error);
       this.#view.showError(error.message);
     } finally {
-      this.#view.hideLoading(); 
+      this.#view.hideLoading();
     }
   }
 }

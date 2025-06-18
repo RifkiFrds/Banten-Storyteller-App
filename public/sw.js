@@ -30,15 +30,16 @@ const appShellFiles = [
   '/images/logo-banten.png',
   '/icons/icon-144x144.png',
   '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  '/icons/icon-512x512.png',
 ];
 
 // Install event - cache the Application Shell
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   console.log('Service Worker: Installing...');
   event.waitUntil(
-    caches.open(APP_SHELL_CACHE)
-      .then((cache) => {
+    caches
+      .open(APP_SHELL_CACHE)
+      .then(cache => {
         console.log('Service Worker: Caching App Shell files');
         return cache.addAll(appShellFiles);
       })
@@ -46,36 +47,41 @@ self.addEventListener('install', (event) => {
         console.log('Service Worker: App Shell cached successfully');
         return self.skipWaiting();
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Service Worker: Failed to cache App Shell', error);
       })
   );
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   console.log('Service Worker: Activating...');
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== APP_SHELL_CACHE && 
-              cacheName !== STATIC_CACHE && 
-              cacheName !== DYNAMIC_CACHE) {
-            console.log('Service Worker: Deleting old cache', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => {
-      console.log('Service Worker: Activated successfully');
-      return self.clients.claim();
-    })
+    caches
+      .keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (
+              cacheName !== APP_SHELL_CACHE &&
+              cacheName !== STATIC_CACHE &&
+              cacheName !== DYNAMIC_CACHE
+            ) {
+              console.log('Service Worker: Deleting old cache', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => {
+        console.log('Service Worker: Activated successfully');
+        return self.clients.claim();
+      })
   );
 });
 
 // Fetch event - Application Shell architecture implementation
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
@@ -88,8 +94,9 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname === '/' || url.pathname === '/index.html') {
     // Application Shell - always serve from cache first
     event.respondWith(
-      caches.match(request)
-        .then((response) => {
+      caches
+        .match(request)
+        .then(response => {
           if (response) {
             return response;
           }
@@ -100,27 +107,28 @@ self.addEventListener('fetch', (event) => {
           return caches.match('/index.html');
         })
     );
-  } else if (url.pathname.startsWith('/src/') || 
-             url.pathname.startsWith('/images/') ||
-             url.pathname.startsWith('/icons/')) {
+  } else if (
+    url.pathname.startsWith('/src/') ||
+    url.pathname.startsWith('/images/') ||
+    url.pathname.startsWith('/icons/')
+  ) {
     // Static assets - Cache First strategy
     event.respondWith(
-      caches.match(request)
-        .then((response) => {
+      caches
+        .match(request)
+        .then(response => {
           if (response) {
             return response;
           }
-          return fetch(request)
-            .then((fetchResponse) => {
-              if (fetchResponse.status === 200) {
-                const responseClone = fetchResponse.clone();
-                caches.open(STATIC_CACHE)
-                  .then((cache) => {
-                    cache.put(request, responseClone);
-                  });
-              }
-              return fetchResponse;
-            });
+          return fetch(request).then(fetchResponse => {
+            if (fetchResponse.status === 200) {
+              const responseClone = fetchResponse.clone();
+              caches.open(STATIC_CACHE).then(cache => {
+                cache.put(request, responseClone);
+              });
+            }
+            return fetchResponse;
+          });
         })
         .catch(() => {
           // Return offline fallback for critical assets
@@ -136,8 +144,10 @@ self.addEventListener('fetch', (event) => {
           });
         })
     );
-  } else if (url.origin === 'https://fonts.googleapis.com' || 
-             url.origin === 'https://fonts.gstatic.com') {
+  } else if (
+    url.origin === 'https://fonts.googleapis.com' ||
+    url.origin === 'https://fonts.gstatic.com'
+  ) {
     // Google Fonts - Stale While Revalidate
     event.respondWith(
       new StaleWhileRevalidate({
@@ -153,8 +163,7 @@ self.addEventListener('fetch', (event) => {
         ],
       }).handle(event)
     );
-  } else if (url.origin === 'https://unpkg.com' || 
-             url.origin === 'https://cdnjs.cloudflare.com') {
+  } else if (url.origin === 'https://unpkg.com' || url.origin === 'https://cdnjs.cloudflare.com') {
     // CDN resources - Cache First
     event.respondWith(
       new CacheFirst({
@@ -174,45 +183,43 @@ self.addEventListener('fetch', (event) => {
     // Dynamic content - Network First strategy with offline fallback
     event.respondWith(
       fetch(request)
-        .then((response) => {
+        .then(response => {
           // Cache successful responses
           if (response.status === 200) {
             const responseClone = response.clone();
-            caches.open(DYNAMIC_CACHE)
-              .then((cache) => {
-                cache.put(request, responseClone);
-              });
+            caches.open(DYNAMIC_CACHE).then(cache => {
+              cache.put(request, responseClone);
+            });
           }
           return response;
         })
         .catch(() => {
           // Return cached version if available, otherwise offline page
-          return caches.match(request)
-            .then((cachedResponse) => {
-              if (cachedResponse) {
-                return cachedResponse;
-              }
-              // Return offline page for navigation requests
-              if (request.destination === 'document') {
-                return caches.match('/offline.html');
-              }
-              return new Response('Offline content not available', {
-                status: 503,
-                statusText: 'Service Unavailable',
-                headers: new Headers({
-                  'Content-Type': 'text/plain',
-                }),
-              });
+          return caches.match(request).then(cachedResponse => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            // Return offline page for navigation requests
+            if (request.destination === 'document') {
+              return caches.match('/offline.html');
+            }
+            return new Response('Offline content not available', {
+              status: 503,
+              statusText: 'Service Unavailable',
+              headers: new Headers({
+                'Content-Type': 'text/plain',
+              }),
             });
+          });
         })
     );
   }
 });
 
 // Push notification handling
-self.addEventListener('push', (event) => {
+self.addEventListener('push', event => {
   console.log('Service Worker: Received Push Notification...');
-  
+
   let notificationData;
   try {
     notificationData = event.data.json();
@@ -220,7 +227,7 @@ self.addEventListener('push', (event) => {
     notificationData = {
       title: 'Banten Storyteller',
       body: 'You have a new notification',
-      icon: '/icons/icon-192x192.png'
+      icon: '/icons/icon-192x192.png',
     };
   }
 
@@ -236,28 +243,28 @@ self.addEventListener('push', (event) => {
       {
         action: 'open',
         title: 'Open App',
-        icon: '/icons/icon-144x144.png'
+        icon: '/icons/icon-144x144.png',
       },
       {
         action: 'close',
         title: 'Close',
-        icon: '/icons/icon-144x144.png'
-      }
-    ]
+        icon: '/icons/icon-144x144.png',
+      },
+    ],
   };
 
   event.waitUntil(
     self.registration.showNotification(title, {
       ...defaultOptions,
-      body: body || 'New story available in Banten Storyteller!'
+      body: body || 'New story available in Banten Storyteller!',
     })
   );
 });
 
 // Notification click handling
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener('notificationclick', event => {
   console.log('Service Worker: Notification clicked');
-  
+
   event.notification.close();
 
   if (event.action === 'close') {
@@ -265,27 +272,26 @@ self.addEventListener('notificationclick', (event) => {
   }
 
   event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true })
-      .then((clientList) => {
-        // Check if app is already open
-        for (const client of clientList) {
-          if (client.url.includes(self.location.origin) && 'focus' in client) {
-            return client.focus();
-          }
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
+      // Check if app is already open
+      for (const client of clientList) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          return client.focus();
         }
-        
-        // If app is not open, open it
-        if (clients.openWindow) {
-          return clients.openWindow('/');
-        }
-      })
+      }
+
+      // If app is not open, open it
+      if (clients.openWindow) {
+        return clients.openWindow('/');
+      }
+    })
   );
 });
 
 // Background sync for offline actions
-self.addEventListener('sync', (event) => {
+self.addEventListener('sync', event => {
   console.log('Service Worker: Background sync triggered', event.tag);
-  
+
   if (event.tag === 'background-sync') {
     event.waitUntil(
       // Handle background sync tasks here
@@ -296,11 +302,11 @@ self.addEventListener('sync', (event) => {
 });
 
 // Message handling for communication with main app
-self.addEventListener('message', (event) => {
+self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
-  
+
   if (event.data && event.data.type === 'GET_VERSION') {
     event.ports[0].postMessage({ version: '1.0.0' });
   }

@@ -1,5 +1,5 @@
-import { getToken } from "../../utils/auth";
-import * as DicodingAPI from "../../data/api";
+import { getToken } from '../../utils/auth';
+import * as DicodingAPI from '../../data/api';
 
 export default class MapPresenter {
   #view;
@@ -23,7 +23,7 @@ export default class MapPresenter {
       const response = await this.#model.getStories({ token, location: 1 });
 
       if (response.error) {
-        throw new Error(response.message || "Gagal mengambil data cerita dari server.");
+        throw new Error(response.message || 'Gagal mengambil data cerita dari server.');
       }
 
       const storiesFromAPI = response.listStory;
@@ -31,7 +31,7 @@ export default class MapPresenter {
       if (!storiesFromAPI) {
         // Kasus jika field listStory tidak ada, meskipun error: false
         console.warn("Respons API tidak memiliki field 'listStory'.");
-        this.#view.showError("Format data cerita dari server tidak sesuai.");
+        this.#view.showError('Format data cerita dari server tidak sesuai.');
         return;
       }
 
@@ -41,13 +41,16 @@ export default class MapPresenter {
         this.#view.showEmptyStoriesWithLocation();
         return;
       }
-      
+
       // Filter tambahan di frontend untuk memastikan validitas data, meskipun API seharusnya sudah benar.
       const validStoriesWithLocation = storiesFromAPI.filter(
-        (story) => story.lat != null && story.lon != null &&
-                     !isNaN(parseFloat(story.lat)) && !isNaN(parseFloat(story.lon))
+        story =>
+          story.lat != null &&
+          story.lon != null &&
+          !isNaN(parseFloat(story.lat)) &&
+          !isNaN(parseFloat(story.lon))
       );
-      
+
       if (validStoriesWithLocation.length === 0) {
         // Jika setelah filter frontend, tidak ada yang valid.
         this.#view.showEmptyStoriesWithLocation(); // Tetap message ini karena query awal adalah untuk yang berlokasi
@@ -55,10 +58,11 @@ export default class MapPresenter {
       }
 
       this.#view.displayMap(validStoriesWithLocation);
-
     } catch (error) {
-      console.error("MapPresenter - loadStoriesWithLocation Error:", error);
-      this.#view.showError(error.message || "Tidak dapat memuat cerita untuk peta. Periksa koneksi Anda.");
+      console.error('MapPresenter - loadStoriesWithLocation Error:', error);
+      this.#view.showError(
+        error.message || 'Tidak dapat memuat cerita untuk peta. Periksa koneksi Anda.'
+      );
     }
   }
 }

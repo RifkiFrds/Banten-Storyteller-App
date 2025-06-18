@@ -54,10 +54,10 @@ const setupSubscriptionButton = async () => {
         console.log(error.message);
       }
     }
-    
+
     const newSubscriptionAfterOp = await serviceWorkerRegistration.pushManager.getSubscription();
     isSubscribed = newSubscriptionAfterOp !== null;
-    
+
     if (isSubscribed) {
       newButton.textContent = 'Unsubscribe';
     } else {
@@ -68,7 +68,6 @@ const setupSubscriptionButton = async () => {
   });
 };
 
-
 document.addEventListener('DOMContentLoaded', async () => {
   const app = new App({
     content: document.querySelector('#main-content'),
@@ -77,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   await new swRegister();
-  
+
   // Initialize offline detector
   const offlineDetector = new OfflineDetector();
 
@@ -86,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await setupSubscriptionButton();
   };
 
-  window.addEventListener('auth-changed', (event) => {
+  window.addEventListener('auth-changed', event => {
     if (event.detail && event.detail.success) {
       window.location.hash = '#/';
     }
@@ -97,10 +96,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   await renderContent();
-  
+
   const mainContent = document.querySelector('#main-content');
   const skipLink = document.querySelector('.skip-link');
-  skipLink.addEventListener('click', (event) => {
+  skipLink.addEventListener('click', event => {
     event.preventDefault();
     skipLink.blur();
     mainContent.focus();

@@ -1,7 +1,7 @@
-import routes from "../routes/routes";
-import { getActiveRoute, parseActivePathname } from "../routes/url-parser";
-import { getAuth, isAuthenticated } from "../utils/auth";
-import { applyPageTransition } from "../utils/index";
+import routes from '../routes/routes';
+import { getActiveRoute, parseActivePathname } from '../routes/url-parser';
+import { getAuth, isAuthenticated } from '../utils/auth';
+import { applyPageTransition } from '../utils/index';
 
 class App {
   #content = null;
@@ -15,7 +15,7 @@ class App {
     this.#content = content;
     this.#drawerButton = drawerButton;
     this.#navigationDrawer = navigationDrawer;
-    this.#authButton = document.querySelector("#auth-button");
+    this.#authButton = document.querySelector('#auth-button');
 
     this.#setupDrawer();
     this.#initAuth();
@@ -23,21 +23,21 @@ class App {
 
   // Setup event listener untuk drawer navigasi
   #setupDrawer() {
-    this.#drawerButton.addEventListener("click", () => {
-      this.#navigationDrawer.classList.toggle("open");
+    this.#drawerButton.addEventListener('click', () => {
+      this.#navigationDrawer.classList.toggle('open');
     });
 
-    document.body.addEventListener("click", (event) => {
+    document.body.addEventListener('click', event => {
       if (
         !this.#navigationDrawer.contains(event.target) &&
         !this.#drawerButton.contains(event.target)
       ) {
-        this.#navigationDrawer.classList.remove("open");
+        this.#navigationDrawer.classList.remove('open');
       }
 
-      this.#navigationDrawer.querySelectorAll("a").forEach((link) => {
+      this.#navigationDrawer.querySelectorAll('a').forEach(link => {
         if (link.contains(event.target)) {
-          this.#navigationDrawer.classList.remove("open");
+          this.#navigationDrawer.classList.remove('open');
         }
       });
     });
@@ -48,7 +48,7 @@ class App {
     this.#updateAuthButton();
 
     // Dengarkan perubahan autentikasi
-    window.addEventListener("auth-changed", () => {
+    window.addEventListener('auth-changed', () => {
       this.#updateAuthButton();
     });
   }
@@ -56,58 +56,58 @@ class App {
   // Update tampilan tombol login/logout
   #updateAuthButton() {
     // Hapus dulu event listener logout agar tidak duplikat
-    this.#authButton.removeEventListener("click", this.#handleLogout);
+    this.#authButton.removeEventListener('click', this.#handleLogout);
 
     if (isAuthenticated()) {
       const { loginResult } = getAuth();
       this.#authButton.textContent = `Logout (${loginResult.name})`;
-      this.#authButton.href = "#/";
-      this.#authButton.addEventListener("click", this.#handleLogout);
+      this.#authButton.href = '#/';
+      this.#authButton.addEventListener('click', this.#handleLogout);
     } else {
-      this.#authButton.textContent = "Login";
-      this.#authButton.href = "#/login";
+      this.#authButton.textContent = 'Login';
+      this.#authButton.href = '#/login';
     }
   }
 
   // Handler saat tombol logout ditekan
-  #handleLogout = (event) => {
+  #handleLogout = event => {
     event.preventDefault();
-    localStorage.removeItem("dicoding_story_auth");
-    window.dispatchEvent(new CustomEvent("auth-changed"));
-    window.location.hash = "#/";
+    localStorage.removeItem('dicoding_story_auth');
+    window.dispatchEvent(new CustomEvent('auth-changed'));
+    window.location.hash = '#/';
   };
 
   // Tentukan tipe animasi berdasarkan perpindahan halaman
   #getAnimationType(newUrl) {
-    if (!this.#currentPage) return "fade"; // Default untuk halaman pertama
+    if (!this.#currentPage) return 'fade'; // Default untuk halaman pertama
 
     const pageCategories = {
-      home: ["/"],
-      auth: ["/login", "/register"],
-      content: ["/view", "/add"],
-      info: ["/about", "/map"],
+      home: ['/'],
+      auth: ['/login', '/register'],
+      content: ['/view', '/add'],
+      info: ['/about', '/map'],
     };
 
-    const getCurrentCategory = (url) => {
+    const getCurrentCategory = url => {
       for (const [category, urls] of Object.entries(pageCategories)) {
-        if (urls.some((path) => url.startsWith(path))) {
+        if (urls.some(path => url.startsWith(path))) {
           return category;
         }
       }
-      return "other";
+      return 'other';
     };
 
     const currentCategory = getCurrentCategory(this.#currentPage);
     const newCategory = getCurrentCategory(newUrl);
 
     if (currentCategory === newCategory) {
-      return "fade"; // Sama kategori: fade
-    } else if (currentCategory === "auth" && newCategory === "home") {
-      return "zoom"; // Dari login/register ke home: zoom
-    } else if (newCategory === "content") {
-      return "slide"; // Halaman konten: slide
+      return 'fade'; // Sama kategori: fade
+    } else if (currentCategory === 'auth' && newCategory === 'home') {
+      return 'zoom'; // Dari login/register ke home: zoom
+    } else if (newCategory === 'content') {
+      return 'slide'; // Halaman konten: slide
     } else {
-      return "fade"; // Default animasi
+      return 'fade'; // Default animasi
     }
   }
 
@@ -127,10 +127,7 @@ class App {
 
     try {
       // Jika halaman sebelumnya ada dan punya destroy method, jalankan untuk cleanup
-      if (
-        this.#currentPageInstance &&
-        typeof this.#currentPageInstance.destroy === "function"
-      ) {
+      if (this.#currentPageInstance && typeof this.#currentPageInstance.destroy === 'function') {
         await this.#currentPageInstance.destroy();
       }
 
@@ -147,7 +144,7 @@ class App {
       this.#currentPage = url;
       this.#currentPageInstance = page;
     } catch (error) {
-      console.error("Error rendering page:", error);
+      console.error('Error rendering page:', error);
       this.#content.innerHTML = `
         <div class="container">
           <div class="alert alert-error">

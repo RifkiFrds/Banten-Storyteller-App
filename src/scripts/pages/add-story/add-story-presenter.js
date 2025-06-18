@@ -1,5 +1,5 @@
-import { getToken } from "../../utils/auth";
-import * as DicodingAPI from "../../data/api";
+import { getToken } from '../../utils/auth';
+import * as DicodingAPI from '../../data/api';
 
 export default class AddStoryPresenter {
   #view;
@@ -38,8 +38,8 @@ export default class AddStoryPresenter {
       const response = await this.#model.addStory({
         description,
         photo,
-        lat: location?.lat, 
-        lon: location?.lon, 
+        lat: location?.lat,
+        lon: location?.lon,
         token,
       });
 
@@ -48,20 +48,16 @@ export default class AddStoryPresenter {
       }
 
       // Menampilkan pesan sukses dan mengarahkan ke halaman utama
-      this.#view.showSuccess(
-        "Cerita berhasil dibagikan! Mengarahkan ke Beranda..."
-      );
+      this.#view.showSuccess('Cerita berhasil dibagikan! Mengarahkan ke Beranda...');
 
       setTimeout(() => {
-        window.location.hash = "#/";
+        window.location.hash = '#/';
       }, 2000);
 
       return true;
     } catch (error) {
-      console.error("createStory: error:", error);
-      this.#view.showError(
-        error.message || "Gagal membagikan cerita. Mohon coba lagi."
-      );
+      console.error('createStory: error:', error);
+      this.#view.showError(error.message || 'Gagal membagikan cerita. Mohon coba lagi.');
       return false;
     } finally {
       this.#view.setLoading(false);
@@ -71,12 +67,12 @@ export default class AddStoryPresenter {
   // Memvalidasi data formulir sebelum pengiriman
   validateFormData(description, imageFile) {
     if (!imageFile) {
-      this.#view.showError("Mohon ambil foto atau unggah gambar.");
+      this.#view.showError('Mohon ambil foto atau unggah gambar.');
       return false;
     }
 
     if (!description.trim()) {
-      this.#view.showError("Mohon masukkan deskripsi cerita.");
+      this.#view.showError('Mohon masukkan deskripsi cerita.');
       return false;
     }
 

@@ -7,7 +7,6 @@
   --color-text-light: #030303;
   --color-accent: #3498db;
   --color-secondary: #e67e22;
-  
 
   /* Glass Effect Variables */
   --glass-bg: rgba(255, 255, 255, 0.25);
@@ -55,7 +54,11 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%);
   color: var(--color-text);
   line-height: 1.6;
@@ -83,7 +86,9 @@ body {
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
@@ -128,7 +133,9 @@ header {
   top: 0;
   z-index: 1000;
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -159,19 +166,19 @@ header {
 
 /* --- Header & Navigation --- */
 .main-header .brand-name {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   gap: var(--spacing-xs, 0.5rem);
 }
 
-.main-header .brand-logo { 
-  height: 70px; 
-  width: auto; 
-  display: block; 
+.main-header .brand-logo {
+  height: 70px;
+  width: auto;
+  display: block;
 }
 
 .main-header .brand-name span {
-  line-height: 1; 
+  line-height: 1;
 }
 
 /* ... (style header dan navigasi) ... */
@@ -278,7 +285,7 @@ header {
 /* --- Accessibility --- */
 .skip-link {
   position: absolute;
-  top: -80px; 
+  top: -80px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--color-primary);
@@ -290,16 +297,17 @@ header {
   font-size: var(--font-size-md);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   box-shadow: var(--shadow-lg);
-  transition: top 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55),
-              opacity 0.3s ease-in-out;
-  opacity: 0; 
+  transition:
+    top 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    opacity 0.3s ease-in-out;
+  opacity: 0;
   line-height: 1.3;
   white-space: nowrap;
 }
 
 .skip-link:focus {
-  top: var(--spacing-md); 
-  opacity: 1; 
+  top: var(--spacing-md);
+  opacity: 1;
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
@@ -775,7 +783,9 @@ footer {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   animation: fadeIn 0.7s ease-out forwards;
 }
 
@@ -966,7 +976,8 @@ footer {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.carousel { /* Used by About page gallery */
+.carousel {
+  /* Used by About page gallery */
   display: flex;
   transition: transform 0.5s ease-in-out;
   position: relative;
@@ -975,7 +986,9 @@ footer {
 .carousel-item {
   min-width: 100%;
   opacity: 0;
-  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+  transition:
+    opacity 1s ease-in-out,
+    transform 0.5s ease-in-out;
   position: absolute;
   top: 0;
   left: 0;
@@ -1065,7 +1078,9 @@ footer {
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .contribution-option:hover {
@@ -1141,7 +1156,8 @@ footer {
   margin-bottom: 10px;
 }
 
-.developer-info p em { /* Styling for quotes */
+.developer-info p em {
+  /* Styling for quotes */
   display: block;
   margin-top: 10px;
   padding-left: 15px;
@@ -1243,7 +1259,8 @@ footer {
 }
 
 /* Kontainer untuk pesan error/sukses */
-#alert-container .alert { /* Menggunakan style .alert yang sudah ada */
+#alert-container .alert {
+  /* Menggunakan style .alert yang sudah ada */
   margin-bottom: var(--spacing-lg); /* Jarak sebelum fieldset pertama */
   max-width: 90%;
   margin-left: auto;
@@ -1273,17 +1290,19 @@ footer {
   color: var(--color-text);
   margin-bottom: var(--spacing-lg); /* Jarak dari legend ke konten fieldset */
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: rgba(var(--rgb-primary, 241, 196, 15), 0.1); /* Latar belakang dengan warna primer transparan */
+  background-color: rgba(
+    var(--rgb-primary, 241, 196, 15),
+    0.1
+  ); /* Latar belakang dengan warna primer transparan */
   border: 1px solid var(--color-primary-dark);
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm); /* Jarak antara ikon dan teks legend */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 /* Anda mungkin perlu menambahkan --rgb-primary: 241, 196, 15; di :root */
 /* Jika tidak, gunakan: background-color: rgba(241, 196, 15, 0.1); */
-
 
 .add-story-form-wrapper .icon-legend {
   color: var(--color-primary-dark); /* Warna ikon di legend */
@@ -1297,7 +1316,7 @@ footer {
   border-radius: var(--radius-sm);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  background-color: rgba(0,0,0,0.03);
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 .photo-options .option-tab {
@@ -1318,16 +1337,17 @@ footer {
   position: relative;
 }
 
-.photo-options .option-tab::after { /* Indikator bawah */
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background-color: var(--color-primary);
-    transition: width 0.3s ease;
+.photo-options .option-tab::after {
+  /* Indikator bawah */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
 }
 
 .photo-options .option-tab .icon-tab {
@@ -1355,7 +1375,7 @@ footer {
   box-shadow: inset 0 -3px 0 var(--color-primary);
 }
 .photo-options .option-tab.active::after {
-    width: 70%; /* Lebar indikator untuk tab aktif */
+  width: 70%; /* Lebar indikator untuk tab aktif */
 }
 
 .photo-options .option-tab.active .icon-tab {
@@ -1391,7 +1411,7 @@ footer {
   justify-content: center;
   overflow: hidden;
   position: relative;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 #camera-stream,
@@ -1408,7 +1428,8 @@ footer {
   color: var(--color-text-light);
   opacity: 0.8;
 }
-.camera-placeholder-content i { /* Font Awesome icon */
+.camera-placeholder-content i {
+  /* Font Awesome icon */
   color: var(--color-accent);
   margin-bottom: var(--spacing-md);
 }
@@ -1427,14 +1448,14 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
 }
-.camera-controls .btn { /* Menggunakan style .btn yang ada */
+.camera-controls .btn {
+  /* Menggunakan style .btn yang ada */
   padding: var(--spacing-sm) var(--spacing-lg); /* Tombol lebih besar */
 }
 .camera-controls .btn i {
   margin-right: var(--spacing-xs);
 }
 /* Kelas .btn-primary, .btn-secondary, .btn-outline sudah di-style */
-
 
 /* Gallery Upload UI */
 .file-upload-ui-container {
@@ -1451,13 +1472,16 @@ footer {
   border-radius: var(--radius-md);
   background-color: rgba(var(--color-accent-rgb, 52, 152, 219), 0.05);
   cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .file-upload-label:hover,
-.file-upload-ui-container.highlight .file-upload-label { /* Highlight dari JS */
+.file-upload-ui-container.highlight .file-upload-label {
+  /* Highlight dari JS */
   background-color: rgba(var(--color-accent-rgb, 52, 152, 219), 0.1);
   border-color: var(--color-primary); /* Warna border berubah saat hover/highlight */
   border-style: solid;
@@ -1467,14 +1491,15 @@ footer {
   text-align: center;
   color: var(--color-text);
 }
-.file-upload-icon { /* Font Awesome icon */
+.file-upload-icon {
+  /* Font Awesome icon */
   color: var(--color-accent);
   margin-bottom: var(--spacing-md);
   font-size: 3.5em !important; /* Ukuran ikon besar */
   transition: transform 0.3s ease;
 }
 .file-upload-label:hover .file-upload-icon {
-    transform: scale(1.1) translateY(-5px);
+  transform: scale(1.1) translateY(-5px);
 }
 
 .file-upload-text {
@@ -1506,10 +1531,11 @@ footer {
   width: 100%;
   max-height: 400px; /* Batasi tinggi maksimum preview */
   object-fit: contain; /* Agar gambar tidak terpotong, tapi terlihat utuh */
-  background-color: rgba(0,0,0,0.02); /* Latar belakang untuk gambar transparan */
+  background-color: rgba(0, 0, 0, 0.02); /* Latar belakang untuk gambar transparan */
 }
 
-.btn-remove-preview { /* Menggunakan .btn .btn-danger */
+.btn-remove-preview {
+  /* Menggunakan .btn .btn-danger */
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-sm);
@@ -1517,7 +1543,7 @@ footer {
   font-size: 0.85rem !important;
   background-color: rgba(200, 0, 0, 0.8) !important; /* Warna merah dengan transparansi */
   backdrop-filter: blur(var(--glass-blur-sm));
-  border: 1px solid rgba(255,255,255,0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   color: white !important;
   border-radius: var(--radius-sm) !important;
   z-index: 10;
@@ -1536,7 +1562,8 @@ footer {
   justify-content: center;
   margin-bottom: var(--spacing-lg);
 }
-#get-current-location { /* Menggunakan style .btn .btn-secondary */
+#get-current-location {
+  /* Menggunakan style .btn .btn-secondary */
   padding: var(--spacing-sm) var(--spacing-lg);
 }
 #get-current-location i {
@@ -1560,7 +1587,8 @@ footer {
   border-radius: var(--radius-md);
   font-weight: var(--font-weight-medium);
 }
-.loader-small { /* Digunakan di JS */
+.loader-small {
+  /* Digunakan di JS */
   border: 4px solid rgba(var(--color-text-rgb, 44, 62, 80), 0.15); /* Anda mungkin perlu --color-text-rgb */
   border-top: 4px solid var(--color-accent);
   border-radius: 50%;
@@ -1579,23 +1607,29 @@ footer {
   margin-bottom: var(--spacing-md);
   background-color: #eee; /* Fallback jika map tiles lambat loading */
 }
-#map { /* ID dari Leaflet container */
+#map {
+  /* ID dari Leaflet container */
   width: 100%;
   height: 100%;
 }
 /* Animasi untuk marker Leaflet (opsional, tapi bagus) */
 @keyframes customMarkerBounce {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-15px) scale(1.1); }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.1);
+  }
 }
 .custom-map-marker .marker-pin.animate-bounce {
   animation: customMarkerBounce 2s infinite ease-in-out;
   transform-origin: bottom center;
 }
-.leaflet-marker-icon .fa-map-marker-alt { /* Pastikan warna ikon di marker sesuai */
+.leaflet-marker-icon .fa-map-marker-alt {
+  /* Pastikan warna ikon di marker sesuai */
   color: white !important;
 }
-
 
 .location-display {
   margin-top: var(--spacing-md);
@@ -1615,14 +1649,17 @@ footer {
 .location-display strong {
   color: var(--color-primary-dark);
 }
-#clear-location.btn-small { /* Tombol kecil kustom */
+#clear-location.btn-small {
+  /* Tombol kecil kustom */
   padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 0.85rem;
   background-color: var(--color-secondary);
   color: white;
   border: none;
   border-radius: var(--radius-sm);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
   font-weight: 500;
 }
 #clear-location.btn-small:hover {
@@ -1650,7 +1687,7 @@ footer {
   gap: var(--spacing-sm); /* Jarak antar tombol toolbar */
 }
 .toolbar-btn {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid var(--glass-border);
   color: var(--color-text);
   padding: var(--spacing-xs) var(--spacing-sm);
@@ -1658,24 +1695,25 @@ footer {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.toolbar-btn:hover:not([aria-disabled="true"]) {
+.toolbar-btn:hover:not([aria-disabled='true']) {
   background-color: var(--color-primary);
   color: var(--color-text); /* Atau white jika kontrasnya lebih baik */
   border-color: var(--color-primary-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
-.toolbar-btn[aria-disabled="true"] {
+.toolbar-btn[aria-disabled='true'] {
   opacity: 0.4;
   cursor: not-allowed;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .toolbar-btn i {
   font-size: 1rem;
   display: block; /* Agar padding bekerja dengan baik */
 }
 
-.description-textarea { /* Menggunakan .form-input dari CSS Anda jika ada, atau style baru */
+.description-textarea {
+  /* Menggunakan .form-input dari CSS Anda jika ada, atau style baru */
   width: 100%;
   padding: var(--spacing-md); /* Padding yang nyaman untuk mengetik */
   border: none; /* Border sudah ada di wrapper */
@@ -1708,7 +1746,8 @@ footer {
 }
 
 /* Submit Button */
-.btn-submit-story { /* Menggunakan .btn .btn-primary */
+.btn-submit-story {
+  /* Menggunakan .btn .btn-primary */
   width: 100%; /* Tombol submit full-width */
   padding: var(--spacing-md) var(--spacing-lg);
   font-size: var(--font-size-lg); /* Font lebih besar untuk tombol utama */
@@ -1728,7 +1767,7 @@ footer {
   transform: none;
 }
 .btn-submit-story:disabled:hover {
-    background: var(--color-text-light) !important;
+  background: var(--color-text-light) !important;
 }
 
 /* --- Page Specific: View Detail Page --- */
@@ -1838,16 +1877,30 @@ footer {
 
 .snackbar.show {
   visibility: visible;
-  animation: fadein 0.3s, fadeout 0.3s 2.7s;
+  animation:
+    fadein 0.3s,
+    fadeout 0.3s 2.7s;
 }
 
 @keyframes fadein {
-  from { bottom: 10px; opacity: 0; }
-  to { bottom: 30px; opacity: 1; }
+  from {
+    bottom: 10px;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 @keyframes fadeout {
-  from { bottom: 30px; opacity: 1; }
-  to { bottom: 10px; opacity: 0; }
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 10px;
+    opacity: 0;
+  }
 }
 
 /* --- Responsive untuk Add Story Page --- */
@@ -1873,7 +1926,8 @@ footer {
     margin-right: var(--spacing-xs);
   }
 
-  .camera-controls { /* Tombol kamera bisa dibuat stacked */
+  .camera-controls {
+    /* Tombol kamera bisa dibuat stacked */
     flex-direction: column;
     align-items: stretch;
   }
@@ -1919,7 +1973,7 @@ footer {
   }
 
   .photo-options .option-tabs {
-      border-radius: var(--radius-sm) var(--radius-sm) 0 0; /* Agar sesuai jika kontennya memanjang */
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0; /* Agar sesuai jika kontennya memanjang */
   }
   .photo-options .option-tab {
     font-size: 0.8rem; /* Kecilkan font tab */
@@ -1932,7 +1986,6 @@ footer {
     margin-bottom: 2px;
     font-size: 1rem;
   }
-
 
   .file-upload-label {
     padding: var(--spacing-lg);
@@ -1966,28 +2019,56 @@ footer {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* --- Responsive Design --- */
@@ -2007,7 +2088,7 @@ footer {
   .drawer-button {
     display: block;
   }
-   body {
+  body {
     overflow-x: hidden;
   }
 
@@ -2129,7 +2210,8 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .section { /* General section padding adjustment */
+  .section {
+    /* General section padding adjustment */
     padding: var(--spacing-lg) 0;
   }
 
@@ -2208,77 +2290,78 @@ footer {
   }
 }
 
-
 /* --- :root (Tambahkan variabel RGB jika belum ada) --- */
 :root {
-    /* ... variabel Anda yang sudah ada ... */
-    --color-primary-rgb: 241, 196, 15; /* Contoh: untuk rgba(var(--color-primary-rgb), 0.1) */
-    --color-accent-rgb: 52, 152, 219;  /* Contoh: untuk rgba(var(--color-accent-rgb), 0.3) */
-    --color-text-rgb: 44, 62, 80;      /* Contoh: untuk rgba(var(--color-text-rgb), 0.05) */
+  /* ... variabel Anda yang sudah ada ... */
+  --color-primary-rgb: 241, 196, 15; /* Contoh: untuk rgba(var(--color-primary-rgb), 0.1) */
+  --color-accent-rgb: 52, 152, 219; /* Contoh: untuk rgba(var(--color-accent-rgb), 0.3) */
+  --color-text-rgb: 44, 62, 80; /* Contoh: untuk rgba(var(--color-text-rgb), 0.05) */
 }
 
 /* --- Page Specific: Map Page --- */
 .map-page-container {
-    padding-top: var(--spacing-lg);
-    padding-bottom: var(--spacing-xl);
-    animation: fadeInUp 0.7s ease-out forwards; /* Animasi masuk yang halus */
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+  animation: fadeInUp 0.7s ease-out forwards; /* Animasi masuk yang halus */
 }
 
 /* Judul Utama Halaman Peta */
 #map-page-title.page-title {
-    font-family: var(--font-heading);
-    font-size: clamp(2.2rem, 5.5vw, 3.2rem); /* Ukuran yang lebih menonjol */
-    color: var(--color-primary-dark);
-    margin-bottom: var(--spacing-sm); /* Jarak lebih dekat ke subjudul */
-    text-align: center;
-    position: relative;
-    padding-bottom: var(--spacing-md); /* Ruang untuk garis bawah yang lebih tebal */
-    letter-spacing: 0.5px;
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5.5vw, 3.2rem); /* Ukuran yang lebih menonjol */
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-sm); /* Jarak lebih dekat ke subjudul */
+  text-align: center;
+  position: relative;
+  padding-bottom: var(--spacing-md); /* Ruang untuk garis bawah yang lebih tebal */
+  letter-spacing: 0.5px;
 }
 
 #map-page-title.page-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px; /* Garis bawah lebih panjang */
-    height: 5px;  /* Garis bawah lebih tebal */
-    background-color: var(--color-accent); /* Gunakan warna aksen untuk menyorot tema peta */
-    border-radius: 3px;
-    box-shadow: 0 2px 5px rgba(var(--color-accent-rgb), 0.3); /* Bayangan halus untuk garis */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px; /* Garis bawah lebih panjang */
+  height: 5px; /* Garis bawah lebih tebal */
+  background-color: var(--color-accent); /* Gunakan warna aksen untuk menyorot tema peta */
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(var(--color-accent-rgb), 0.3); /* Bayangan halus untuk garis */
 }
 
 /* Subjudul Halaman Peta */
-.page-subtitle { /* Sudah ada di JS, kita style di sini */
-    text-align: center;
-    font-size: clamp(1rem, 2.5vw, 1.15rem); /* Ukuran font responsif */
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-xl); /* Jarak cukup sebelum konten peta */
-    max-width: 750px; /* Batasi lebar untuk keterbacaan */
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.75; /* Keterbacaan lebih baik */
+.page-subtitle {
+  /* Sudah ada di JS, kita style di sini */
+  text-align: center;
+  font-size: clamp(1rem, 2.5vw, 1.15rem); /* Ukuran font responsif */
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xl); /* Jarak cukup sebelum konten peta */
+  max-width: 750px; /* Batasi lebar untuk keterbacaan */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75; /* Keterbacaan lebih baik */
 }
 
 /* Wrapper Utama Konten Peta (Glass Card) */
 #map-content-wrapper.glass-card {
-    display: flex;
-    flex-direction: column; /* Default untuk mobile */
-    gap: var(--spacing-lg);
-    padding: var(--spacing-lg);
-    /* background: rgba(255, 255, 255, 0.2); /* Sedikit lebih soft dari glass-card standar jika perlu */
-    /* backdrop-filter: blur(var(--glass-blur-sm)); */
-    /* border: 1px solid var(--glass-border); */
-    /* box-shadow: var(--glass-shadow); */
-    /* border-radius: var(--radius-md); */
-    /* Style di atas sudah dicover oleh .glass-card, tidak perlu di-override kecuali ada kebutuhan spesifik */
+  display: flex;
+  flex-direction: column; /* Default untuk mobile */
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  /* background: rgba(255, 255, 255, 0.2); /* Sedikit lebih soft dari glass-card standar jika perlu */
+  /* backdrop-filter: blur(var(--glass-blur-sm)); */
+  /* border: 1px solid var(--glass-border); */
+  /* box-shadow: var(--glass-shadow); */
+  /* border-radius: var(--radius-md); */
+  /* Style di atas sudah dicover oleh .glass-card, tidak perlu di-override kecuali ada kebutuhan spesifik */
 }
 
-@media (min-width: 992px) { /* Layout side-by-side untuk layar lebih besar (desktop) */
-    #map-content-wrapper.glass-card {
-        flex-direction: row;
-    }
+@media (min-width: 992px) {
+  /* Layout side-by-side untuk layar lebih besar (desktop) */
+  #map-content-wrapper.glass-card {
+    flex-direction: row;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2299,36 +2382,38 @@ footer {
 
 /* Area Peta Utama (Sebelah Kiri di Desktop) */
 #map-main-area {
-    flex-grow: 1; /* Mengisi ruang yang tersedia */
-    min-height: 450px; /* Tinggi minimum untuk peta atau loader */
-    display: flex; /* Untuk memusatkan loader atau pesan error */
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--radius-md); /* Radius konsisten */
-    overflow: hidden; /* Penting agar peta tidak keluar dari border radius */
-    position: relative; /* Untuk positioning absolut loader */
-    background-color: rgba(var(--color-text-rgb), 0.03); /* Latar belakang sangat halus */
-    box-shadow: inset 0 0 20px rgba(var(--color-text-rgb), 0.05); /* Efek kedalaman halus */
+  flex-grow: 1; /* Mengisi ruang yang tersedia */
+  min-height: 450px; /* Tinggi minimum untuk peta atau loader */
+  display: flex; /* Untuk memusatkan loader atau pesan error */
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-md); /* Radius konsisten */
+  overflow: hidden; /* Penting agar peta tidak keluar dari border radius */
+  position: relative; /* Untuk positioning absolut loader */
+  background-color: rgba(var(--color-text-rgb), 0.03); /* Latar belakang sangat halus */
+  box-shadow: inset 0 0 20px rgba(var(--color-text-rgb), 0.05); /* Efek kedalaman halus */
 }
 
 @media (min-width: 992px) {
-    #map-main-area {
-        min-height: 600px; /* Lebih tinggi di desktop */
-    }
+  #map-main-area {
+    min-height: 600px; /* Lebih tinggi di desktop */
+  }
 }
 
 /* Kontainer Peta Aktual dari Leaflet */
-.map-container.large { /* Sudah ada di JS */
-    width: 100%;
-    height: 100%;
-    border-radius: var(--radius-md); /* Cocokkan dengan #map-main-area */
+.map-container.large {
+  /* Sudah ada di JS */
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md); /* Cocokkan dengan #map-main-area */
 }
 
-#map { /* Div target Leaflet */
-    width: 100%;
-    height: 100%; /* Krusial untuk Leaflet agar memenuhi kontainer */
-    border-radius: inherit; /* Warisi border-radius dari parent */
-    background-color: var(--color-background); /* Warna fallback sebelum tiles dimuat */
+#map {
+  /* Div target Leaflet */
+  width: 100%;
+  height: 100%; /* Krusial untuk Leaflet agar memenuhi kontainer */
+  border-radius: inherit; /* Warisi border-radius dari parent */
+  background-color: var(--color-background); /* Warna fallback sebelum tiles dimuat */
 }
 
 /* Loader Container & Loader (Menggunakan style global yang sudah ada) */
@@ -2336,384 +2421,400 @@ footer {
 /* .loader { ... } */
 /* .sr-only { ... } (Pastikan style sr-only sudah ada untuk aksesibilitas) */
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
-
 
 /* Sidebar Peta (Sebelah Kanan di Desktop) */
 #map-sidebar {
-    flex-basis: 340px; /* Lebar tetap untuk sidebar di desktop */
-    flex-shrink: 0; /* Agar tidak mengecil */
-    padding: var(--spacing-lg); /* Padding lebih luas */
-    background: var(--glass-bg); /* Efek glass konsisten */
-    backdrop-filter: blur(var(--glass-blur-sm));
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: var(--radius-md);
-    align-self: flex-start; /* Konten tidak meregang jika sedikit */
-    max-height: calc(100vh - 220px); /* Batasi tinggi dan aktifkan scroll */
-    overflow-y: auto;
-    /* Efek transisi saat muncul */
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUpSidebar 0.5s 0.2s ease-out forwards; /* Delay sedikit */
+  flex-basis: 340px; /* Lebar tetap untuk sidebar di desktop */
+  flex-shrink: 0; /* Agar tidak mengecil */
+  padding: var(--spacing-lg); /* Padding lebih luas */
+  background: var(--glass-bg); /* Efek glass konsisten */
+  backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-md);
+  align-self: flex-start; /* Konten tidak meregang jika sedikit */
+  max-height: calc(100vh - 220px); /* Batasi tinggi dan aktifkan scroll */
+  overflow-y: auto;
+  /* Efek transisi saat muncul */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUpSidebar 0.5s 0.2s ease-out forwards; /* Delay sedikit */
 }
 
 @keyframes fadeInUpSidebar {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@media (max-width: 991px) { /* Sidebar di bawah peta pada layar kecil */
-    #map-sidebar {
-        flex-basis: auto; /* Lebar penuh */
-        width: 100%;
-        max-height: none; /* Tidak ada batasan tinggi spesifik di mobile */
-        margin-top: var(--spacing-lg); /* Jarak dari area peta */
-    }
-    #map-main-area {
-        min-height: 400px; /* Kurangi tinggi peta di mobile agar tidak terlalu dominan */
-    }
+@media (max-width: 991px) {
+  /* Sidebar di bawah peta pada layar kecil */
+  #map-sidebar {
+    flex-basis: auto; /* Lebar penuh */
+    width: 100%;
+    max-height: none; /* Tidak ada batasan tinggi spesifik di mobile */
+    margin-top: var(--spacing-lg); /* Jarak dari area peta */
+  }
+  #map-main-area {
+    min-height: 400px; /* Kurangi tinggi peta di mobile agar tidak terlalu dominan */
+  }
 }
 
 .sidebar-title {
-    font-family: var(--font-heading);
-    color: var(--color-primary);
-    font-size: 1.6rem; /* Sedikit lebih besar dari var(--font-size-xl) standar */
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--color-primary-dark);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-size: 1.6rem; /* Sedikit lebih besar dari var(--font-size-xl) standar */
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
-.sidebar-title::before { /* Tambahkan ikon peta kecil di judul sidebar */
-    content: "\f5a0"; /* Kode ikon Font Awesome untuk peta, sesuaikan jika beda */
-    font-family: "Font Awesome 5 Free"; /* Pastikan Font Awesome termuat */
-    font-weight: 900; /* Solid icon */
-    font-size: 1em;
-    color: var(--color-primary-dark);
+.sidebar-title::before {
+  /* Tambahkan ikon peta kecil di judul sidebar */
+  content: '\f5a0'; /* Kode ikon Font Awesome untuk peta, sesuaikan jika beda */
+  font-family: 'Font Awesome 5 Free'; /* Pastikan Font Awesome termuat */
+  font-weight: 900; /* Solid icon */
+  font-size: 1em;
+  color: var(--color-primary-dark);
 }
 
 .sidebar-section {
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid var(--glass-border);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--glass-border);
 }
-.sidebar-section:last-of-type { /* Hapus border untuk section terakhir */
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
+.sidebar-section:last-of-type {
+  /* Hapus border untuk section terakhir */
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .sidebar-section p {
-    font-size: 0.9rem; /* Teks lebih kecil agar muat banyak informasi */
-    color: var(--color-text-light);
-    line-height: 1.65;
-    margin-bottom: var(--spacing-sm);
+  font-size: 0.9rem; /* Teks lebih kecil agar muat banyak informasi */
+  color: var(--color-text-light);
+  line-height: 1.65;
+  margin-bottom: var(--spacing-sm);
 }
 .sidebar-section p:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
-.sidebar-section .icon-legend { /* Ikon di dalam teks legenda */
-    color: var(--color-accent);
-    margin-right: var(--spacing-xs);
-    font-size: 1.05em;
-    width: 22px; /* Jaga agar ikon dan teks sejajar */
-    text-align: center;
-    vertical-align: middle; /* Sejajarkan ikon dengan teks */
+.sidebar-section .icon-legend {
+  /* Ikon di dalam teks legenda */
+  color: var(--color-accent);
+  margin-right: var(--spacing-xs);
+  font-size: 1.05em;
+  width: 22px; /* Jaga agar ikon dan teks sejajar */
+  text-align: center;
+  vertical-align: middle; /* Sejajarkan ikon dengan teks */
 }
 
-.marker-example { /* Styling untuk contoh marker di legenda */
-    display: inline-flex; /* Agar ikon dan teks di dalamnya sejajar */
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-accent); /* Sesuai dengan warna marker asli */
-    color: white;
-    padding: 4px 7px;
-    border-radius: 50%;
-    font-size: 0.75em; /* Kecilkan agar tidak dominan */
-    margin: 0 3px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+.marker-example {
+  /* Styling untuk contoh marker di legenda */
+  display: inline-flex; /* Agar ikon dan teks di dalamnya sejajar */
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent); /* Sesuai dengan warna marker asli */
+  color: white;
+  padding: 4px 7px;
+  border-radius: 50%;
+  font-size: 0.75em; /* Kecilkan agar tidak dominan */
+  margin: 0 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.marker-example .fas { /* Ikon di dalam marker-example */
-    font-size: inherit; /* Ikuti ukuran font parent */
-    vertical-align: middle;
+.marker-example .fas {
+  /* Ikon di dalam marker-example */
+  font-size: inherit; /* Ikuti ukuran font parent */
+  vertical-align: middle;
 }
 
 #map-stats h4 {
-    font-size: var(--font-size-lg); /* Ukuran konsisten */
-    color: var(--color-text);
-    margin-bottom: var(--spacing-sm);
-    font-weight: var(--font-weight-medium);
-    border-bottom: 1px dashed var(--glass-border); /* Garis pemisah halus */
-    padding-bottom: var(--spacing-xs);
+  font-size: var(--font-size-lg); /* Ukuran konsisten */
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+  border-bottom: 1px dashed var(--glass-border); /* Garis pemisah halus */
+  padding-bottom: var(--spacing-xs);
 }
 
 #total-stories-on-map strong {
-    color: var(--color-primary-dark);
-    font-weight: var(--font-weight-bold);
-    font-size: 1.1em; /* Sedikit perbesar angka statistik */
+  color: var(--color-primary-dark);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.1em; /* Sedikit perbesar angka statistik */
 }
 
 /* Tombol Reset Tampilan Peta */
-#reset-map-view-btn.btn { /* Menggunakan style .btn */
-    width: 100%; /* Tombol mengisi lebar sidebar */
-    background-color: var(--color-accent); /* Warna utama tombol */
-    border-color: var(--color-accent);
-    color: white;
-    margin-top: var(--spacing-md); /* Jarak dari statistik */
-    font-size: 0.95rem;
-    padding: var(--spacing-sm) var(--spacing-md);
+#reset-map-view-btn.btn {
+  /* Menggunakan style .btn */
+  width: 100%; /* Tombol mengisi lebar sidebar */
+  background-color: var(--color-accent); /* Warna utama tombol */
+  border-color: var(--color-accent);
+  color: white;
+  margin-top: var(--spacing-md); /* Jarak dari statistik */
+  font-size: 0.95rem;
+  padding: var(--spacing-sm) var(--spacing-md);
 }
 #reset-map-view-btn.btn:hover {
-    background-color: var(--color-primary-dark); /* Warna hover lebih gelap */
-    border-color: var(--color-primary-dark);
-    transform: translateY(-2px); /* Efek hover halus */
-    box-shadow: var(--shadow-sm);
+  background-color: var(--color-primary-dark); /* Warna hover lebih gelap */
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px); /* Efek hover halus */
+  box-shadow: var(--shadow-sm);
 }
 #reset-map-view-btn.btn i {
-    margin-right: var(--spacing-sm); /* Jarak ikon dan teks */
+  margin-right: var(--spacing-sm); /* Jarak ikon dan teks */
 }
 
 /* Teks Ringkasan Peta (di bawah konten utama) */
 #map-summary-text {
-    text-align: center;
-    padding: var(--spacing-md) var(--spacing-lg);
-    margin: var(--spacing-lg) auto 0 auto; /* Jarak dari #map-content-wrapper, dan pusatkan */
-    max-width: 800px; /* Batasi lebar */
-    background: rgba(255, 255, 255, 0.15); /* Glass effect yang lebih subtle */
-    backdrop-filter: blur(var(--glass-blur-sm));
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--glass-border);
-    color: var(--color-text-light);
-    font-size: 1rem;
-    box-shadow: var(--shadow-sm);
-    /* Animasi saat muncul */
-    opacity: 0;
-    transform: translateY(15px);
-    animation: fadeInUpSummary 0.5s 0.4s ease-out forwards; /* Delay setelah sidebar */
+  text-align: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: var(--spacing-lg) auto 0 auto; /* Jarak dari #map-content-wrapper, dan pusatkan */
+  max-width: 800px; /* Batasi lebar */
+  background: rgba(255, 255, 255, 0.15); /* Glass effect yang lebih subtle */
+  backdrop-filter: blur(var(--glass-blur-sm));
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  color: var(--color-text-light);
+  font-size: 1rem;
+  box-shadow: var(--shadow-sm);
+  /* Animasi saat muncul */
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUpSummary 0.5s 0.4s ease-out forwards; /* Delay setelah sidebar */
 }
 
 @keyframes fadeInUpSummary {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #map-summary-text strong {
-    color: var(--color-accent);
-    font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
 }
 
 /* --- Styling untuk Kontrol Leaflet --- */
 .leaflet-control-container .leaflet-control {
-    border-radius: var(--radius-sm) !important;
-    box-shadow: var(--shadow-lg) !important; /* Bayangan lebih jelas untuk kontrol */
-    background-clip: padding-box !important; /* Perbaikan border-radius di Safari */
-    border: 1px solid var(--glass-border) !important;
-    background-color: rgba(255, 255, 255, 0.6) !important; /* Latar belakang semi-transparan */
-    backdrop-filter: blur(var(--glass-blur)) !important;
-    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-lg) !important; /* Bayangan lebih jelas untuk kontrol */
+  background-clip: padding-box !important; /* Perbaikan border-radius di Safari */
+  border: 1px solid var(--glass-border) !important;
+  background-color: rgba(255, 255, 255, 0.6) !important; /* Latar belakang semi-transparan */
+  backdrop-filter: blur(var(--glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
 }
 
-.leaflet-control-layers-toggle { /* Tombol Layers Control */
-    width: 38px !important;
-    height: 38px !important;
-    background-size: 22px 22px !important; /* Ukuran ikon di tombol */
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    /* Ganti dengan ikon SVG atau Font Awesome jika diinginkan, contoh: */
-    /* background-image: url('path/to/your/layers-icon.svg') !important; */
+.leaflet-control-layers-toggle {
+  /* Tombol Layers Control */
+  width: 38px !important;
+  height: 38px !important;
+  background-size: 22px 22px !important; /* Ukuran ikon di tombol */
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  /* Ganti dengan ikon SVG atau Font Awesome jika diinginkan, contoh: */
+  /* background-image: url('path/to/your/layers-icon.svg') !important; */
 }
 /* Jika menggunakan Font Awesome, Anda mungkin perlu men-style ::before atau ::after */
 
-.leaflet-control-layers { /* Kontainer daftar layer */
-    padding: var(--spacing-sm) !important; /* Padding internal */
+.leaflet-control-layers {
+  /* Kontainer daftar layer */
+  padding: var(--spacing-sm) !important; /* Padding internal */
 }
 .leaflet-control-layers-list,
 .leaflet-control-layers-expanded {
-    font-family: 'Inter', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
 }
 .leaflet-control-layers-base label,
 .leaflet-control-layers-overlays label {
-    color: var(--color-text) !important;
-    font-weight: 500 !important;
-    font-size: 0.95rem !important;
-    margin-bottom: var(--spacing-xs) !important;
-    display: flex !important;
-    align-items: center !important;
-    cursor: pointer !important;
+  color: var(--color-text) !important;
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: var(--spacing-xs) !important;
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
 }
 .leaflet-control-layers-base label input, /* Styling radio/checkbox */
 .leaflet-control-layers-overlays label input {
-    margin-right: var(--spacing-sm) !important;
-    accent-color: var(--color-primary) !important; /* Warna saat terpilih */
+  margin-right: var(--spacing-sm) !important;
+  accent-color: var(--color-primary) !important; /* Warna saat terpilih */
 }
 .leaflet-control-layers-base label:hover,
 .leaflet-control-layers-overlays label:hover {
-    background-color: rgba(var(--color-primary-rgb), 0.1) !important; /* Highlight saat hover */
-    border-radius: var(--radius-sm);
+  background-color: rgba(var(--color-primary-rgb), 0.1) !important; /* Highlight saat hover */
+  border-radius: var(--radius-sm);
 }
 
 .leaflet-control-layers-separator {
-    margin: var(--spacing-sm) 0 !important; /* Jarak pemisah */
-    border-top: 1px solid var(--glass-border) !important;
+  margin: var(--spacing-sm) 0 !important; /* Jarak pemisah */
+  border-top: 1px solid var(--glass-border) !important;
 }
 
-.leaflet-bar a, .leaflet-bar a:hover { /* Tombol Zoom (+/-) */
-    color: var(--color-accent) !important;
-    width: 34px !important;
-    height: 34px !important;
-    line-height: 34px !important;
-    font-size: 1.5rem !important; /* Ukuran ikon zoom */
+.leaflet-bar a,
+.leaflet-bar a:hover {
+  /* Tombol Zoom (+/-) */
+  color: var(--color-accent) !important;
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  font-size: 1.5rem !important; /* Ukuran ikon zoom */
 }
 .leaflet-bar a:hover {
-    background-color: rgba(var(--color-primary-rgb), 0.2) !important;
+  background-color: rgba(var(--color-primary-rgb), 0.2) !important;
 }
 .leaflet-bar a:first-child {
-    border-top-left-radius: var(--radius-sm) !important;
-    border-top-right-radius: var(--radius-sm) !important;
+  border-top-left-radius: var(--radius-sm) !important;
+  border-top-right-radius: var(--radius-sm) !important;
 }
 .leaflet-bar a:last-child {
-    border-bottom-left-radius: var(--radius-sm) !important;
-    border-bottom-right-radius: var(--radius-sm) !important;
+  border-bottom-left-radius: var(--radius-sm) !important;
+  border-bottom-right-radius: var(--radius-sm) !important;
 }
 
-.leaflet-control-scale-line { /* Skala Peta */
-    border-color: var(--color-text) !important;
-    color: var(--color-text) !important;
-    background: transparent !important; /* Hapus background default jika ada */
-    padding: 3px 6px !important;
-    font-size: 0.8rem !important;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.7); /* Agar lebih terbaca di atas peta */
+.leaflet-control-scale-line {
+  /* Skala Peta */
+  border-color: var(--color-text) !important;
+  color: var(--color-text) !important;
+  background: transparent !important; /* Hapus background default jika ada */
+  padding: 3px 6px !important;
+  font-size: 0.8rem !important;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Agar lebih terbaca di atas peta */
 }
 
 /* --- Custom Map Markers & Popups --- */
-.custom-map-marker { /* Kontainer untuk pin dan pulse */
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end; /* Pin mengarah ke bawah */
-    filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3)); /* Efek bayangan untuk marker */
+.custom-map-marker {
+  /* Kontainer untuk pin dan pulse */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Pin mengarah ke bawah */
+  filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3)); /* Efek bayangan untuk marker */
 }
 
-.marker-pin { /* Pin utama marker */
-    width: 34px; /* Sedikit lebih besar */
-    height: 34px;
-    border-radius: 50% 50% 50% 2px; /* Bentuk pin lebih halus */
-    background: var(--color-accent); /* Warna dari JS */
-    transform: rotate(-45deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white; /* Border putih untuk kontras dari peta */
-    transition: transform 0.2s ease-in-out;
+.marker-pin {
+  /* Pin utama marker */
+  width: 34px; /* Sedikit lebih besar */
+  height: 34px;
+  border-radius: 50% 50% 50% 2px; /* Bentuk pin lebih halus */
+  background: var(--color-accent); /* Warna dari JS */
+  transform: rotate(-45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white; /* Border putih untuk kontras dari peta */
+  transition: transform 0.2s ease-in-out;
 }
 .custom-map-marker:hover .marker-pin {
-    transform: rotate(-45deg) scale(1.1); /* Efek hover pada pin */
+  transform: rotate(-45deg) scale(1.1); /* Efek hover pada pin */
 }
 
-.marker-pin i.fas { /* Ikon di dalam pin */
-    transform: rotate(45deg); /* Luruskan kembali ikon */
-    color: white; /* Warna dari JS */
-    font-size: 17px; /* Ukuran ikon */
+.marker-pin i.fas {
+  /* Ikon di dalam pin */
+  transform: rotate(45deg); /* Luruskan kembali ikon */
+  color: white; /* Warna dari JS */
+  font-size: 17px; /* Ukuran ikon */
 }
 
-.marker-pulse { /* Efek denyut di bawah pin */
-    position: absolute;
-    bottom: -4px; /* Sesuaikan agar pas dengan ujung pin */
-    left: 50%;
-    /* transform: translateX(-50%); -- Dihandle di animasi */
-    width: 24px; /* Sesuaikan ukuran pulse */
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(var(--color-accent-rgb), 0.4); /* Gunakan variabel RGB warna aksen */
-    animation: pulse-animation 2.2s infinite cubic-bezier(0.25, 0.1, 0.25, 1); /* Animasi lebih smooth */
-    z-index: -1; /* Pastikan di belakang pin */
-    border: none;
+.marker-pulse {
+  /* Efek denyut di bawah pin */
+  position: absolute;
+  bottom: -4px; /* Sesuaikan agar pas dengan ujung pin */
+  left: 50%;
+  /* transform: translateX(-50%); -- Dihandle di animasi */
+  width: 24px; /* Sesuaikan ukuran pulse */
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(var(--color-accent-rgb), 0.4); /* Gunakan variabel RGB warna aksen */
+  animation: pulse-animation 2.2s infinite cubic-bezier(0.25, 0.1, 0.25, 1); /* Animasi lebih smooth */
+  z-index: -1; /* Pastikan di belakang pin */
+  border: none;
 }
 
 @keyframes pulse-animation {
-    0% {
-        transform: translateX(-50%) scale(0.7);
-        opacity: 0.8;
-    }
-    50% {
-        transform: translateX(-50%) scale(1.6); /* Lebih besar saat puncak */
-        opacity: 0.2;
-    }
-    100% {
-        transform: translateX(-50%) scale(0.7);
-        opacity: 0.8; /* Kembali ke awal untuk loop yang mulus */
-    }
+  0% {
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.6); /* Lebih besar saat puncak */
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.8; /* Kembali ke awal untuk loop yang mulus */
+  }
 }
 
 /* Styling Popup Leaflet */
 .leaflet-popup-content-wrapper {
-    background: var(--glass-bg) !important;
-    backdrop-filter: blur(var(--glass-blur)) !important; /* Blur lebih kuat untuk popup */
-    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
-    border: 1px solid var(--glass-border) !important;
-    box-shadow: var(--shadow-lg) !important; /* Bayangan lebih menonjol */
-    border-radius: var(--radius-lg) !important; /* Radius lebih besar untuk popup */
-    padding: 0 !important; /* Hapus padding default, kita atur di .map-popup */
-    color: var(--color-text) !important;
-    overflow: hidden; /* Agar konten dengan radius tidak keluar */
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur)) !important; /* Blur lebih kuat untuk popup */
+  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--shadow-lg) !important; /* Bayangan lebih menonjol */
+  border-radius: var(--radius-lg) !important; /* Radius lebih besar untuk popup */
+  padding: 0 !important; /* Hapus padding default, kita atur di .map-popup */
+  color: var(--color-text) !important;
+  overflow: hidden; /* Agar konten dengan radius tidak keluar */
 }
 
 .leaflet-popup-content {
-    margin: 0 !important; /* Hapus margin default Leaflet */
-    width: auto !important; /* Biarkan konten menentukan lebar */
-    min-width: 300px; /* Lebar minimum popup */
-    max-width: 340px; /* Batasi lebar maksimum popup */
-    font-family: 'Inter', sans-serif !important;
+  margin: 0 !important; /* Hapus margin default Leaflet */
+  width: auto !important; /* Biarkan konten menentukan lebar */
+  min-width: 300px; /* Lebar minimum popup */
+  max-width: 340px; /* Batasi lebar maksimum popup */
+  font-family: 'Inter', sans-serif !important;
 }
 
-.map-popup { /* Konten kustom di dalam popup */
-    /* Padding diatur di sini, bukan di .leaflet-popup-content-wrapper */
+.map-popup {
+  /* Konten kustom di dalam popup */
+  /* Padding diatur di sini, bukan di .leaflet-popup-content-wrapper */
 }
 
 .popup-image {
-    width: 100%; /* Gambar mengisi lebar popup */
-    height: 160px; /* Tinggi tetap untuk gambar */
-    object-fit: cover;
-    /* Tidak perlu border-radius jika wrapper sudah overflow:hidden dan padding:0 */
-    /* border-radius: var(--radius-lg) var(--radius-lg) 0 0; */ /* Radius hanya di atas */
-    display: block; /* Hapus spasi ekstra di bawah gambar */
+  width: 100%; /* Gambar mengisi lebar popup */
+  height: 160px; /* Tinggi tetap untuk gambar */
+  object-fit: cover;
+  /* Tidak perlu border-radius jika wrapper sudah overflow:hidden dan padding:0 */
+  /* border-radius: var(--radius-lg) var(--radius-lg) 0 0; */ /* Radius hanya di atas */
+  display: block; /* Hapus spasi ekstra di bawah gambar */
 }
 
 .popup-content-text {
-    padding: var(--spacing-md); /* Padding untuk area teks */
+  padding: var(--spacing-md); /* Padding untuk area teks */
 }
 
 .popup-title {
-    font-family: var(--font-heading);
-    font-size: 1.35rem; /* Judul lebih besar */
-    color: var(--color-primary-dark);
-    margin-bottom: var(--spacing-xs);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.3;
+  font-family: var(--font-heading);
+  font-size: 1.35rem; /* Judul lebih besar */
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
 }
 
 .popup-description {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    line-height: 1.55;
-    margin-bottom: var(--spacing-sm);
-    /* Batasan tinggi dan overflow dihandle oleh JS truncateText,
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.55;
+  margin-bottom: var(--spacing-sm);
+  /* Batasan tinggi dan overflow dihandle oleh JS truncateText,
        namun ini bisa jadi fallback jika JS gagal:
     max-height: 4.5em;
     overflow: hidden;
@@ -2725,82 +2826,95 @@ footer {
 }
 
 .popup-date {
-    font-size: 0.8rem;
-    color: var(--color-text-light);
-    opacity: 0.9;
-    margin-bottom: var(--spacing-md);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs); /* Jarak antara ikon dan teks */
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  opacity: 0.9;
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs); /* Jarak antara ikon dan teks */
 }
-.popup-date i.far { /* Ikon kalender */
-    color: var(--color-accent);
-    font-size: 0.9em;
+.popup-date i.far {
+  /* Ikon kalender */
+  color: var(--color-accent);
+  font-size: 0.9em;
 }
 
-.popup-btn.btn { /* Tombol "Baca Selengkapnya" */
-    width: 100%;
-    background-color: var(--color-accent); /* Warna aksen untuk tombol utama popup */
-    border-color: var(--color-accent);
-    color: white;
-    font-size: 0.9rem !important; /* Sesuaikan ukuran font jika perlu */
-    padding: var(--spacing-xs) var(--spacing-md) !important; /* Padding yang sesuai */
+.popup-btn.btn {
+  /* Tombol "Baca Selengkapnya" */
+  width: 100%;
+  background-color: var(--color-accent); /* Warna aksen untuk tombol utama popup */
+  border-color: var(--color-accent);
+  color: white;
+  font-size: 0.9rem !important; /* Sesuaikan ukuran font jika perlu */
+  padding: var(--spacing-xs) var(--spacing-md) !important; /* Padding yang sesuai */
 }
 .popup-btn.btn:hover {
-    background-color: var(--color-primary); /* Warna hover berbeda */
-    border-color: var(--color-primary);
-    transform: translateY(-2px) scale(1.02);
+  background-color: var(--color-primary); /* Warna hover berbeda */
+  border-color: var(--color-primary);
+  transform: translateY(-2px) scale(1.02);
 }
-.popup-btn.btn i.fas { /* Ikon pada tombol */
-    margin-right: var(--spacing-xs);
-}
-
-.leaflet-popup-tip-container { /* Panah popup */
-    /* Leaflet biasanya menangani ini dengan baik, tapi bisa di-override jika perlu */
-}
-.leaflet-popup-tip { /* Ujung panah popup */
-    background: var(--glass-bg) !important; /* Warna konsisten dengan wrapper */
-    border: 1px solid var(--glass-border) !important;
-    border-top-color: transparent !important; /* Sesuaikan jika panah di atas */
-    border-left-color: transparent !important; /* Sesuaikan jika panah di kiri */
-    box-shadow: none !important;
+.popup-btn.btn i.fas {
+  /* Ikon pada tombol */
+  margin-right: var(--spacing-xs);
 }
 
-.leaflet-popup-close-button { /* Tombol close (X) pada popup */
-    color: var(--color-text) !important;
-    font-size: 1.3rem !important;
-    padding: var(--spacing-xs) var(--spacing-xs) 0 0 !important; /* Padding agar tidak terlalu mepet */
-    transition: color 0.2s ease;
+.leaflet-popup-tip-container {
+  /* Panah popup */
+  /* Leaflet biasanya menangani ini dengan baik, tapi bisa di-override jika perlu */
+}
+.leaflet-popup-tip {
+  /* Ujung panah popup */
+  background: var(--glass-bg) !important; /* Warna konsisten dengan wrapper */
+  border: 1px solid var(--glass-border) !important;
+  border-top-color: transparent !important; /* Sesuaikan jika panah di atas */
+  border-left-color: transparent !important; /* Sesuaikan jika panah di kiri */
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button {
+  /* Tombol close (X) pada popup */
+  color: var(--color-text) !important;
+  font-size: 1.3rem !important;
+  padding: var(--spacing-xs) var(--spacing-xs) 0 0 !important; /* Padding agar tidak terlalu mepet */
+  transition: color 0.2s ease;
 }
 .leaflet-popup-close-button:hover {
-    color: var(--color-secondary) !important; /* Warna hover untuk tombol close */
-    background-color: transparent !important; /* Hapus background hover default */
+  color: var(--color-secondary) !important; /* Warna hover untuk tombol close */
+  background-color: transparent !important; /* Hapus background hover default */
 }
 
 /* Styling untuk Pesan Alert di Area Peta (jika belum tercover sempurna) */
-#map-main-area .alert { /* Alert di dalam #map-main-area */
-    width: calc(100% - (2 * var(--spacing-lg))); /* Tidak terlalu lebar */
-    max-width: 550px; /* Batasi lebar maksimum alert */
-    margin-left: auto;
-    margin-right: auto;
-    /* Style .alert dan .alert-error sudah ada, ini hanya penyesuaian minor */
-    padding: var(--spacing-lg); /* Padding lebih besar untuk alert utama */
-    font-size: 1.05rem; /* Teks alert lebih jelas */
+#map-main-area .alert {
+  /* Alert di dalam #map-main-area */
+  width: calc(100% - (2 * var(--spacing-lg))); /* Tidak terlalu lebar */
+  max-width: 550px; /* Batasi lebar maksimum alert */
+  margin-left: auto;
+  margin-right: auto;
+  /* Style .alert dan .alert-error sudah ada, ini hanya penyesuaian minor */
+  padding: var(--spacing-lg); /* Padding lebih besar untuk alert utama */
+  font-size: 1.05rem; /* Teks alert lebih jelas */
 }
-#map-main-area .alert p i { /* Ikon di dalam alert */
-    margin-right: var(--spacing-sm); /* Jarak ikon dan teks */
-    font-size: 1.2em; /* Ikon lebih besar */
+#map-main-area .alert p i {
+  /* Ikon di dalam alert */
+  margin-right: var(--spacing-sm); /* Jarak ikon dan teks */
+  font-size: 1.2em; /* Ikon lebih besar */
 }
 
 /* Penyesuaian untuk animasi fade-in pada alert jika perlu */
 .animate-fade-in {
-    animation: fadeInAlert 0.5s ease-out forwards;
+  animation: fadeInAlert 0.5s ease-out forwards;
 }
 @keyframes fadeInAlert {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 
 /* --- Page Specific: Login & Register --- */
 .login-page,
@@ -2815,7 +2929,8 @@ footer {
 }
 
 .login-container,
-.auth-container { /* Kontainer utama untuk kedua form */
+.auth-container {
+  /* Kontainer utama untuk kedua form */
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -2873,7 +2988,8 @@ footer {
 }
 
 .login-title,
-.form-title { /* Digunakan di kedua form */
+.form-title {
+  /* Digunakan di kedua form */
   font-family: var(--font-heading);
   font-size: clamp(1.8rem, 4vw, 2.2rem);
   color: var(--color-primary);
@@ -2902,7 +3018,8 @@ footer {
 }
 
 .form-input,
-.form-control { /* Input fields for both forms */
+.form-control {
+  /* Input fields for both forms */
   width: 100%;
   padding: var(--spacing-sm);
   border: 1px solid var(--glass-border);
@@ -2926,12 +3043,15 @@ footer {
 .form-control:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(var(--rgb-primary, 241, 196, 15), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 0 4px rgba(var(--rgb-primary, 241, 196, 15), 0.3),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.2); /* Sedikit lebih transparan saat fokus */
 }
 
 .btn-login,
-.btn-full { /* Tombol submit untuk kedua form */
+.btn-full {
+  /* Tombol submit untuk kedua form */
   width: 100%;
   padding: var(--spacing-md) var(--spacing-lg);
   margin-top: var(--spacing-md);
@@ -3017,7 +3137,9 @@ footer {
   color: var(--color-accent);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
-  transition: color 0.3s ease, text-decoration 0.3s ease;
+  transition:
+    color 0.3s ease,
+    text-decoration 0.3s ease;
 }
 
 .form-footer a:hover,
@@ -3090,8 +3212,9 @@ footer {
 }
 
 /* Register specific adjustments */
-.auth-container .mb-3 { /* alert-container wrapper for register */
-    margin-bottom: var(--spacing-lg);
+.auth-container .mb-3 {
+  /* alert-container wrapper for register */
+  margin-bottom: var(--spacing-lg);
 }
 
 /* Additional UX static features */
@@ -3178,23 +3301,22 @@ body::after {
 }
 
 @keyframes moveShape {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(20px, 15px) scale(1.05);
-    }
-    50% {
-        transform: translate(0, 30px) scale(1);
-    }
-    75% {
-        transform: translate(-15px, 10px) scale(0.95);
-    }
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, 15px) scale(1.05);
+  }
+  50% {
+    transform: translate(0, 30px) scale(1);
+  }
+  75% {
+    transform: translate(-15px, 10px) scale(0.95);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
 }
-
 
 /* Media Queries for responsiveness */
 @media screen and (max-width: 768px) {
@@ -3248,5 +3370,424 @@ body::after {
 
   .form-footer {
     font-size: 0.85rem;
+  }
+}
+
+/* --- Story Collections Styles --- */
+.story-collections-hero {
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.story-collections-header {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story-collections-header .page-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.story-collections-header .page-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.8;
+}
+
+.collection-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  min-width: 120px;
+}
+
+.stat-item i {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.stat-item span:first-of-type {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.stat-item span:last-of-type {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+#offline-status.online {
+  color: #27ae60;
+}
+
+#offline-status.offline {
+  color: #e74c3c;
+}
+
+.story-collections-content {
+  padding: var(--spacing-lg) 0;
+}
+
+.collections-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.collections-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+  border: 1px solid #e74c3c;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+
+.btn-success {
+  background-color: #27ae60;
+  color: white;
+  border: 1px solid #27ae60;
+}
+
+.btn-success:hover {
+  background-color: #229954;
+  border-color: #229954;
+}
+
+.collections-container {
+  min-height: 400px;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.empty-collections {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.empty-collections-icon {
+  font-size: 4rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  opacity: 0.6;
+}
+
+.empty-collections h3 {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.empty-collections p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+  opacity: 0.8;
+}
+
+.empty-collections p:last-of-type {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Enhanced Story Card Styles for Collections */
+.collection-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.collection-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.story-card-header {
+  position: relative;
+}
+
+.story-card-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.story-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.collection-card:hover .story-card-overlay {
+  opacity: 1;
+}
+
+.story-card-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-direction: column;
+  align-items: center;
+}
+
+.story-card-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  background: var(--color-primary);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(241, 196, 15, 0.3);
+}
+
+.story-card-content {
+  padding: var(--spacing-md);
+}
+
+.story-card-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.3;
+}
+
+.story-card-title a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.story-card-title a:hover {
+  color: var(--color-primary);
+}
+
+.story-card-description {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.story-card-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+  font-size: 0.875rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+.meta-item i {
+  color: var(--color-primary);
+  width: 16px;
+}
+
+.meta-item.text-muted {
+  opacity: 0.5;
+}
+
+/* Enhanced Home Page Story Cards */
+.story-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.story-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-sm);
+}
+
+.add-to-collection-btn,
+.add-to-collection-btn-meta {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-to-collection-btn:hover,
+.add-to-collection-btn-meta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.add-to-collection-btn:disabled,
+.add-to-collection-btn-meta:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Notification Styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  max-width: 400px;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.notification-content i {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.notification-success .notification-content i {
+  color: #27ae60;
+}
+
+.notification-error .notification-content i {
+  color: #e74c3c;
+}
+
+.notification-info .notification-content i {
+  color: var(--color-primary);
+}
+
+.notification-content span {
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Responsive Design for Collections */
+@media (max-width: 768px) {
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .collections-section-header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .collections-actions {
+    justify-content: center;
+  }
+  
+  .collection-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+  
+  .stat-item {
+    min-width: 150px;
+  }
+  
+  .story-card-meta {
+    grid-template-columns: 1fr;
+  }
+  
+  .story-actions {
+    flex-direction: column;
+  }
+  
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-collections-header .page-title {
+    font-size: 1.75rem;
+  }
+  
+  .story-collections-header .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .collections-grid {
+    gap: var(--spacing-sm);
+  }
+  
+  .story-card-content {
+    padding: var(--spacing-sm);
+  }
+  
+  .story-card-title {
+    font-size: 1.1rem;
+  }
+  
+  .story-card-meta {
+    font-size: 0.8rem;
   }
 }

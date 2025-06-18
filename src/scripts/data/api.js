@@ -1,11 +1,11 @@
-import CONFIG from "../config";
+import CONFIG from '../config';
 
 const ENDPOINTS = {
   REGISTER: `${CONFIG.BASE_URL}/register`,
   LOGIN: `${CONFIG.BASE_URL}/login`,
   STORIES: `${CONFIG.BASE_URL}/stories`,
   GUEST_STORIES: `${CONFIG.BASE_URL}/stories/guest`,
-  STORY_DETAIL: (id) => `${CONFIG.BASE_URL}/stories/${id}`,
+  STORY_DETAIL: id => `${CONFIG.BASE_URL}/stories/${id}`,
   SUBSCRIBE: `${CONFIG.BASE_URL}/notifications/subscribe`,
   UNSUBSCRIBE: `${CONFIG.BASE_URL}/notifications/subscribe`,
 };
@@ -23,9 +23,9 @@ async function handleApiResponse(response) {
 
 export async function registerUser({ name, email, password }) {
   const response = await fetch(ENDPOINTS.REGISTER, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ name, email, password }),
   });
@@ -35,9 +35,9 @@ export async function registerUser({ name, email, password }) {
 
 export async function loginUser({ email, password }) {
   const response = await fetch(ENDPOINTS.LOGIN, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   });
@@ -58,10 +58,10 @@ export async function loginUser({ email, password }) {
 export async function getStories({ page, size, location, query, token }) {
   const queryParams = new URLSearchParams();
 
-  if (page) queryParams.append("page", page);
-  if (size) queryParams.append("size", size);
-  if (location !== undefined) queryParams.append("location", location ? 1 : 0);
-  if (query) queryParams.append("q", query); // Menambahkan parameter 'q' untuk pencarian
+  if (page) queryParams.append('page', page);
+  if (size) queryParams.append('size', size);
+  if (location !== undefined) queryParams.append('location', location ? 1 : 0);
+  if (query) queryParams.append('q', query); // Menambahkan parameter 'q' untuk pencarian
 
   const url = `${ENDPOINTS.STORIES}?${queryParams.toString()}`;
 
@@ -87,14 +87,14 @@ export async function getStoryDetail({ id, token }) {
 export async function addStory({ description, photo, lat, lon, token }) {
   const formData = new FormData();
 
-  formData.append("description", description);
-  formData.append("photo", photo);
+  formData.append('description', description);
+  formData.append('photo', photo);
 
-  if (lat !== undefined && lat !== null) formData.append("lat", lat); 
-  if (lon !== undefined && lon !== null) formData.append("lon", lon); 
+  if (lat !== undefined && lat !== null) formData.append('lat', lat);
+  if (lon !== undefined && lon !== null) formData.append('lon', lon);
 
   const response = await fetch(ENDPOINTS.STORIES, {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -107,14 +107,14 @@ export async function addStory({ description, photo, lat, lon, token }) {
 export async function addGuestStory({ description, photo, lat, lon }) {
   const formData = new FormData();
 
-  formData.append("description", description);
-  formData.append("photo", photo);
+  formData.append('description', description);
+  formData.append('photo', photo);
 
-  if (lat !== undefined && lat !== null) formData.append("lat", lat);
-  if (lon !== undefined && lon !== null) formData.append("lon", lon);
+  if (lat !== undefined && lat !== null) formData.append('lat', lat);
+  if (lon !== undefined && lon !== null) formData.append('lon', lon);
 
   const response = await fetch(ENDPOINTS.GUEST_STORIES, {
-    method: "POST",
+    method: 'POST',
     body: formData,
   });
 
@@ -129,9 +129,9 @@ export async function subscribeNotification({ subscription, token }) {
   };
 
   const response = await fetch(ENDPOINTS.SUBSCRIBE, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(body),
@@ -142,9 +142,9 @@ export async function subscribeNotification({ subscription, token }) {
 
 export async function unsubscribeNotification({ endpoint, token }) {
   const response = await fetch(ENDPOINTS.UNSUBSCRIBE, {
-    method: "DELETE", 
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({

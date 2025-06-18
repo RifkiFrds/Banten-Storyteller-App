@@ -5,12 +5,12 @@
  */
 export function showFormattedDate(date) {
   const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   };
-  return new Date(date).toLocaleDateString("en-US", options);
+  return new Date(date).toLocaleDateString('en-US', options);
 }
 
 /**
@@ -18,10 +18,7 @@ export function showFormattedDate(date) {
  * @param {Function} updateCallback - Fungsi untuk memperbarui DOM.
  * @param {string} animationType - Jenis animasi yang akan diterapkan ('fade', 'slide', 'zoom').
  */
-export async function applyPageTransition(
-  updateCallback,
-  animationType = "fade"
-) {
+export async function applyPageTransition(updateCallback, animationType = 'fade') {
   // Memeriksa apakah browser mendukung View Transitions API
   if (document.startViewTransition) {
     try {
@@ -39,7 +36,7 @@ export async function applyPageTransition(
       // Membersihkan atribut
       delete document.documentElement.dataset.transitionType;
     } catch (error) {
-      console.error("Terjadi kesalahan selama transisi tampilan:", error);
+      console.error('Terjadi kesalahan selama transisi tampilan:', error);
       // Fallback jika transisi gagal
       updateCallback();
     }
@@ -72,5 +69,5 @@ export function animateElement(element, animationClass, duration = 500) {
  * @returns {Promise<void>} Sebuah Promise yang akan selesai setelah waktu yang ditentukan.
  */
 export function sleep(time = 1000) {
-  return new Promise((resolve) => setTimeout(resolve, time));
+  return new Promise(resolve => setTimeout(resolve, time));
 }

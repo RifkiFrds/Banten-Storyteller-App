@@ -119,7 +119,7 @@ export default class AboutPage {
   async afterRender() {
     // Inisialisasi Carousel untuk Galeri Cerita
     this._initStoryCarousel();
-    this._initScrollAnimations(); 
+    this._initScrollAnimations();
   }
 
   _initStoryCarousel() {
@@ -152,45 +152,50 @@ export default class AboutPage {
     }
 
     if (prevButton && nextButton) {
-        prevButton.addEventListener('click', () => {
-            prevItem();
-            resetAutoSlide();
-        });
-        nextButton.addEventListener('click', () => {
-            nextItem();
-            resetAutoSlide();
-        });
+      prevButton.addEventListener('click', () => {
+        prevItem();
+        resetAutoSlide();
+      });
+      nextButton.addEventListener('click', () => {
+        nextItem();
+        resetAutoSlide();
+      });
     }
-    
+
     function startAutoSlide() {
-        if (items.length > 1) { 
-            autoSlideInterval = setInterval(nextItem, 5000); 
-        }
+      if (items.length > 1) {
+        autoSlideInterval = setInterval(nextItem, 5000);
+      }
     }
 
     function resetAutoSlide() {
-        clearInterval(autoSlideInterval);
-        startAutoSlide();
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
     }
 
-    showItem(currentIndex); 
-    startAutoSlide(); 
+    showItem(currentIndex);
+    startAutoSlide();
 
     carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
     carousel.addEventListener('mouseleave', () => startAutoSlide());
   }
 
   _initScrollAnimations() {
-    const animatedSections = document.querySelectorAll('.about-section, .about-description, .about-title, .contribution-option, .developer-content');
+    const animatedSections = document.querySelectorAll(
+      '.about-section, .about-description, .about-title, .contribution-option, .developer-content'
+    );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in-up'); 
-          observer.unobserve(entry.target); 
-        }
-      });
-    }, { threshold: 0.1 }); 
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-up');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
     animatedSections.forEach(section => {
       observer.observe(section);
