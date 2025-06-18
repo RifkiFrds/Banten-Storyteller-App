@@ -1,3 +1,5 @@
+import { subscribeNotification, unsubscribeNotification } from '../data/api'; 
+
 const PUSH_API_SERVER_KEY = 'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk';
 
 const urlBase64ToUint8Array = (base64String) => {
@@ -12,8 +14,7 @@ const urlBase64ToUint8Array = (base64String) => {
 };
 
 const NotificationHelper = {
-  // Menggabungkan permintaan izin dan subscribe 
-  async subscribe() {
+  async subscribe(token) {
     if (!('Notification' in window) || !('serviceWorker' in navigator)) {
       console.warn('Browser tidak mendukung notifikasi.');
       return;
@@ -25,48 +26,62 @@ const NotificationHelper = {
       throw new Error('Izin notifikasi ditolak.'); 
     }
 
-    await this._subscribeToPushManager();
+     await this._subscribeToPushManager(token);
   },
-
-  // Fungsi internal untuk menangani logika subscription
-  async _subscribeToPushManager() {
+ async _subscribeToPushManager(token) {
     const serviceWorkerRegistration = await navigator.serviceWorker.ready;
     let subscription = await serviceWorkerRegistration.pushManager.getSubscription();
 
     if (subscription) {
-      console.log('Pengguna sudah berlangganan:', subscription.toJSON());
-      return; // Keluar jika sudah ada subscription
-    }
-
-    try {
-      console.log('Membuat langganan baru...');
-      subscription = await serviceWorkerRegistration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(PUSH_API_SERVER_KEY),
-      });
-      console.log('Berhasil berlangganan:', subscription.toJSON());
-      // TODO: Kirim subscription ke server Anda di sini
-    } catch (error) {
-      console.error('Gagal berlangganan push notification:', error);
-      throw error;
-    }
-  },
-
-  // Fungsi untuk berhenti berlangganan
-  async unsubscribe() {
-    const serviceWorkerRegistration = await navigator.serviceWorker.ready;
-    const subscription = await serviceWorkerRegistration.pushManager.getSubscription();
-
-    if (!subscription) {
-      console.log('Tidak ada langganan yang aktif untuk dibatalkan.');
+      console.log('Pengguna sudah berlangganan.');
       return;
     }
 
     try {
+      subscription = await serviceWorkerRegistration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(PUSH_API_SERVER_KEY),
+      });
+      
+      console.log('Berhasil berlangganan di browser, mengirim ke server...');
+      // IMPLEMENTASI TODO: Kirim subscription ke server
+      await subscribeNotification({
+        subscription: subscription.toJSON(), // Kirim objek subscription
+        token, // Kirim token untuk otentikasi
+      });
+      console.log('Berhasil mengirim subscription ke server.');
+
+    } catch (error) {
+      console.error('Gagal berlangganan push notification:', error);
+      // Jika gagal, langsung batalkan subscription di browser
+      if (subscription) {
+        await subscription.unsubscribe();
+      }
+      throw error;
+    }
+  },
+
+  // Tambahkan parameter 'token' untuk otentikasi
+  async unsubscribe(token) {
+    const serviceWorkerRegistration = await navigator.serviceWorker.ready;
+    const subscription = await serviceWorkerRegistration.pushManager.getSubscription();
+
+    if (!subscription) {
+      console.log('Tidak ada langganan yang aktif.');
+      return;
+    }
+
+    const endpoint = subscription.endpoint;
+
+    try {
       const successful = await subscription.unsubscribe();
       if (successful) {
-        console.log('Berhasil berhenti berlangganan.');
-        // TODO: Kirim pemberitahuan ke server Anda untuk menghapus subscription
+        console.log('Berhasil berhenti berlangganan dari browser, mengirim ke server...');
+        await unsubscribeNotification({
+          endpoint, // Gunakan endpoint yang sudah disimpan
+          token,
+        });
+        console.log('Berhasil mengirim notifikasi unsubscribe ke server.');
       }
     } catch (error) {
       console.error('Gagal berhenti berlangganan:', error);

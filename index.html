@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/images/logo-banten.png" />
+  <meta name="description" content="Aplikasi Banten Storyteller" />
+  <meta name="theme-color" content="#2c3e50" />
+  
+  <!-- PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Banten Storyteller" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="msapplication-TileColor" content="#2c3e50" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png" />
+ 
+  <title>Banten Storyteller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <div class="main-header container">
+      <a class="brand-name" href="#/">
+        <img src="/images/logo-banten.png" alt="Logo Banten Storyteller" class="brand-logo">
+        <span>Banten Storyteller</span>
+      </a>
+      <a href="#main-content" class="skip-link">Skip to content</a>
+      <nav id="navigation-drawer" class="navigation-drawer" aria-label="Main navigation">
+        <ul id="nav-list" class="nav-list">
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/about">About</a></li>
+          <li><a href="#/map">Mapped Stories</a></li>
+          <li><a href="#/add">Create Story</a></li>
+          <li><a id="subscribe-button" href="#">Subscribe</a></li>
+          <li><a href="#/login" id="auth-button">Login</a></li>
+        </ul>
+      </nav>
+      <button id="drawer-button" class="drawer-button" aria-label="Toggle navigation menu">☰</button>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-content" tabindex="-1"></main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-top">
+          <div class="footer-logo">
+            <h3>Banten Storyteller</h3>
+            <p>Platform peta cerita yang mengangkat kisah inspiratif masyarakat Banten melalui teknologi.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="#/">Home</a></li>
+              <li><a href="#/about">About</a></li>
+              <li><a href="#/map">Mapped Stories</a></li>
+              <li><a href="#/create">Create Story</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>Email: <a href="mailto:support@bantenstoryteller.id">support@bantenstoryteller.id</a></p>
+            <p>Phone: +62 812-3456-7890</p>
+            <div class="social-icons">
+              <a href="https://instagram.com/bantenstoryteller" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://facebook.com/bantenstoryteller" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="https://twitter.com/bantenstory" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p id="footer-copyright">
+            &copy; 2025 Banten Storyteller. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+   <script>
+    if (!document.startViewTransition) {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/view-transitions-api-polyfill@1.0.1/dist/view-transitions-api-polyfill.js";
+      document.head.appendChild(script);
+    }
+  </script>
+  <script type="module" src="/src/scripts/index.js"></script>
+
+</body>
+</html>

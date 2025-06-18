@@ -131,26 +131,22 @@ export default class MapPage {
 
   async _initLeafletMap(stories) {
     if (!document.querySelector('link[href*="leaflet.css"]')) {
-      const leafletCSS = document.createElement("link");
-      leafletCSS.rel = "stylesheet";
-      leafletCSS.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-      leafletCSS.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
-      leafletCSS.crossOrigin = "";
-      document.head.appendChild(leafletCSS);
-    }
+  const leafletCSS = document.createElement("link");
+  leafletCSS.rel = "stylesheet";
+  leafletCSS.href = "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css";
+  document.head.appendChild(leafletCSS);
+}
 
     // Pemuatan Leaflet JS
     if (typeof L === "undefined") {
-      const script = document.createElement("script");
-      script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-      script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
-      script.crossOrigin = "";
-      document.head.appendChild(script);
-      script.onload = () => this._setupMapInstance(stories);
-      script.onerror = () => this.showError("Gagal memuat pustaka peta (Leaflet JS).");
-    } else {
-      this._setupMapInstance(stories);
-    }
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js";
+  document.head.appendChild(script);
+  script.onload = () => this._setupMapInstance(stories);
+  script.onerror = () => this.showError("Gagal memuat pustaka peta (Leaflet JS).");
+} else {
+  this._setupMapInstance(stories);
+}
   }
 
   _setupMapInstance(stories) {

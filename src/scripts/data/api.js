@@ -121,17 +121,20 @@ export async function addGuestStory({ description, photo, lat, lon }) {
   return await handleApiResponse(response);
 }
 
-export async function subscribeNotification({ endpoint, keys, token }) {
+export async function subscribeNotification({ subscription, token }) {
+  // Body yang dikirim sekarang akan menyertakan objek 'keys'
+  const body = {
+    endpoint: subscription.endpoint,
+    keys: subscription.keys, // <-- KITA TAMBAHKAN FIELD INI SESUAI ERROR
+  };
+
   const response = await fetch(ENDPOINTS.SUBSCRIBE, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      endpoint,
-      keys,
-    }),
+    body: JSON.stringify(body),
   });
 
   return await handleApiResponse(response);

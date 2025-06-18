@@ -20,25 +20,25 @@ export default class LoginPresenter {
         throw new Error(response.message);
       }
 
-      // Save auth data to local storage
+      // 1. Simpan data otentikasi (termasuk token)
       saveAuth(response);
 
-      // Dispatch auth changed event
-      window.dispatchEvent(new CustomEvent("auth-changed"));
+      // 2. Tampilkan pesan sukses kepada pengguna
+      this.#view.showSuccess("Login berhasil!");
 
-      // Show success message and redirect
-      this.#view.showSuccess("Login successful. Redirecting to homepage...");
-
-      setTimeout(() => {
-        window.location.hash = "#/";
-      }, 1500);
+      // 3. Kirim sinyal 'auth-changed' yang jelas bahwa login SUKSES
+      //    Hanya satu dispatchEvent yang diperlukan.
+      window.dispatchEvent(new CustomEvent("auth-changed", { detail: { success: true } }));
 
       return true;
     } catch (error) {
       console.error("login: error:", error);
       this.#view.showError(
-        error.message || "Failed to login. Please try again."
+        error.message || "Gagal login. Silakan coba lagi."
       );
+      
+      // Kirim sinyal 'auth-changed' bahwa login GAGAL
+      window.dispatchEvent(new CustomEvent("auth-changed", { detail: { success: false } }));
       return false;
     } finally {
       this.#view.setLoading(false);

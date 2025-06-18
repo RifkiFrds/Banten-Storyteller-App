@@ -148,7 +148,7 @@ header {
 
 .brand-name {
   font-family: var(--font-heading);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   color: var(--color-primary);
   text-decoration: none;
@@ -157,28 +157,24 @@ header {
   transition: color 0.3s ease;
 }
 
-/* --- Header & Navigation (Penyesuaian untuk Logo) --- */
-/* ... (Style header Anda yang sudah ada) ... */
-
+/* --- Header & Navigation --- */
 .main-header .brand-name {
-  display: flex; /* Mengatur logo dan teks secara horizontal */
-  align-items: center; /* Menyejajarkan logo dan teks secara vertikal di tengah */
-  gap: var(--spacing-xs, 0.5rem); /* Jarak antara logo dan teks, gunakan variabel spasi Anda */
-  /* text-decoration: none; sudah ada di style .brand-name Anda */
-  /* color: var(--color-primary); sudah ada di style .brand-name Anda */
+  display: flex; 
+  align-items: center; 
+  gap: var(--spacing-xs, 0.5rem);
 }
 
-.main-header .brand-logo { /* Kelas baru untuk styling logo */
-  height: 70px; /* Sesuaikan tinggi logo sesuai kebutuhan */
-  width: auto; /* Lebar akan menyesuaikan secara proporsional */
-  display: block; /* Menghindari spasi ekstra di bawah gambar */
+.main-header .brand-logo { 
+  height: 70px; 
+  width: auto; 
+  display: block; 
 }
 
 .main-header .brand-name span {
-  line-height: 1; /* Untuk alignment vertikal yang lebih baik dengan logo */
+  line-height: 1; 
 }
 
-/* ... (style header dan navigasi Anda) ... */
+/* ... (style header dan navigasi) ... */
 .brand-name:hover {
   color: var(--color-secondary);
 }
