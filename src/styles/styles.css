@@ -209,7 +209,7 @@ header {
 }
 
 #close-drawer-button {
-  display: none;;
+  display: none;
   background: none;
   border: none;
   font-size: 2rem;
@@ -223,22 +223,21 @@ header {
   transition: opacity 0.3s ease;
 }
 
-
 /* Mobile: navigation hidden by default, toggle button visible */
 @media (max-width: 1000px) {
   .navigation-drawer {
     /* Atur sebagai flexbox dengan arah kolom */
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     /* Posisikan sebagai overlay di luar layar */
     position: fixed;
     top: 0;
     right: 0;
     transform: translateX(100%); /* Sembunyikan ke kanan */
     visibility: hidden; /* Sembunyikan dari aksesibilitas & interaksi */
-    
+
     /* Ukuran dan Tampilan */
     width: 280px;
     max-width: 80vw; /* Pastikan tidak terlalu lebar di layar kecil */
@@ -248,9 +247,11 @@ header {
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     padding-top: calc(var(--spacing-lg) * 2);
     z-index: 999;
-    
+
     /* Transisi untuk animasi yang mulus */
-    transition: transform 0.35s cubic-bezier(0.77, 0, 0.18, 1), visibility 0.35s;
+    transition:
+      transform 0.35s cubic-bezier(0.77, 0, 0.18, 1),
+      visibility 0.35s;
   }
 
   .navigation-drawer.open {
@@ -953,7 +954,7 @@ footer {
 .story-meta {
   /* Mengatur tata letak menjadi kolom */
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: flex-start; /* Sejajarkan item ke kiri */
   gap: var(--spacing-sm); /* Beri jarak antar elemen (tanggal dan tombol) */
   margin-top: auto; /* Tetap dorong blok ini ke bawah kartu */
@@ -1912,12 +1913,11 @@ footer {
   color: var(--color-primary-dark);
   margin-bottom: var(--spacing-sm);
   text-align: center;
-  background: rgba(255, 255, 255, 0.6); 
-  border-radius: 12px; 
-  padding: 0.5rem 1rem; 
-  display: inline-block; 
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  display: inline-block;
 }
-
 
 .detail-meta {
   display: flex;
@@ -2386,8 +2386,8 @@ footer {
   .footer-logo,
   .footer-links,
   .footer-contact {
-  width: 100%;      
-  min-width: 0; 
+    width: 100%;
+    min-width: 0;
   }
 
   .social-icons {
@@ -3111,7 +3111,6 @@ footer {
   display: inline-block;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
-
 
 .login-title,
 .form-title {
@@ -3857,35 +3856,35 @@ body::after {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
-  
+
   .collections-section-header {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
   }
-  
+
   .collections-actions {
     justify-content: center;
   }
-  
+
   .collection-stats {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-md);
   }
-  
+
   .stat-item {
     min-width: 150px;
   }
-  
+
   .story-card-meta {
     grid-template-columns: 1fr;
   }
-  
+
   .story-actions {
     flex-direction: column;
   }
-  
+
   .notification {
     top: 10px;
     right: 10px;
@@ -3898,23 +3897,23 @@ body::after {
   .story-collections-header .page-title {
     font-size: 1.75rem;
   }
-  
+
   .story-collections-header .page-subtitle {
     font-size: 1rem;
   }
-  
+
   .collections-grid {
     gap: var(--spacing-sm);
   }
-  
+
   .story-card-content {
     padding: var(--spacing-sm);
   }
-  
+
   .story-card-title {
     font-size: 1.1rem;
   }
-  
+
   .story-card-meta {
     font-size: 0.8rem;
   }
@@ -3923,14 +3922,18 @@ body::after {
 /* --- BATCH RESPONSIVE IMPROVEMENTS FOR MOBILE UX --- */
 
 /* General: Prevent horizontal scroll on all pages */
-html, body {
+html,
+body {
   max-width: 100vw;
   overflow-x: hidden;
 }
 
 /* Make all .btn, .btn-primary, .btn-outline full-width on mobile for easier tap */
 @media (max-width: 480px) {
-  .btn, .btn-primary, .btn-outline, .btn-lg {
+  .btn,
+  .btn-primary,
+  .btn-outline,
+  .btn-lg {
     width: 100%;
     box-sizing: border-box;
     font-size: 1rem;
@@ -3966,7 +3969,8 @@ html, body {
     padding-top: 2rem;
     min-height: unset;
   }
-  .home-hero-content, .hero-glass-card {
+  .home-hero-content,
+  .hero-glass-card {
     max-width: 100%;
     padding: 0;
   }
@@ -3983,7 +3987,8 @@ html, body {
   .story-card {
     padding: 0.5rem;
   }
-  .search-options, .home-section-header {
+  .search-options,
+  .home-section-header {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
@@ -4019,7 +4024,10 @@ html, body {
     padding: 1rem;
     margin: 0.5rem auto;
   }
-  .form-input, .form-section, .form-group, .form-control {
+  .form-input,
+  .form-section,
+  .form-group,
+  .form-control {
     width: 100%;
     box-sizing: border-box;
   }
@@ -4060,7 +4068,9 @@ html, body {
     gap: 1rem;
     padding: 1rem;
   }
-  #map-main-area, .map-container.large, #map {
+  #map-main-area,
+  .map-container.large,
+  #map {
     min-height: 220px !important;
     height: 220px !important;
     max-width: 100vw;
@@ -4101,14 +4111,18 @@ html, body {
 
 /* Login & Register: Centered, full-width, reduce padding */
 @media (max-width: 480px) {
-  .login-container, .auth-container {
+  .login-container,
+  .auth-container {
     padding: 1rem;
     border-radius: 1rem;
     width: 100vw;
     min-width: 0;
     box-sizing: border-box;
   }
-  .form-input, .form-control, .btn-login, .btn-full {
+  .form-input,
+  .form-control,
+  .btn-login,
+  .btn-full {
     width: 100%;
     font-size: 1rem;
     padding: 1rem;
@@ -4124,7 +4138,9 @@ html, body {
     gap: 1.5rem;
     text-align: left;
   }
-  .footer-logo, .footer-links, .footer-contact {
+  .footer-logo,
+  .footer-links,
+  .footer-contact {
     width: 100%;
     min-width: 0;
     margin-bottom: 1rem;
@@ -4136,7 +4152,9 @@ html, body {
 }
 
 /* Ensure all images, videos, iframes are responsive */
-img, video, iframe {
+img,
+video,
+iframe {
   max-width: 100%;
   height: auto;
   display: block;
