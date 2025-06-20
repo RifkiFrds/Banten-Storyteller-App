@@ -69,6 +69,10 @@ const setupSubscriptionButton = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Debug: Check if drawer button and navigation drawer are selected
+  console.log('drawerButton:', document.querySelector('#drawer-button'));
+  console.log('navigationDrawer:', document.querySelector('#navigation-drawer'));
+
   const app = new App({
     content: document.querySelector('#main-content'),
     drawerButton: document.querySelector('#drawer-button'),

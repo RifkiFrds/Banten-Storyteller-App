@@ -24,22 +24,32 @@ class App {
   // Setup event listener untuk drawer navigasi
   #setupDrawer() {
     this.#drawerButton.addEventListener('click', () => {
-      this.#navigationDrawer.classList.toggle('open');
+      // Only toggle on mobile (max-width: 1000px)
+      if (window.matchMedia('(max-width: 1000px)').matches) {
+        this.#navigationDrawer.classList.toggle('open');
+      }
     });
 
-    document.body.addEventListener('click', event => {
+    // Close drawer when a nav link is clicked (on mobile)
+    this.#navigationDrawer.addEventListener('click', (e) => {
       if (
-        !this.#navigationDrawer.contains(event.target) &&
-        !this.#drawerButton.contains(event.target)
+        window.matchMedia('(max-width: 1000px)').matches &&
+        e.target.closest('a')
       ) {
         this.#navigationDrawer.classList.remove('open');
       }
+    });
 
-      this.#navigationDrawer.querySelectorAll('a').forEach(link => {
-        if (link.contains(event.target)) {
-          this.#navigationDrawer.classList.remove('open');
-        }
-      });
+    // Optional: Close drawer when clicking outside (on mobile)
+    document.addEventListener('click', (e) => {
+      if (
+        window.matchMedia('(max-width: 1000px)').matches &&
+        this.#navigationDrawer.classList.contains('open') &&
+        !this.#navigationDrawer.contains(e.target) &&
+        e.target !== this.#drawerButton
+      ) {
+        this.#navigationDrawer.classList.remove('open');
+      }
     });
   }
 
@@ -139,6 +149,9 @@ class App {
         this.#content.innerHTML = await page.render(urlParams);
         await page.afterRender(urlParams);
       }, animationType);
+
+      // Scroll to top after transition and afterRender are complete
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       // Simpan state halaman saat ini
       this.#currentPage = url;

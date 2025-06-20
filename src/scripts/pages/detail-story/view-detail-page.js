@@ -64,7 +64,7 @@ export default class ViewDetailPage {
 
     container.innerHTML = `
       <div class="detail-container" style="view-transition-name: story-${story.id}">
-        <a href="#/" class="btn btn-outline mb-4">← Back to Stories</a>
+        <a href="#/" class="btn btn-outline mb-2">← Back to Stories</a>
 
         <article class="detail-card">
           <header>
@@ -90,20 +90,9 @@ export default class ViewDetailPage {
             <img src="${story.photoUrl}" alt="Photo shared by ${story.name}" class="detail-image rounded" />
           </figure>
 
-          <div class="detail-description mt-4">
+          <div class="detail-description">
             <p>${story.description}</p>
           </div>
-
-          ${
-            story.lat && story.lon
-              ? `
-            <div class="map-container mt-4">
-              <h3 id="map-heading">📍 Story Location</h3>
-              <div id="map" class="map-box" role="img" aria-labelledby="map-heading"></div>
-            </div>
-          `
-              : ''
-          }
 
           <div id="snackbar" class="snackbar">Link copied!</div>
         </article>

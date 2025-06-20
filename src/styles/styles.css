@@ -51,6 +51,8 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
@@ -186,9 +188,73 @@ header {
   color: var(--color-secondary);
 }
 
+/* --- NAVIGATION VISIBILITY FINAL FIX --- */
+/* Desktop: navigation always visible, toggle button hidden */
 .navigation-drawer {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  z-index: auto;
+  transition: none;
 }
+.drawer-button {
+  display: none;
+}
+
+/* Mobile: navigation hidden by default, toggle button visible */
+@media (max-width: 1000px) {
+  .navigation-drawer {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-background-glass-fallback);
+    box-shadow: var(--shadow-lg);
+    border-left: 1px solid rgba(255,255,255,0.2);
+    padding-top: calc(var(--spacing-lg) * 2);
+    z-index: 999;
+    transition: right 0.3s cubic-bezier(0.77,0,0.18,1), opacity 0.3s ease;
+  }
+  .navigation-drawer.open {
+    display: flex;
+    right: 0;
+    opacity: 1;
+    animation: navDrawerSlideIn 0.4s cubic-bezier(0.77,0,0.18,1);
+  }
+  .drawer-button {
+    display: block;
+  }
+}
+
+/* Remove conflicting display rules in lower media queries */
+@media (max-width: 768px) {
+  .navigation-drawer {
+    /* Remove display: flex or display: block here */
+  }
+  .navigation-drawer.open {
+    /* Remove display: flex here */
+  }
+}
+@media (max-width: 480px) {
+  .navigation-drawer {
+    /* Remove display: flex or display: block here */
+  }
+  .navigation-drawer.open {
+    /* Remove display: flex here */
+  }
+}
+/* --- END NAVIGATION VISIBILITY FINAL FIX --- */
 
 .nav-list {
   display: flex;
@@ -684,16 +750,16 @@ footer {
   width: 100%;
   padding: var(--spacing-md);
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
   border-top: 1px solid var(--glass-border);
   color: var(--color-text);
   z-index: 1;
 }
 
 .hero-glass-text h3 {
-  margin-bottom: var(--spacing-xs);
-  font-size: 1.3rem;
+  margin-bottom: 1px;
+  font-size: 20px;
   color: var(--color-text);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -701,6 +767,7 @@ footer {
 .hero-glass-text p {
   font-size: 0.95rem;
   color: var(--color-text-light);
+  margin-top: 5px;
 }
 
 .home-content {
@@ -1790,18 +1857,23 @@ footer {
 
 .detail-title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 4vw, 2rem); /* versi kecil */
   color: var(--color-primary-dark);
   margin-bottom: var(--spacing-sm);
   text-align: center;
+  background: rgba(255, 255, 255, 0.6); 
+  border-radius: 12px; 
+  padding: 0.5rem 1rem; 
+  display: inline-block; 
 }
+
 
 .detail-meta {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .detail-meta .badge {
@@ -2978,18 +3050,19 @@ footer {
 }
 
 .login-header {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 5px;
+  text-align: center;
 }
-
 .login-logo {
   max-width: 120px;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+  display: inline-block;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
+
 .login-title,
 .form-title {
-  /* Digunakan di kedua form */
   font-family: var(--font-heading);
   font-size: clamp(1.8rem, 4vw, 2.2rem);
   color: var(--color-primary);
@@ -3791,3 +3864,226 @@ body::after {
     font-size: 0.8rem;
   }
 }
+
+/* --- BATCH RESPONSIVE IMPROVEMENTS FOR MOBILE UX --- */
+
+/* General: Prevent horizontal scroll on all pages */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Make all .btn, .btn-primary, .btn-outline full-width on mobile for easier tap */
+@media (max-width: 480px) {
+  .btn, .btn-primary, .btn-outline, .btn-lg {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Navigation: Ensure drawer covers content, links are large, and easy to tap */
+@media (max-width: 768px) {
+  .navigation-drawer {
+    width: 100vw;
+    min-width: unset;
+    padding-top: 4rem;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 2000;
+  }
+  .nav-list li a {
+    font-size: 1.2rem;
+    padding: 1.2rem 1rem;
+    width: 100%;
+    display: block;
+    min-height: 48px;
+  }
+}
+
+/* Home: Hero section, story cards, search, etc. */
+@media (max-width: 768px) {
+  .home-hero {
+    padding-top: 2rem;
+    min-height: unset;
+  }
+  .home-hero-content, .hero-glass-card {
+    max-width: 100%;
+    padding: 0;
+  }
+  .home-title {
+    font-size: 2rem;
+  }
+  .home-subtitle {
+    font-size: 1rem;
+  }
+  .story-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .story-card {
+    padding: 0.5rem;
+  }
+  .search-options, .home-section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+}
+
+/* About: Stack sections, reduce padding, readable font */
+@media (max-width: 768px) {
+  .about-page.glass-card {
+    padding: 1rem;
+  }
+  .about-title {
+    font-size: 1.5rem;
+  }
+  .vision-mission {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .about-section {
+    padding: 0.75rem;
+  }
+  .developer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+/* Add Story: Form full-width, tabs stack, camera/gallery scale */
+@media (max-width: 768px) {
+  .add-story-form-wrapper {
+    padding: 1rem;
+    margin: 0.5rem auto;
+  }
+  .form-input, .form-section, .form-group, .form-control {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .photo-options .option-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .camera-preview-area {
+    max-width: 100vw;
+    min-width: 0;
+    height: 180px;
+  }
+}
+
+/* Story Collections: Grid to column, stats stack, cards shrink */
+@media (max-width: 768px) {
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .collection-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .stat-item {
+    min-width: 100px;
+    width: 100%;
+  }
+  .story-card-content {
+    padding: 0.5rem;
+  }
+}
+
+/* Map: Sidebar below map, map fixed height, controls larger */
+@media (max-width: 768px) {
+  #map-content-wrapper.glass-card {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  #map-main-area, .map-container.large, #map {
+    min-height: 220px !important;
+    height: 220px !important;
+    max-width: 100vw;
+  }
+  #map-sidebar {
+    margin-top: 1rem;
+    padding: 1rem;
+    max-height: none;
+    width: 100%;
+  }
+  .leaflet-control-container .leaflet-control {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Story Detail: Image scales, meta stacks, readable text */
+@media (max-width: 768px) {
+  .detail-card {
+    padding: 1rem;
+  }
+  .detail-title {
+    font-size: 1.3rem;
+  }
+  .detail-image {
+    max-height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+  .detail-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .detail-description {
+    font-size: 1rem;
+  }
+}
+
+/* Login & Register: Centered, full-width, reduce padding */
+@media (max-width: 480px) {
+  .login-container, .auth-container {
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .form-input, .form-control, .btn-login, .btn-full {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* Footer: Stack sections, center-align, increase spacing */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .footer-logo, .footer-links, .footer-contact {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 1rem;
+  }
+  .social-icons {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+
+/* Ensure all images, videos, iframes are responsive */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- END BATCH RESPONSIVE IMPROVEMENTS --- */
