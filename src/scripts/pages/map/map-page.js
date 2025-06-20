@@ -4,8 +4,8 @@ import * as DicodingAPI from '../../data/api';
 
 export default class MapPage {
   #presenter = null;
-  #mapInstance = null; // Menyimpan instance peta Leaflet
-  #storyMarkersGroup = null; // Menyimpan layer group untuk marker cerita
+  #mapInstance = null;
+  #storyMarkersGroup = null;
 
   async render() {
     return `
@@ -164,7 +164,7 @@ export default class MapPage {
     const defaultZoom = 9;
 
     const tileLayers = this._getTileLayers();
-    tileLayers['OpenStreetMap'].addTo(this.#mapInstance);
+    tileLayers['Streets'].addTo(this.#mapInstance);
 
     this.#storyMarkersGroup = L.layerGroup().addTo(this.#mapInstance); // Buat dan langsung tambahkan
     const markerBounds = L.latLngBounds();
@@ -218,14 +218,32 @@ export default class MapPage {
   }
 
   _getTileLayers() {
-    return {
-      OpenStreetMap: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    });
+
+    const satellite = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        attribution:
+          'Tiles &copy; Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
         maxZoom: 19,
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      }),
+      }
+    );
+
+    const terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      maxZoom: 17,
+      attribution:
+        'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+    });
+
+    return {
+      Streets: streets,
+      Satellite: satellite,
+      Terrain: terrain,
     };
   }
-
   _createStoryMarker(story) {
     const iconHtml = `
       <div class="marker-pin" style="background-color: var(--color-accent);">

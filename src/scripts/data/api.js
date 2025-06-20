@@ -14,8 +14,6 @@ const ENDPOINTS = {
 async function handleApiResponse(response) {
   const data = await response.json();
   if (!response.ok) {
-    // Jika respons bukan 2xx (misalnya 4xx atau 5xx), lemparkan error
-    // Pesan error dari API akan digunakan jika tersedia, jika tidak, gunakan status teks
     throw new Error(data.message || response.statusText);
   }
   return data;
@@ -125,7 +123,7 @@ export async function subscribeNotification({ subscription, token }) {
   // Body yang dikirim sekarang akan menyertakan objek 'keys'
   const body = {
     endpoint: subscription.endpoint,
-    keys: subscription.keys, // <-- KITA TAMBAHKAN FIELD INI SESUAI ERROR
+    keys: subscription.keys,
   };
 
   const response = await fetch(ENDPOINTS.SUBSCRIBE, {

@@ -4,18 +4,14 @@ import { StaleWhileRevalidate, CacheFirst, NetworkFirst } from 'workbox-strategi
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
 
-// Clean up outdated caches when new version is available
 cleanupOutdatedCaches();
 
-// Precache and route the App Shell files (core HTML, CSS, JS)
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Application Shell Architecture - Cache core UI components
 const APP_SHELL_CACHE = 'app-shell-v1';
 const STATIC_CACHE = 'static-v1';
 const DYNAMIC_CACHE = 'dynamic-v1';
 
-// Cache the Application Shell (core UI that doesn't change)
 const appShellFiles = [
   '/',
   '/index.html',
@@ -33,7 +29,6 @@ const appShellFiles = [
   '/icons/icon-512x512.png',
 ];
 
-// Install event - cache the Application Shell
 self.addEventListener('install', event => {
   console.log('Service Worker: Installing...');
   event.waitUntil(
@@ -53,7 +48,6 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', event => {
   console.log('Service Worker: Activating...');
   event.waitUntil(
@@ -80,19 +74,15 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event - Application Shell architecture implementation
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip non-GET requests
   if (request.method !== 'GET') {
     return;
   }
 
-  // Handle different types of requests with appropriate strategies
   if (url.pathname === '/' || url.pathname === '/index.html') {
-    // Application Shell - always serve from cache first
     event.respondWith(
       caches
         .match(request)
@@ -103,7 +93,6 @@ self.addEventListener('fetch', event => {
           return fetch(request);
         })
         .catch(() => {
-          // Fallback to cached version if network fails
           return caches.match('/index.html');
         })
     );
@@ -112,7 +101,6 @@ self.addEventListener('fetch', event => {
     url.pathname.startsWith('/images/') ||
     url.pathname.startsWith('/icons/')
   ) {
-    // Static assets - Cache First strategy
     event.respondWith(
       caches
         .match(request)
@@ -131,7 +119,6 @@ self.addEventListener('fetch', event => {
           });
         })
         .catch(() => {
-          // Return offline fallback for critical assets
           if (request.destination === 'image') {
             return caches.match('/images/logo-banten.png');
           }
@@ -148,7 +135,6 @@ self.addEventListener('fetch', event => {
     url.origin === 'https://fonts.googleapis.com' ||
     url.origin === 'https://fonts.gstatic.com'
   ) {
-    // Google Fonts - Stale While Revalidate
     event.respondWith(
       new StaleWhileRevalidate({
         cacheName: 'google-fonts',
@@ -157,14 +143,13 @@ self.addEventListener('fetch', event => {
             statuses: [0, 200],
           }),
           new ExpirationPlugin({
-            maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+            maxAgeSeconds: 60 * 60 * 24 * 365,
             maxEntries: 30,
           }),
         ],
       }).handle(event)
     );
   } else if (url.origin === 'https://unpkg.com' || url.origin === 'https://cdnjs.cloudflare.com') {
-    // CDN resources - Cache First
     event.respondWith(
       new CacheFirst({
         cacheName: 'cdn-resources',
@@ -173,18 +158,16 @@ self.addEventListener('fetch', event => {
             statuses: [0, 200],
           }),
           new ExpirationPlugin({
-            maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
+            maxAgeSeconds: 60 * 60 * 24 * 7,
             maxEntries: 50,
           }),
         ],
       }).handle(event)
     );
   } else {
-    // Dynamic content - Network First strategy with offline fallback
     event.respondWith(
       fetch(request)
         .then(response => {
-          // Cache successful responses
           if (response.status === 200) {
             const responseClone = response.clone();
             caches.open(DYNAMIC_CACHE).then(cache => {
@@ -194,12 +177,10 @@ self.addEventListener('fetch', event => {
           return response;
         })
         .catch(() => {
-          // Return cached version if available, otherwise offline page
           return caches.match(request).then(cachedResponse => {
             if (cachedResponse) {
               return cachedResponse;
             }
-            // Return offline page for navigation requests
             if (request.destination === 'document') {
               return caches.match('/offline.html');
             }
@@ -216,7 +197,6 @@ self.addEventListener('fetch', event => {
   }
 });
 
-// Push notification handling
 self.addEventListener('push', event => {
   console.log('Service Worker: Received Push Notification...');
 
@@ -261,7 +241,6 @@ self.addEventListener('push', event => {
   );
 });
 
-// Notification click handling
 self.addEventListener('notificationclick', event => {
   console.log('Service Worker: Notification clicked');
 
@@ -273,14 +252,12 @@ self.addEventListener('notificationclick', event => {
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
-      // Check if app is already open
       for (const client of clientList) {
         if (client.url.includes(self.location.origin) && 'focus' in client) {
           return client.focus();
         }
       }
 
-      // If app is not open, open it
       if (clients.openWindow) {
         return clients.openWindow('/');
       }
@@ -288,20 +265,14 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-// Background sync for offline actions
 self.addEventListener('sync', event => {
   console.log('Service Worker: Background sync triggered', event.tag);
 
   if (event.tag === 'background-sync') {
-    event.waitUntil(
-      // Handle background sync tasks here
-      // For example, sync offline story submissions
-      console.log('Background sync: Processing offline tasks...')
-    );
+    event.waitUntil(console.log('Background sync: Processing offline tasks...'));
   }
 });
 
-// Message handling for communication with main app
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();

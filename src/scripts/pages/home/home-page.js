@@ -260,51 +260,53 @@ export default class HomePage {
       .join('');
 
     container.innerHTML = `<div class="story-list">${storiesHtml}</div>`;
-    
+
     // Setup collection buttons after rendering
     await this.#setupCollectionButtons();
   }
 
   async #setupCollectionButtons() {
-    const collectionButtons = document.querySelectorAll('.add-to-collection-btn, .add-to-collection-btn-meta');
-    
+    const collectionButtons = document.querySelectorAll(
+      '.add-to-collection-btn, .add-to-collection-btn-meta'
+    );
+
     collectionButtons.forEach(button => {
-      button.addEventListener('click', async (event) => {
+      button.addEventListener('click', async event => {
         event.preventDefault();
         event.stopPropagation();
-        
+
         const storyId = button.getAttribute('data-story-id');
         const storyName = button.getAttribute('data-story-name');
-        
+
         // Check if story is already in collection
         const isInCollection = await indexedDBService.isStoryInCollection(storyId);
-        
+
         if (isInCollection) {
           alert(`${storyName} is already in your collection!`);
           return;
         }
-        
+
         // Get the full story data from the current stories list
         const storyCard = button.closest('.story-card');
         const storyData = this.#extractStoryDataFromCard(storyCard, storyId);
-        
+
         try {
           // Show loading state
           button.disabled = true;
           const originalText = button.innerHTML;
           button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
-          
+
           await indexedDBService.addStory(storyData);
-          
+
           // Update button state
           button.innerHTML = '<i class="fas fa-check"></i> Added!';
           button.classList.remove('btn-outline');
           button.classList.add('btn-success');
           button.disabled = true;
-          
+
           // Show success message
           this.#showNotification(`${storyName} Cerita ini sudah masuk ke koleksimu!`, 'success');
-          
+
           // Reset button after 3 seconds
           setTimeout(() => {
             button.disabled = false;
@@ -312,15 +314,17 @@ export default class HomePage {
             button.classList.remove('btn-success');
             button.classList.add('btn-outline');
           }, 3000);
-          
         } catch (error) {
           console.error('Error adding story to collection:', error);
-          
+
           // Reset button state
           button.disabled = false;
           button.innerHTML = originalText;
-          
-          this.#showNotification(`Failed to add ${storyName} to collection: ${error.message}`, 'error');
+
+          this.#showNotification(
+            `Failed to add ${storyName} to collection: ${error.message}`,
+            'error'
+          );
         }
       });
     });
@@ -332,13 +336,15 @@ export default class HomePage {
     const descriptionElement = storyCard.querySelector('.story-description');
     const imageElement = storyCard.querySelector('.story-image');
     const dateElement = storyCard.querySelector('.story-date');
-    
+
     return {
       id: storyId,
       name: titleElement ? titleElement.textContent.trim() : '',
       description: descriptionElement ? descriptionElement.textContent.trim() : '',
       photoUrl: imageElement ? imageElement.src : '',
-      createdAt: dateElement ? new Date(dateElement.getAttribute('datetime')).toISOString() : new Date().toISOString(),
+      createdAt: dateElement
+        ? new Date(dateElement.getAttribute('datetime')).toISOString()
+        : new Date().toISOString(),
       // Add other story properties as needed
     };
   }
@@ -353,15 +359,15 @@ export default class HomePage {
         <span>${message}</span>
       </div>
     `;
-    
+
     // Add to page
     document.body.appendChild(notification);
-    
+
     // Show notification
     setTimeout(() => {
       notification.classList.add('show');
     }, 100);
-    
+
     // Remove notification after 5 seconds
     setTimeout(() => {
       notification.classList.remove('show');

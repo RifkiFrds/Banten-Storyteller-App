@@ -8,6 +8,7 @@ class App {
   #drawerButton = null;
   #navigationDrawer = null;
   #authButton = null;
+  #closeDrawerButton = null;
   #currentPage = null;
   #currentPageInstance = null;
 
@@ -16,6 +17,7 @@ class App {
     this.#drawerButton = drawerButton;
     this.#navigationDrawer = navigationDrawer;
     this.#authButton = document.querySelector('#auth-button');
+    this.#closeDrawerButton = document.querySelector('#close-drawer-button');
 
     this.#setupDrawer();
     this.#initAuth();
@@ -23,25 +25,29 @@ class App {
 
   // Setup event listener untuk drawer navigasi
   #setupDrawer() {
+    // Event: toggle drawer saat tombol ☰ ditekan
     this.#drawerButton.addEventListener('click', () => {
-      // Only toggle on mobile (max-width: 1000px)
       if (window.matchMedia('(max-width: 1000px)').matches) {
         this.#navigationDrawer.classList.toggle('open');
       }
     });
 
-    // Close drawer when a nav link is clicked (on mobile)
-    this.#navigationDrawer.addEventListener('click', (e) => {
-      if (
-        window.matchMedia('(max-width: 1000px)').matches &&
-        e.target.closest('a')
-      ) {
+    // Event: tutup drawer saat tombol ✕ ditekan
+    if (this.#closeDrawerButton) {
+      this.#closeDrawerButton.addEventListener('click', () => {
+        this.#navigationDrawer.classList.remove('open');
+      });
+    }
+
+    // Event: tutup drawer saat klik link di dalam nav
+    this.#navigationDrawer.addEventListener('click', e => {
+      if (window.matchMedia('(max-width: 1000px)').matches && e.target.closest('a')) {
         this.#navigationDrawer.classList.remove('open');
       }
     });
 
-    // Optional: Close drawer when clicking outside (on mobile)
-    document.addEventListener('click', (e) => {
+    // Event: tutup drawer saat klik di luar menu
+    document.addEventListener('click', e => {
       if (
         window.matchMedia('(max-width: 1000px)').matches &&
         this.#navigationDrawer.classList.contains('open') &&
@@ -65,7 +71,7 @@ class App {
 
   // Update tampilan tombol login/logout
   #updateAuthButton() {
-    // Hapus dulu event listener logout agar tidak duplikat
+    // Hapus event listener logout lama agar tidak duplikat
     this.#authButton.removeEventListener('click', this.#handleLogout);
 
     if (isAuthenticated()) {
@@ -89,7 +95,7 @@ class App {
 
   // Tentukan tipe animasi berdasarkan perpindahan halaman
   #getAnimationType(newUrl) {
-    if (!this.#currentPage) return 'fade'; // Default untuk halaman pertama
+    if (!this.#currentPage) return 'fade';
 
     const pageCategories = {
       home: ['/'],
@@ -111,13 +117,13 @@ class App {
     const newCategory = getCurrentCategory(newUrl);
 
     if (currentCategory === newCategory) {
-      return 'fade'; // Sama kategori: fade
+      return 'fade';
     } else if (currentCategory === 'auth' && newCategory === 'home') {
-      return 'zoom'; // Dari login/register ke home: zoom
+      return 'zoom';
     } else if (newCategory === 'content') {
-      return 'slide'; // Halaman konten: slide
+      return 'slide';
     } else {
-      return 'fade'; // Default animasi
+      return 'fade';
     }
   }
 
@@ -136,24 +142,22 @@ class App {
     }
 
     try {
-      // Jika halaman sebelumnya ada dan punya destroy method, jalankan untuk cleanup
+      // Jalankan destroy() dari halaman sebelumnya jika ada
       if (this.#currentPageInstance && typeof this.#currentPageInstance.destroy === 'function') {
         await this.#currentPageInstance.destroy();
       }
 
-      // Tentukan animasi transisi
       const animationType = this.#getAnimationType(url);
 
-      // Terapkan animasi saat render halaman baru
+      // Render dengan animasi transisi
       await applyPageTransition(async () => {
         this.#content.innerHTML = await page.render(urlParams);
         await page.afterRender(urlParams);
       }, animationType);
 
-      // Scroll to top after transition and afterRender are complete
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Simpan state halaman saat ini
+      // Simpan state halaman
       this.#currentPage = url;
       this.#currentPageInstance = page;
     } catch (error) {

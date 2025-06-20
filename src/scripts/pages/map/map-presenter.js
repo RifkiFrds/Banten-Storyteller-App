@@ -36,13 +36,10 @@ export default class MapPresenter {
       }
 
       if (storiesFromAPI.length === 0) {
-        // Jika API (dengan location=1) tidak mengembalikan cerita,
-        // berarti tidak ada cerita DENGAN LOKASI yang ditemukan.
         this.#view.showEmptyStoriesWithLocation();
         return;
       }
 
-      // Filter tambahan di frontend untuk memastikan validitas data, meskipun API seharusnya sudah benar.
       const validStoriesWithLocation = storiesFromAPI.filter(
         story =>
           story.lat != null &&

@@ -58,7 +58,7 @@ export default class ViewDetailPage {
 
     const wordCount = story.description.trim().split(/\s+/).length;
     const readTime = Math.ceil(wordCount / 200);
-    
+
     // Check if story is in collection
     const isInCollection = await indexedDBService.isStoryInCollection(story.id);
 
@@ -118,48 +118,50 @@ export default class ViewDetailPage {
 
   #setupCollectionButton() {
     const collectionBtn = document.getElementById('add-to-collection-btn');
-    
+
     if (!collectionBtn) return;
-    
-    collectionBtn.addEventListener('click', async (event) => {
+
+    collectionBtn.addEventListener('click', async event => {
       event.preventDefault();
-      
+
       const storyId = collectionBtn.getAttribute('data-story-id');
       const storyName = collectionBtn.getAttribute('data-story-name');
-      
+
       // Check if story is already in collection
       const isInCollection = await indexedDBService.isStoryInCollection(storyId);
-      
+
       if (isInCollection) {
         this.#showNotification(`${storyName} is already in your collection!`, 'info');
         return;
       }
-      
+
       try {
         // Show loading state
         collectionBtn.disabled = true;
         const originalText = collectionBtn.innerHTML;
         collectionBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
-        
+
         await indexedDBService.addStory(this.#currentStory);
-        
+
         // Update button state
         collectionBtn.innerHTML = '<i class="fas fa-check"></i> In Collection';
         collectionBtn.classList.remove('btn-outline');
         collectionBtn.classList.add('btn-success');
         collectionBtn.disabled = true;
-        
+
         // Show success message
-        this.#showNotification(`${storyName} has been added to your collection!`, 'success');
-        
+        this.#showNotification(`${storyName} Cerita ini sudah masuk ke koleksimu!`, 'success');
       } catch (error) {
         console.error('Error adding story to collection:', error);
-        
+
         // Reset button state
         collectionBtn.disabled = false;
         collectionBtn.innerHTML = originalText;
-        
-        this.#showNotification(`Failed to add ${storyName} to collection: ${error.message}`, 'error');
+
+        this.#showNotification(
+          `Failed to add ${storyName} to collection: ${error.message}`,
+          'error'
+        );
       }
     });
   }
@@ -174,15 +176,15 @@ export default class ViewDetailPage {
         <span>${message}</span>
       </div>
     `;
-    
+
     // Add to page
     document.body.appendChild(notification);
-    
+
     // Show notification
     setTimeout(() => {
       notification.classList.add('show');
     }, 100);
-    
+
     // Remove notification after 5 seconds
     setTimeout(() => {
       notification.classList.remove('show');

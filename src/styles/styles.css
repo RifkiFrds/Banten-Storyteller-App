@@ -208,32 +208,64 @@ header {
   display: none;
 }
 
+#close-drawer-button {
+  display: none;;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+
 /* Mobile: navigation hidden by default, toggle button visible */
 @media (max-width: 1000px) {
   .navigation-drawer {
-    display: none;
+    /* Atur sebagai flexbox dengan arah kolom */
+    display: flex; 
     flex-direction: column;
     align-items: flex-start;
+    
+    /* Posisikan sebagai overlay di luar layar */
     position: fixed;
     top: 0;
-    right: -300px;
+    right: 0;
+    transform: translateX(100%); /* Sembunyikan ke kanan */
+    visibility: hidden; /* Sembunyikan dari aksesibilitas & interaksi */
+    
+    /* Ukuran dan Tampilan */
     width: 280px;
+    max-width: 80vw; /* Pastikan tidak terlalu lebar di layar kecil */
     height: 100vh;
     background-color: var(--color-background-glass-fallback);
     box-shadow: var(--shadow-lg);
-    border-left: 1px solid rgba(255,255,255,0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
     padding-top: calc(var(--spacing-lg) * 2);
     z-index: 999;
-    transition: right 0.3s cubic-bezier(0.77,0,0.18,1), opacity 0.3s ease;
+    
+    /* Transisi untuk animasi yang mulus */
+    transition: transform 0.35s cubic-bezier(0.77, 0, 0.18, 1), visibility 0.35s;
   }
+
   .navigation-drawer.open {
-    display: flex;
-    right: 0;
-    opacity: 1;
-    animation: navDrawerSlideIn 0.4s cubic-bezier(0.77,0,0.18,1);
+    /* Pindahkan ke dalam layar saat kelas .open ditambahkan */
+    transform: translateX(0);
+    visibility: visible; /* Buat terlihat dan interaktif */
   }
+
   .drawer-button {
+    display: block; /* Tampilkan tombol hamburger */
+  }
+  #close-drawer-button {
     display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
@@ -893,22 +925,41 @@ footer {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 600;
+  line-height: 1.4; /* Atur jarak antar baris */
+  height: 2.8em; /* Batasi tinggi untuk maksimal 2 baris (1.4 * 2) */
+  overflow: hidden; /* Sembunyikan teks yang berlebih */
+  text-overflow: ellipsis; /* Tampilkan "..." pada teks yang terpotong */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Batasi teks hingga 2 baris */
+  -webkit-box-orient: vertical;
+  word-break: break-word; /* Paksa pemotongan kata yang sangat panjang */
 }
 
 .story-description {
   font-size: 0.95rem;
   color: var(--color-text-light);
   margin-bottom: var(--spacing-md);
-  flex-grow: 1;
+  flex-grow: 1; /* Biarkan properti ini untuk mendorong meta ke bawah */
+  line-height: 1.5; /* Atur jarak antar baris */
+  height: 4.5em; /* Batasi tinggi untuk maksimal 3 baris (1.5 * 3) */
+  overflow: hidden; /* Sembunyikan teks yang berlebih */
+  text-overflow: ellipsis; /* Tampilkan "..." pada teks yang terpotong */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Batasi teks hingga 3 baris */
+  -webkit-box-orient: vertical;
+  word-break: break-word; /* Paksa pemotongan kata yang sangat panjang */
 }
 
 .story-meta {
+  /* Mengatur tata letak menjadi kolom */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
+  flex-direction: column; 
+  align-items: flex-start; /* Sejajarkan item ke kiri */
+  gap: var(--spacing-sm); /* Beri jarak antar elemen (tanggal dan tombol) */
+  margin-top: auto; /* Tetap dorong blok ini ke bawah kartu */
   padding-top: var(--spacing-sm);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%; /* Pastikan mengambil lebar penuh */
 }
 
 .story-date {
@@ -2325,16 +2376,18 @@ footer {
 
   /* Footer Responsive */
   .footer-top {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
   }
 
   .footer-logo,
   .footer-links,
   .footer-contact {
-    min-width: unset;
-    width: 100%;
+  width: 100%;      
+  min-width: 0; 
   }
 
   .social-icons {
@@ -2913,7 +2966,6 @@ footer {
 }
 
 .popup-btn.btn {
-  /* Tombol "Baca Selengkapnya" */
   width: 100%;
   background-color: var(--color-accent); /* Warna aksen untuk tombol utama popup */
   border-color: var(--color-accent);
@@ -3722,9 +3774,12 @@ body::after {
 
 .story-actions {
   display: flex;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-  margin-top: var(--spacing-sm);
+  gap: var(--spacing-sm); /* Jarak antar tombol */
+  width: 100%; /* Ambil lebar penuh dari parent (.story-meta) */
+}
+
+.story-actions .btn {
+  flex: 1; /* Distribusikan ruang secara merata ke setiap tombol */
 }
 
 .add-to-collection-btn,
@@ -4063,10 +4118,11 @@ html, body {
 /* Footer: Stack sections, center-align, increase spacing */
 @media (max-width: 768px) {
   .footer-top {
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.5rem;
-    text-align: center;
+    text-align: left;
   }
   .footer-logo, .footer-links, .footer-contact {
     width: 100%;
@@ -4074,7 +4130,7 @@ html, body {
     margin-bottom: 1rem;
   }
   .social-icons {
-    justify-content: center;
+    justify-content: left;
     gap: 1.5rem;
   }
 }

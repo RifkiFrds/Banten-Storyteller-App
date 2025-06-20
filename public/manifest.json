@@ -45,6 +45,13 @@
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Banten Storyteller - Mobile View"
+    },
+    {
+      "src": "/images/screenshot-narrow-2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Banten Storyteller - Mobile View"
     }
   ],
   "shortcuts": [

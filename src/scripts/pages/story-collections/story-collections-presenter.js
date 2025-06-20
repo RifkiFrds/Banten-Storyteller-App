@@ -10,9 +10,9 @@ export default class StoryCollectionsPresenter {
   async loadCollections() {
     try {
       this.#view.showLoading();
-      
+
       const stories = await this.#model.getAllStories();
-      
+
       if (!stories || stories.length === 0) {
         this.#view.showEmptyCollections();
         return;
@@ -79,28 +79,28 @@ export default class StoryCollectionsPresenter {
 
   #setupRemoveButtons() {
     const removeButtons = document.querySelectorAll('.remove-from-collection-btn');
-    
+
     removeButtons.forEach(button => {
-      button.addEventListener('click', async (event) => {
+      button.addEventListener('click', async event => {
         event.preventDefault();
         event.stopPropagation();
-        
+
         const storyId = button.getAttribute('data-story-id');
         const storyCard = button.closest('.story-card');
-        
+
         if (confirm('Are you sure you want to remove this story from your collection?')) {
           // Show loading state
           button.disabled = true;
           button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Removing...';
-          
+
           try {
             const result = await this.removeFromCollection(storyId);
-            
+
             if (result.success) {
               // Remove the card from DOM with animation
               storyCard.style.opacity = '0';
               storyCard.style.transform = 'scale(0.8)';
-              
+
               setTimeout(() => {
                 storyCard.remove();
                 this.#updateCollectionCountAfterRemoval();
@@ -130,4 +130,4 @@ export default class StoryCollectionsPresenter {
       console.error('Error updating collection count:', error);
     }
   }
-} 
+}

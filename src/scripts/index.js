@@ -6,7 +6,6 @@ import swRegister from './utils/sw-register';
 import OfflineDetector from './utils/offline-detector';
 import NotificationHelper from './utils/notification-helper';
 
-// --- PERBAIKAN 1: Impor fungsi getToken ---
 import { getToken } from './utils/auth';
 
 const setupSubscriptionButton = async () => {
@@ -15,7 +14,7 @@ const setupSubscriptionButton = async () => {
     return;
   }
 
-  // --- PERBAIKAN 2: Gunakan fungsi getToken() yang benar ---
+  // --- fungsi getToken() ---
   const token = getToken();
 
   if (!token) {
@@ -69,10 +68,6 @@ const setupSubscriptionButton = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Debug: Check if drawer button and navigation drawer are selected
-  console.log('drawerButton:', document.querySelector('#drawer-button'));
-  console.log('navigationDrawer:', document.querySelector('#navigation-drawer'));
-
   const app = new App({
     content: document.querySelector('#main-content'),
     drawerButton: document.querySelector('#drawer-button'),

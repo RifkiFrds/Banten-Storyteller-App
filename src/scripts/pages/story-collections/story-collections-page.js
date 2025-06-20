@@ -66,7 +66,11 @@ export default class StoryCollectionsPage {
     const clearButton = document.getElementById('clear-collection-btn');
     if (clearButton) {
       clearButton.addEventListener('click', async () => {
-        if (confirm('Are you sure you want to clear all stories from your collection? This action cannot be undone.')) {
+        if (
+          confirm(
+            'Are you sure you want to clear all stories from your collection? This action cannot be undone.'
+          )
+        ) {
           await this.#presenter.clearCollection();
         }
       });
@@ -134,14 +138,14 @@ export default class StoryCollectionsPage {
 
   displayCollections(stories) {
     const container = document.getElementById('collections-container');
-    
+
     if (!stories || stories.length === 0) {
       this.showEmptyCollections();
       return;
     }
 
     const storiesHTML = stories.map(story => this.#createStoryCard(story)).join('');
-    
+
     container.innerHTML = `
       <div class="collections-grid">
         ${storiesHTML}
@@ -156,7 +160,8 @@ export default class StoryCollectionsPage {
     const formattedDate = showFormattedDate(story.createdAt);
     const addedDate = showFormattedDate(story.addedToCollectionAt);
     const locationText = story.lat && story.lon ? 'Has Location' : 'No Location';
-    const locationIcon = story.lat && story.lon ? 'fas fa-map-marker-alt' : 'fas fa-map-marker-alt text-muted';
+    const locationIcon =
+      story.lat && story.lon ? 'fas fa-map-marker-alt' : 'fas fa-map-marker-alt text-muted';
 
     return `
       <article class="story-card collection-card" data-story-id="${story.id}">
@@ -237,4 +242,4 @@ export default class StoryCollectionsPage {
       this.showError('Failed to remove story from collection');
     }
   }
-} 
+}

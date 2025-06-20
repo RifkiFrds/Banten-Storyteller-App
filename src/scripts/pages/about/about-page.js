@@ -93,7 +93,7 @@ export default class AboutPage {
         <div class="about-section developer-profile">
           <h2>Sang Inisiator</h2>
           <div class="developer-content">
-            <img src="/images/profile-muhamad-rifki-firdaus.jpg" alt="Muhamad Rifki Firdaus" class="developer-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <img src="/images/penulis1.jpg" alt="Muhamad Rifki Firdaus" class="developer-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             <div class="developer-avatar-placeholder" style="display:none; width: 100px; height: 100px; background-color: #ccc; border-radius: 50%; text-align: center; line-height: 100px; font-weight: bold; margin-right: 20px;">MRF</div>
             <div class="developer-info">
               <p>Platform ini diinisiasi dan dikembangkan oleh <strong>Muhamad Rifki Firdaus</strong>, seorang Front-End Web Developer dari Tangerang, Banten. Dengan kecintaan pada budaya lokal dan keahlian di bidang teknologi web interaktif, Rifki berkomitmen untuk memajukan literasi digital sekaligus melestarikan warisan naratif Banten.</p>
@@ -117,7 +117,6 @@ export default class AboutPage {
   }
 
   async afterRender() {
-    // Inisialisasi Carousel untuk Galeri Cerita
     this._initStoryCarousel();
     this._initScrollAnimations();
   }
