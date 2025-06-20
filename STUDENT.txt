@@ -4,4 +4,4 @@ Belajar Pengembangan Front-End Intermidiate
 Project Name: Banten Storyteller App
 Dev Name: Muhamad Rifki Firdaus 
 
-Distribution Public Deployment: 
+Distribution Public Deployment: https://bantenstoryteller.netlify.app/
