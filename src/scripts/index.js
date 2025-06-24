@@ -14,14 +14,22 @@ const setupSubscriptionButton = async () => {
     return;
   }
 
-  // --- fungsi getToken() ---
   const token = getToken();
 
   if (!token) {
-    subscribeButton.style.display = 'none';
+    subscribeButton.style.display = 'inline-block'; 
+    subscribeButton.textContent = 'Subscribe';
+    subscribeButton.disabled = true;
+    subscribeButton.title = 'Silakan login untuk mengaktifkan notifikasi';
+    subscribeButton.style.opacity = '0.5';
+    subscribeButton.style.cursor = 'not-allowed';
     return;
   }
 
+  subscribeButton.disabled = false;
+  subscribeButton.title = '';
+  subscribeButton.style.opacity = '1';
+  subscribeButton.style.cursor = 'pointer';
   subscribeButton.style.display = 'inline-block';
 
   const serviceWorkerRegistration = await navigator.serviceWorker.ready;
@@ -44,6 +52,7 @@ const setupSubscriptionButton = async () => {
   newButton.addEventListener('click', async () => {
     newButton.disabled = true;
 
+    // Logika subscribe/unsubscribe
     if (isSubscribed) {
       await NotificationHelper.unsubscribe(token);
     } else {
@@ -56,7 +65,7 @@ const setupSubscriptionButton = async () => {
 
     const newSubscriptionAfterOp = await serviceWorkerRegistration.pushManager.getSubscription();
     isSubscribed = newSubscriptionAfterOp !== null;
-
+    
     if (isSubscribed) {
       newButton.textContent = 'Unsubscribe';
     } else {
@@ -84,10 +93,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     await setupSubscriptionButton();
   };
 
-  window.addEventListener('auth-changed', event => {
+  window.addEventListener('auth-changed', (event) => {
     if (event.detail && event.detail.success) {
       window.location.hash = '#/';
     }
+    
+    renderContent();
   });
 
   window.addEventListener('hashchange', async () => {
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const mainContent = document.querySelector('#main-content');
   const skipLink = document.querySelector('.skip-link');
-  skipLink.addEventListener('click', event => {
+  skipLink.addEventListener('click', (event) => {
     event.preventDefault();
     skipLink.blur();
     mainContent.focus();
