@@ -2,7 +2,6 @@ import 'regenerator-runtime';
 import '../styles/styles.css';
 
 import App from './pages/app';
-import swRegister from './utils/sw-register';
 import OfflineDetector from './utils/offline-detector';
 import NotificationHelper from './utils/notification-helper';
 
@@ -83,7 +82,67 @@ document.addEventListener('DOMContentLoaded', async () => {
     navigationDrawer: document.querySelector('#navigation-drawer'),
   });
 
-  await new swRegister();
+
+  // ===== LOGIKA UNTUK BANNER INSTALL PWA  =====
+  let deferredPrompt; 
+
+  const installBanner = document.createElement('div');
+  installBanner.id = 'install-banner';
+  installBanner.style.display = 'none'; 
+  installBanner.innerHTML = `
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #2c3e50; color: white; padding: 1rem; z-index: 1000; display: flex; justify-content: center;">
+      <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; width: 100%;">
+        <span>Install Banten Storyteller untuk pengalaman lebih baik!</span>
+        <div>
+          <button id="install-button" style="background: #27ae60; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">Install</button>
+          <button id="dismiss-install" style="background: transparent; color: white; border: none; font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(installBanner);
+
+  const installButton = document.getElementById('install-button');
+  const dismissButton = document.getElementById('dismiss-install');
+
+  // Fungsi untuk menampilkan banner
+  const showInstallPrompt = () => {
+    installBanner.style.display = 'block';
+  };
+
+  // Fungsi untuk menyembunyikan banner
+  const hideInstallPrompt = () => {
+    installBanner.style.display = 'none';
+  };
+
+  // Fungsi untuk memicu proses instalasi
+  const installApp = async () => {
+    if (!deferredPrompt) {
+      return;
+    }
+    // Tampilkan prompt instalasi bawaan browser
+    deferredPrompt.prompt();
+    // Tunggu hasil pilihan pengguna
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    hideInstallPrompt();
+  };
+
+  installButton.addEventListener('click', installApp);
+  dismissButton.addEventListener('click', hideInstallPrompt);
+
+  // Event listener untuk menangkap event 'beforeinstallprompt'
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallPrompt();
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('Aplikasi berhasil di-install!');
+    hideInstallPrompt();
+    deferredPrompt = null;
+  });
 
   // Initialize offline detector
   const offlineDetector = new OfflineDetector();

@@ -3008,6 +3008,82 @@ footer {
   background-color: transparent !important; /* Hapus background hover default */
 }
 
+/* File: src/styles/styles.css */
+
+/* --- STYLING KUSTOM UNTUK POPUP PETA DI HALAMAN DETAIL --- */
+
+/* Wrapper utama untuk konten di dalam popup */
+.leaflet-popup-content-wrapper {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.5)) !important;
+  backdrop-filter: blur(var(--glass-blur, 8px)) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur, 8px)) !important;
+  border-radius: var(--radius-md, 16px) !important;
+  box-shadow: var(--shadow-lg, 0 8px 32px 0 rgba(0,0,0,0.15)) !important;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.18)) !important;
+  padding: 0 !important; /* Hapus padding bawaan */
+  overflow: hidden; /* Penting agar gambar tidak keluar dari border-radius */
+}
+
+/* Menghilangkan margin bawaan dari Leaflet */
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+  min-width: 280px; /* Lebar minimum popup */
+}
+
+/* Kontainer utama konten kustom kita */
+.map-popup-detail {
+  width: 100%;
+}
+
+/* Gambar di dalam popup */
+.popup-detail-image {
+  width: 100%;
+  height: 150px; /* Tinggi gambar yang proporsional */
+  object-fit: cover;
+  display: block; /* Menghapus spasi ekstra di bawah gambar */
+}
+
+/* Kontainer untuk teks di bawah gambar */
+.popup-detail-content {
+  padding: var(--spacing-md, 1.5rem);
+  text-align: left;
+}
+
+/* Judul cerita di dalam popup */
+.popup-detail-title {
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 1.25rem;
+  color: var(--color-text, #2c3e50);
+  margin: 0 0 var(--spacing-xs, 0.5rem) 0;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Nama pembuat cerita di dalam popup */
+.popup-detail-author {
+  font-size: 0.9rem;
+  color: var(--color-text-light, #555);
+  margin: 0;
+}
+
+.popup-detail-author strong {
+  color: var(--color-primary-dark, #f39c12);
+  font-weight: 600;
+}
+
+/* Mengganti gaya tombol close (X) */
+.leaflet-popup-close-button {
+  color: var(--color-text, #2c3e50) !important;
+  padding: var(--spacing-xs, 0.5rem) var(--spacing-xs, 0.5rem) 0 0 !important;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.leaflet-popup-close-button:hover {
+  color: var(--color-secondary, #e67e22) !important;
+  transform: scale(1.2);
+}
+
 /* Styling untuk Pesan Alert di Area Peta (jika belum tercover sempurna) */
 #map-main-area .alert {
   /* Alert di dalam #map-main-area */
@@ -4065,25 +4141,35 @@ body {
 @media (max-width: 768px) {
   #map-content-wrapper.glass-card {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: var(--spacing-md, 1.5rem);
+    padding: var(--spacing-sm, 1rem);
   }
+
   #map-main-area,
   .map-container.large,
   #map {
-    min-height: 220px !important;
-    height: 220px !important;
-    max-width: 100vw;
+    /* Gunakan min-height agar tidak gepeng, hindari !important */
+    min-height: 300px; 
+    height: 45vh; /* Tinggi 45% dari viewport, lebih fleksibel */
+    max-width: 100%;
   }
+
   #map-sidebar {
-    margin-top: 1rem;
-    padding: 1rem;
+    margin-top: var(--spacing-md, 1.5rem);
+    padding: var(--spacing-md, 1.5rem);
     max-height: none;
     width: 100%;
   }
+
+  /* Perbesar target sentuh untuk kontrol peta */
   .leaflet-control-container .leaflet-control {
     min-width: 44px;
     min-height: 44px;
+  }
+  .leaflet-bar a, .leaflet-bar a:hover {
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
   }
 }
 
@@ -4126,6 +4212,40 @@ body {
     width: 100%;
     font-size: 1rem;
     padding: 1rem;
+  }
+    /*
+   * RESPONSIVE LEAFLET POPUP
+   */
+  .leaflet-popup-content {
+    min-width: 250px;
+    max-width: calc(100vw - 50px); /* Popup tidak menempel di tepi layar */
+  }
+
+  .popup-content-text {
+    padding: var(--spacing-sm, 1rem);
+  }
+
+  .popup-image {
+    height: 120px; /* Tinggi gambar lebih kecil di mobile */
+  }
+
+  .popup-title {
+    font-size: 1.1rem;
+  }
+
+  .popup-description {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 2; /* Tampilkan 2 baris deskripsi saja */
+  }
+
+  .popup-meta {
+    font-size: 0.75rem;
+    margin-bottom: var(--spacing-sm, 1rem);
+  }
+
+  .popup-btn.btn {
+    font-size: 0.9rem !important;
+    padding: 0.8rem !important;
   }
 }
 

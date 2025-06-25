@@ -59,6 +59,17 @@ export default class ViewDetailPage {
     const wordCount = story.description.trim().split(/\s+/).length;
     const readTime = Math.ceil(wordCount / 200);
 
+      const mapSectionHTML = (story.lat && story.lon)
+    ? `
+      <div class="map-container detail-map-container" aria-label="Lokasi cerita di peta">
+        <h3 class="section-legend" style="margin-bottom: 1rem;">
+          <i class="fas fa-map-marked-alt icon-legend"></i> Lokasi Cerita
+        </h3>
+        <div id="map" style="height: 350px; border-radius: var(--radius-md);"></div>
+      </div>
+    `
+    : '';
+
     // Check if story is in collection
     const isInCollection = await indexedDBService.isStoryInCollection(story.id);
 
@@ -94,6 +105,7 @@ export default class ViewDetailPage {
             <p>${story.description}</p>
           </div>
 
+           ${mapSectionHTML}
           <div id="snackbar" class="snackbar">Link copied!</div>
         </article>
       </div>
@@ -286,10 +298,20 @@ export default class ViewDetailPage {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.marker([story.lat, story.lon])
-        .addTo(map)
-        .bindPopup(`<b>${story.name}</b><br>${story.description.slice(0, 60)}...`)
-        .openPopup();
+    const popupContent = `
+      <div class="map-popup-detail">
+        <img src="${story.photoUrl}" alt="Foto dari ${story.name}" class="popup-detail-image">
+        <div class="popup-detail-content">
+          <h4 class="popup-detail-title">${story.name}</h4>
+          <p class="popup-detail-author">Oleh: <strong>${story.name}</strong></p>
+        </div>
+      </div>
+    `;
+
+    L.marker([story.lat, story.lon])
+      .addTo(map)
+      .bindPopup(popupContent) 
+      .openPopup();
 
       setTimeout(() => map.invalidateSize(), 300);
     };
